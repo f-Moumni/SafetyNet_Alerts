@@ -10,28 +10,42 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.safetynet.alerts.model.Person;
-import com.safetynet.alerts.service.PersonService;
+import com.safetynet.alerts.service.IPersonService;
 
+import lombok.Data;
+@Data
 @RestController
 public class PersonController {
-	@Autowired
-	PersonService personService;
 
-	@GetMapping("/Persons")
+	private final IPersonService personService;
+
+	@Autowired
+	public PersonController(final IPersonService personService) {
+		this.personService = personService;
+	}
+
+	@GetMapping(value = "person")
 	public ResponseEntity<List<Person>> getPersons() {
-		if (personService.getPersons().isEmpty()) {
-			return new ResponseEntity<>(personService.getPersons(),
-					HttpStatus.BAD_REQUEST);
+		if (personService.findAll().isEmpty()) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		} else {
+			return new ResponseEntity<>(personService.findAll(), HttpStatus.OK);
 		}
-		return new ResponseEntity<>(personService.getPersons(), HttpStatus.OK);
 	}
 
 	// // http://localhost:8080/person/person?firstName=toto&lastName=tata
-	@GetMapping(value = "/Person/{firstName}&{lastName}")
-	public Person getPerson(@PathVariable String firstName,
+	@GetMapping(value = "person/{firstName}/{lastName}")
+	public ResponseEntity<Person> getPerson(@PathVariable String firstName,
 			@PathVariable String lastName) {
+		Person person = personService.findByName(firstName, lastName);
+		if (person == null) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		} else {
+			return new ResponseEntity<>(
+					personService.findByName(firstName, lastName),
+					HttpStatus.OK);
+		}
 
-		return personService.getPerson(firstName, lastName);
 	}
 	//
 	// @GetMapping

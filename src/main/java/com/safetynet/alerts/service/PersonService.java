@@ -12,18 +12,19 @@ import lombok.Data;
 
 @Data
 @Service
-public class PersonService {
+public class PersonService implements IPersonService {
 
 	@Autowired
 	private PersonRepository personRepository;
 
-	public List<Person> getPersons() {
+	@Override
+	public List<Person> findAll() {
 
 		return personRepository.findAll();
 	}
-
-	public Person getPerson(String firstName, String lastName) {
-
+	@Override
+	public Person findByName(String firstName, String lastName) {
 		return personRepository.findByName(firstName, lastName);
+
 	}
 }

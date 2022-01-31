@@ -11,6 +11,7 @@ import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.safetynet.alerts.model.FireStation;
@@ -29,47 +30,72 @@ public class ReadDataFromJson implements IReadData {
 	private List<Person> listPersons = new ArrayList<>();
 	private List<FireStation> listFireStations = new ArrayList<>();
 	private List<MedicalRecord> listMedicalrecords = new ArrayList<>();
-
+	JsonNode dataNode = null;
+	ObjectMapper mapper = new ObjectMapper();
 	@Override
 	@PostConstruct
 	public void readData() throws IOException {
 		log.info("reading JSON data from file");
-		JsonNode localeTemp = null;
-		ObjectMapper mapper = new ObjectMapper();
+
 		try {
-			localeTemp = mapper.readTree(new File(jsonFilePath));
+			dataNode = mapper.readTree(new File(jsonFilePath));
 		} catch (FileNotFoundException e) {
 			log.error("ERROR fetching json file", e);
 		}
-		if (localeTemp) {
+	}
 
-			JsonNode personsNode = localeTemp.get("persons");
-
+	@Override
+	public List<Person> getListPersons() {
+		JsonNode personsNode = dataNode.at("/persons");
+		if (!personsNode.isEmpty()) {
+			Person person = null;
 			for (JsonNode jsonNode : personsNode) {
-				Person person = mapper.treeToValue(jsonNode, Person.class);
+				try {
+					person = mapper.treeToValue(jsonNode, Person.class);
+				} catch (JsonProcessingException | IllegalArgumentException e) {
+					log.error("error converting json data to person object ",
+							e);
+				}
 				listPersons.add(person);
 			}
+		} else {
+			log.error("person note found");
+			System.out.println("error");
+		}
+		return listPersons;
 
-			JsonNode firestationsNode = localeTemp.get("firestations");
-
-			for (JsonNode jsonNode : firestationsNode) {
-				FireStation fireStation = mapper.treeToValue(jsonNode,
-						FireStation.class);
-				listFireStations.add(fireStation);
+	}
+	@Override
+	public List<FireStation> getListFireStations() {
+		JsonNode firestationsNode = dataNode.at("/firestations");
+		FireStation fireStation = null;
+		for (JsonNode jsonNode : firestationsNode) {
+			try {
+				fireStation = mapper.treeToValue(jsonNode, FireStation.class);
+			} catch (JsonProcessingException | IllegalArgumentException e) {
+				log.error("error converting json data to FireStations object ",
+						e);
 			}
-			JsonNode medicalRecordNode = localeTemp.get("medicalrecords");
-
-			for (JsonNode jsonNode : medicalRecordNode) {
-				MedicalRecord medicalRecord = mapper.treeToValue(jsonNode,
+			listFireStations.add(fireStation);
+		}
+		return listFireStations;
+	}
+	@Override
+	public List<MedicalRecord> getListmedicalRecordNode() {
+		JsonNode medicalRecordNode = dataNode.at("/medicalrecords");
+		MedicalRecord medicalRecord = null;
+		for (JsonNode jsonNode : medicalRecordNode) {
+			try {
+				medicalRecord = mapper.treeToValue(jsonNode,
 						MedicalRecord.class);
-				listMedicalrecords.add(medicalRecord);
+			} catch (JsonProcessingException | IllegalArgumentException e) {
+				log.error(
+						"error converting json data to medicalrecords object ",
+						e);
 			}
+			listMedicalrecords.add(medicalRecord);
 		}
-		for (MedicalRecord medicalRecord : listMedicalrecords) {
-			System.out.println(medicalRecord);
-
-		}
-
+		return listMedicalrecords;
 	}
 
 }
