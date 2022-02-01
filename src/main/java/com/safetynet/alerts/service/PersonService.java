@@ -8,9 +8,6 @@ import org.springframework.stereotype.Service;
 import com.safetynet.alerts.model.Person;
 import com.safetynet.alerts.repository.PersonRepository;
 
-import lombok.Data;
-
-@Data
 @Service
 public class PersonService implements IPersonService {
 
@@ -24,7 +21,15 @@ public class PersonService implements IPersonService {
 	}
 	@Override
 	public Person findByName(String firstName, String lastName) {
-		return personRepository.findByName(firstName, lastName);
+		Person person = null;
+		for (Person pr : personRepository.getListPersons()) {
+			if ((pr.getFirstName().equals(firstName))
+					&& (pr.getLastName().equals(lastName))) {
+				person = pr;
+
+			}
+		}
+		return person;
 
 	}
 }
