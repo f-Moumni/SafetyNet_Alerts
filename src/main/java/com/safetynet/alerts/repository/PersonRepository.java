@@ -32,9 +32,10 @@ public class PersonRepository implements IPersonRepository {
 		Person person = null;
 		for (Person pr : persons) {
 			if ((pr.getFirstName().equalsIgnoreCase(firstName))
-					&& (pr.getLastName().equalsIgnoreCase(lastName)))
+					&& (pr.getLastName().equalsIgnoreCase(lastName))) {
 				person = pr;
-
+				break;
+			}
 		}
 		return person;
 

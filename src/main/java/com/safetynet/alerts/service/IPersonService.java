@@ -3,12 +3,13 @@ package com.safetynet.alerts.service;
 import java.util.List;
 
 import com.safetynet.alerts.exceptions.AlreadyExistsException;
+import com.safetynet.alerts.exceptions.DataNotFoundException;
 import com.safetynet.alerts.exceptions.PersonNotFoundException;
 import com.safetynet.alerts.model.Person;
 
 public interface IPersonService {
 
-	public List<Person> findAll();
+	public List<Person> findAll() throws DataNotFoundException;
 
 	public Person findByName(String firstName, String lastName)
 			throws PersonNotFoundException;

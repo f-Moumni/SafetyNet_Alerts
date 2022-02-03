@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.safetynet.alerts.exceptions.AlreadyExistsException;
+import com.safetynet.alerts.exceptions.DataNotFoundException;
 import com.safetynet.alerts.exceptions.PersonNotFoundException;
 import com.safetynet.alerts.model.Person;
 import com.safetynet.alerts.repository.PersonRepository;
@@ -17,10 +18,12 @@ public class PersonService implements IPersonService {
 	private PersonRepository personRepository;
 
 	@Override
-	public List<Person> findAll() {
-
-		return personRepository.findAll();
-
+	public List<Person> findAll() throws DataNotFoundException {
+		List<Person> persons = personRepository.findAll();
+		if (persons != null) {
+			return persons;
+		} else
+			throw new DataNotFoundException("Person data not found");
 	}
 
 	@Override
@@ -30,20 +33,17 @@ public class PersonService implements IPersonService {
 		if (person != null) {
 			return person;
 		} else {
-			throw new PersonNotFoundException("person not found");
+			throw new PersonNotFoundException(
+					"person " + firstName + " " + lastName + " not found");
 		}
 	}
+
 	@Override
 	public Person deletePerson(String firstName, String lastName)
 			throws PersonNotFoundException {
-		try {
-			Person person = findByName(firstName, lastName);
-			personRepository.deletePerson(person);
-			return person;
-		} catch (PersonNotFoundException e) {
-			throw new PersonNotFoundException("person not found");
-		}
-
+		Person person = findByName(firstName, lastName);
+		personRepository.deletePerson(person);
+		return person;
 	}
 
 	@Override
@@ -53,7 +53,9 @@ public class PersonService implements IPersonService {
 		if (person == null) {
 			personRepository.addPerson(personToAdd);
 		} else {
-			throw new AlreadyExistsException("this person already exists");
+			throw new AlreadyExistsException(
+					"this person " + personToAdd.getFirstName() + " "
+							+ personToAdd.getLastName() + " already exists");
 		}
 
 	}

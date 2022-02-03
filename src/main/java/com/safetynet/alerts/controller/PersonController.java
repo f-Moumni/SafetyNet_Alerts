@@ -36,10 +36,7 @@ public class PersonController {
 	public ResponseEntity<List<Person>> getPersons()
 			throws DataNotFoundException {
 		List<Person> persons = personService.findAll();
-		if (persons != null) {
-			return new ResponseEntity<>(persons, HttpStatus.OK);
-		} else
-			throw new DataNotFoundException("Person data not found");
+		return new ResponseEntity<>(persons, HttpStatus.OK);
 
 	}
 
@@ -47,53 +44,36 @@ public class PersonController {
 	public ResponseEntity<Person> getPersonByName(
 			@RequestParam String firstName, @RequestParam String lastName)
 			throws PersonNotFoundException, BadRequestException {
-		if (firstName.isEmpty() || lastName.isEmpty()) {
+		if (firstName.isBlank() || lastName.isBlank()) {
 			throw new BadRequestException(
 					"firstName and lastName are required");
 		} else {
-			try {
-				Person person = personService.findByName(firstName, lastName);
-				return new ResponseEntity<>(person, HttpStatus.OK);
-			} catch (PersonNotFoundException e) {
-				throw new PersonNotFoundException(
-						"person:" + firstName + " " + lastName + " not found");
-			}
+			Person person = personService.findByName(firstName, lastName);
+			return new ResponseEntity<>(person, HttpStatus.OK);
 		}
-
 	}
+
 	@DeleteMapping
 	public ResponseEntity<Person> deletePerson(@RequestParam String firstName,
 			@RequestParam String lastName)
 			throws PersonNotFoundException, BadRequestException {
-		if (firstName.equals(null) || lastName.equals(null)) {
+		if (firstName.isBlank() || lastName.isBlank()) {
 			throw new BadRequestException(
 					"firstName and lastName are required");
 		} else {
-			try {
-				Person person = personService.deletePerson(firstName, lastName);
-				return new ResponseEntity<>(person, HttpStatus.OK);
-			} catch (PersonNotFoundException e) {
-				throw new PersonNotFoundException(
-						"person: " + firstName + " " + lastName + " not found");
-			}
+			Person person = personService.deletePerson(firstName, lastName);
+			return new ResponseEntity<>(person, HttpStatus.OK);
 		}
 	}
 
 	@PostMapping
 	public ResponseEntity<Person> addPerson(@RequestBody Person person)
 			throws AlreadyExistsException, BadRequestException {
-
 		if (person != null) {
-			try {
-				personService.addPerson(person);
-				return new ResponseEntity<>(person, HttpStatus.CREATED);
-			} catch (AlreadyExistsException e) {
-				throw new AlreadyExistsException(
-						"person: " + person.getFirstName() + " "
-								+ person.getLastName() + " exists already");
-			}
+			personService.addPerson(person);
+			return new ResponseEntity<>(person, HttpStatus.CREATED);
 		} else {
-			throw new BadRequestException("All filed are required");
+			throw new BadRequestException("All fields are required");
 		}
 	}
 
@@ -101,16 +81,10 @@ public class PersonController {
 	public ResponseEntity<Person> updatePerson(@RequestBody Person person)
 			throws PersonNotFoundException, BadRequestException {
 		if (person != null) {
-			try {
-				return new ResponseEntity<>(personService.updatePerson(person),
-						HttpStatus.OK);
-			} catch (PersonNotFoundException e) {
-				throw new PersonNotFoundException("person: "
-						+ person.getFirstName() + " " + person.getLastName()
-						+ " not found. the name cannot be changed");
-			}
+			return new ResponseEntity<>(personService.updatePerson(person),
+					HttpStatus.OK);
 		} else {
-			throw new BadRequestException("All filed are required");
+			throw new BadRequestException("All fields are required");
 		}
 
 	}

@@ -13,7 +13,9 @@ import lombok.extern.slf4j.Slf4j;
 @Data
 @Repository
 public class FireStationRepository implements IFireStationRepository {
+
 	private List<FireStation> fireStations = new ArrayList<>();
+
 	@Override
 	public List<FireStation> findAll() {
 		return fireStations;
@@ -23,4 +25,41 @@ public class FireStationRepository implements IFireStationRepository {
 		fireStations.add(fireStation);
 
 	}
+	@Override
+	public void deleteFireStation(FireStation fireStation) {
+		fireStations.remove(fireStation);
+
+	}
+	@Override
+	public FireStation FindByAddress(String address) {
+		FireStation fireStation = null;
+		for (FireStation fStation : fireStations) {
+			if (fStation.getAddress().equalsIgnoreCase(address)) {
+				fireStation = fStation;
+				break;
+			}
+		}
+		return fireStation;
+
+	}
+	@Override
+	public FireStation FindByStation(int station) {
+		FireStation fireStation = null;
+		for (FireStation fStation : fireStations) {
+			if (fStation.getStation() == station) {
+				fireStation = fStation;
+				break;
+			}
+		}
+		return fireStation;
+
+	}
+	@Override
+	public FireStation updateFireStation(FireStation fireStation) {
+		FireStation fStation = FindByAddress(fireStation.getAddress());
+		deleteFireStation(fStation);
+		addFireStation(fireStation);
+		return fireStation;
+	}
+
 }

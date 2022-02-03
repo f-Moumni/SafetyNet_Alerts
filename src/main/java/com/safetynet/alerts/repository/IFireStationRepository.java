@@ -10,4 +10,12 @@ public interface IFireStationRepository {
 
 	void addFireStation(FireStation fireStation);
 
+	void deleteFireStation(FireStation fireStation);
+
+	FireStation FindByAddress(String address);
+
+	FireStation updateFireStation(FireStation fireStation);
+
+	FireStation FindByStation(int station);
+
 }

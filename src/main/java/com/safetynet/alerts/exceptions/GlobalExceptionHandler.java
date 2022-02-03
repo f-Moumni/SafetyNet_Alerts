@@ -51,5 +51,14 @@ public class GlobalExceptionHandler {
 		return new ResponseEntity<>(exception, HttpStatus.ALREADY_REPORTED);
 
 	}
+	@ExceptionHandler(FireStationNoteFoundException.class)
+	public ResponseEntity<?> handleFireStationNoteFoundException(
+			FireStationNoteFoundException e, WebRequest request) {
 
+		ExceptionDetails exception = new ExceptionDetails(new Date(),
+				e.getMessage(), HttpStatus.NOT_FOUND,
+				request.getDescription(false));
+		return new ResponseEntity<>(exception, HttpStatus.NOT_FOUND);
+
+	}
 }
