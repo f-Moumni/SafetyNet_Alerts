@@ -13,16 +13,40 @@ import lombok.Data;
 @Repository
 public class PersonRepository implements IPersonRepository {
 
-	private List<Person> listPersons = new ArrayList<>();
+	private List<Person> persons = new ArrayList<>();
 
 	@Override
 	public List<Person> findAll() {
-
-		return listPersons;
+		return persons;
 	}
 	@Override
 	public void addPerson(Person person) {
-		this.listPersons.add(person);
+		this.persons.add(person);
+	}
+	@Override
+	public void deletePerson(Person person) {
+		this.persons.remove(person);
+	}
+	@Override
+	public Person findByName(String firstName, String lastName) {
+		Person person = null;
+		for (Person pr : persons) {
+			if ((pr.getFirstName().equalsIgnoreCase(firstName))
+					&& (pr.getLastName().equalsIgnoreCase(lastName)))
+				person = pr;
+
+		}
+		return person;
+
+	}
+	@Override
+	public Person updatePerson(Person person) {
+		Person persontoUpdate = findByName(person.getFirstName(),
+				person.getLastName());
+		deletePerson(persontoUpdate);
+		addPerson(person);
+		return person;
+
 	}
 
 }

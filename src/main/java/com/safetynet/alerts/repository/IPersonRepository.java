@@ -6,8 +6,14 @@ import com.safetynet.alerts.model.Person;
 
 public interface IPersonRepository {
 
-	void addPerson(Person person);
+	public void addPerson(Person person);
 
-	List<Person> findAll();
+	public List<Person> findAll();
+
+	public void deletePerson(Person person);
+
+	Person findByName(String firstName, String lastName);
+
+	Person updatePerson(Person person);
 
 }

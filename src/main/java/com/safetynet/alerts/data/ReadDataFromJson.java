@@ -58,21 +58,16 @@ public class ReadDataFromJson implements IReadData {
 
 	private void loadPersons() {
 		JsonNode personsNode = dataNode.path("persons");
-		if (!personsNode.isEmpty()) {
-			Person person = null;
-			for (JsonNode personNode : personsNode) {
-				try {
-					person = mapper.treeToValue(personNode, Person.class);
-				} catch (JsonProcessingException | IllegalArgumentException e) {
-					log.error("error converting json data to person object ",
-							e);
-				}
 
-				personRepository.addPerson(person);
+		Person person = null;
+		for (JsonNode personNode : personsNode) {
+			try {
+				person = mapper.treeToValue(personNode, Person.class);
+			} catch (JsonProcessingException | IllegalArgumentException e) {
+				log.error("error converting json data to person object ", e);
 			}
-		} else {
-			log.error("person note found");
-			System.out.println("error");
+
+			personRepository.addPerson(person);
 		}
 
 	}
