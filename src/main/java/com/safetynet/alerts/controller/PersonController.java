@@ -57,7 +57,8 @@ public class PersonController {
 	public ResponseEntity<Person> deletePerson(@RequestParam String firstName,
 			@RequestParam String lastName)
 			throws PersonNotFoundException, BadRequestException {
-		if (firstName.isBlank() || lastName.isBlank()) {
+		if (((firstName == null) || (lastName == null)) || (firstName.isBlank())
+				|| (lastName.isBlank())) {
 			throw new BadRequestException(
 					"firstName and lastName are required");
 		} else {
@@ -69,22 +70,30 @@ public class PersonController {
 	@PostMapping
 	public ResponseEntity<Person> addPerson(@RequestBody Person person)
 			throws AlreadyExistsException, BadRequestException {
-		if (person != null) {
+		if (((person.getFirstName() == null) || (person.getLastName() == null))
+				|| (person.getFirstName().isBlank())
+				|| (person.getLastName().isBlank())) {
+			throw new BadRequestException(
+					"the first and the last name are required");
+		} else {
+
 			personService.addPerson(person);
 			return new ResponseEntity<>(person, HttpStatus.CREATED);
-		} else {
-			throw new BadRequestException("All fields are required");
 		}
 	}
 
 	@PutMapping
 	public ResponseEntity<Person> updatePerson(@RequestBody Person person)
 			throws PersonNotFoundException, BadRequestException {
-		if (person != null) {
+		if (((person.getFirstName() == null) || (person.getLastName() == null))
+				|| (person.getFirstName().isBlank())
+				|| (person.getLastName().isBlank())) {
+			throw new BadRequestException(
+					"the first and the last name are required");
+		} else {
+
 			return new ResponseEntity<>(personService.updatePerson(person),
 					HttpStatus.OK);
-		} else {
-			throw new BadRequestException("All fields are required");
 		}
 
 	}

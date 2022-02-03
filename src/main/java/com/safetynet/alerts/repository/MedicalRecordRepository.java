@@ -7,10 +7,6 @@ import org.springframework.stereotype.Repository;
 
 import com.safetynet.alerts.model.MedicalRecord;
 
-import lombok.Data;
-import lombok.extern.slf4j.Slf4j;
-@Slf4j
-@Data
 @Repository
 public class MedicalRecordRepository implements IMedicalRecordRepository {
 
@@ -22,6 +18,32 @@ public class MedicalRecordRepository implements IMedicalRecordRepository {
 	@Override
 	public void addMedicalRecord(MedicalRecord medicalRecord) {
 		medicalRecords.add(medicalRecord);
+
+	}
+	public MedicalRecord findByName(String firstName, String lastName) {
+		MedicalRecord medicalRecord = null;
+		for (MedicalRecord medRecord : medicalRecords) {
+			if ((medRecord.getFirstName().equalsIgnoreCase(firstName))
+					&& (medRecord.getLastName().equalsIgnoreCase(lastName))) {
+				medicalRecord = medRecord;
+				break;
+			}
+		}
+		return medicalRecord;
+	}
+	@Override
+	public void deleteMedicalRecord(MedicalRecord medicalRecord) {
+		medicalRecords.remove(medicalRecord);
+	}
+	@Override
+	public MedicalRecord updateMedicalRecord(
+			MedicalRecord medicalRecordUpdated) {
+		MedicalRecord medicalRecord = findByName(
+				medicalRecordUpdated.getFirstName(),
+				medicalRecordUpdated.getLastName());
+		deleteMedicalRecord(medicalRecord);
+		addMedicalRecord(medicalRecordUpdated);
+		return medicalRecordUpdated;
 
 	}
 }

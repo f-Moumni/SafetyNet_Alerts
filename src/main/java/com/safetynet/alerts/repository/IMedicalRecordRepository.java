@@ -10,4 +10,8 @@ public interface IMedicalRecordRepository {
 
 	List<MedicalRecord> findAll();
 
+	void deleteMedicalRecord(MedicalRecord medicalRecord);
+
+	MedicalRecord updateMedicalRecord(MedicalRecord medicalRecordUpdated);
+
 }

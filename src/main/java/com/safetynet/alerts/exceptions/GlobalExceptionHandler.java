@@ -61,4 +61,14 @@ public class GlobalExceptionHandler {
 		return new ResponseEntity<>(exception, HttpStatus.NOT_FOUND);
 
 	}
+	@ExceptionHandler(MedicalRecordNotFoundException.class)
+	public ResponseEntity<?> handleMedicalRecordNotFoundException(
+			MedicalRecordNotFoundException e, WebRequest request) {
+
+		ExceptionDetails exception = new ExceptionDetails(new Date(),
+				e.getMessage(), HttpStatus.NOT_FOUND,
+				request.getDescription(false));
+		return new ResponseEntity<>(exception, HttpStatus.NOT_FOUND);
+
+	}
 }
