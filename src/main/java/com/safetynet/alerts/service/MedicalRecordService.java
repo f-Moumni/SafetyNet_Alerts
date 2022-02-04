@@ -5,22 +5,27 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.safetynet.alerts.DTO.MedicalRecordDTO;
 import com.safetynet.alerts.exceptions.AlreadyExistsException;
 import com.safetynet.alerts.exceptions.DataNotFoundException;
 import com.safetynet.alerts.exceptions.MedicalRecordNotFoundException;
 import com.safetynet.alerts.model.MedicalRecord;
 import com.safetynet.alerts.repository.MedicalRecordRepository;
+import com.safetynet.alerts.util.MedicalRecordConverter;
 @Service
 public class MedicalRecordService implements IMedicalRecordService {
 
 	@Autowired
 	MedicalRecordRepository medicalRecordRepository;
+	@Autowired
+	MedicalRecordConverter medicalRecordConverter;
 
 	@Override
-	public List<MedicalRecord> findAll() throws DataNotFoundException {
+	public List<MedicalRecordDTO> findAll() throws DataNotFoundException {
 		List<MedicalRecord> medicaleRecords = medicalRecordRepository.findAll();
 		if (!medicaleRecords.isEmpty()) {
-			return medicaleRecords;
+			return medicalRecordConverter
+					.toMedicalRecordDTOList(medicaleRecords);
 		} else
 			throw new DataNotFoundException("Medical records Data not found");
 
@@ -44,15 +49,16 @@ public class MedicalRecordService implements IMedicalRecordService {
 	}
 
 	@Override
-	public MedicalRecord updateMedicalRecord(
+	public MedicalRecordDTO updateMedicalRecord(
 			MedicalRecord medicalRecordToUpdate)
 			throws MedicalRecordNotFoundException {
 		MedicalRecord medicalRecord = medicalRecordRepository.findByName(
 				medicalRecordToUpdate.getFirstName(),
 				medicalRecordToUpdate.getLastName());
 		if (medicalRecord != null) {
-			return medicalRecordRepository
-					.updateMedicalRecord(medicalRecordToUpdate);
+			return medicalRecordConverter
+					.toMedicalRecordDTO(medicalRecordRepository
+							.updateMedicalRecord(medicalRecordToUpdate));
 		} else {
 			throw new MedicalRecordNotFoundException(
 					"the name cannot be changed");
@@ -60,15 +66,15 @@ public class MedicalRecordService implements IMedicalRecordService {
 	}
 
 	@Override
-	public MedicalRecord deleteMedicalRecord(String firstName, String lastName)
-			throws MedicalRecordNotFoundException {
+	public MedicalRecordDTO deleteMedicalRecord(String firstName,
+			String lastName) throws MedicalRecordNotFoundException {
 		MedicalRecord medicalRecord = findByName(firstName, lastName);
 		medicalRecordRepository.deleteMedicalRecord(medicalRecord);
-		return medicalRecord;
+		return medicalRecordConverter.toMedicalRecordDTO(medicalRecord);
 
 	}
-
-	private MedicalRecord findByName(String firstName, String lastName)
+	@Override
+	public MedicalRecord findByName(String firstName, String lastName)
 			throws MedicalRecordNotFoundException {
 		MedicalRecord medicalRecord = medicalRecordRepository
 				.findByName(firstName, lastName);

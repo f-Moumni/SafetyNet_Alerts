@@ -5,11 +5,13 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.safetynet.alerts.DTO.FireStationDTO;
 import com.safetynet.alerts.exceptions.AlreadyExistsException;
 import com.safetynet.alerts.exceptions.DataNotFoundException;
 import com.safetynet.alerts.exceptions.FireStationNoteFoundException;
 import com.safetynet.alerts.model.FireStation;
 import com.safetynet.alerts.repository.FireStationRepository;
+import com.safetynet.alerts.util.FireStationConverter;
 
 import lombok.Data;
 @Data
@@ -17,12 +19,14 @@ import lombok.Data;
 public class FireStationService implements IFireStationService {
 	@Autowired
 	private FireStationRepository fireStationRepository;
+	@Autowired
+	FireStationConverter fireStationConverter;
 
 	@Override
-	public List<FireStation> findAll() throws DataNotFoundException {
+	public List<FireStationDTO> findAll() throws DataNotFoundException {
 		List<FireStation> firestations = fireStationRepository.findAll();
 		if (firestations != null) {
-			return firestations;
+			return fireStationConverter.toFireStationDTOList(firestations);
 		} else {
 			throw new DataNotFoundException("Firestation Data note found");
 		}
@@ -57,12 +61,13 @@ public class FireStationService implements IFireStationService {
 
 	}
 	@Override
-	public FireStation updateFireStation(FireStation fireStation)
+	public FireStationDTO updateFireStation(FireStation fireStation)
 			throws FireStationNoteFoundException {
 		FireStation fstation = fireStationRepository
 				.FindByAddress(fireStation.getAddress());
 		if (fstation != null) {
-			return fireStationRepository.updateFireStation(fireStation);
+			return fireStationConverter.toFireStationDTO(
+					fireStationRepository.updateFireStation(fireStation));
 		} else {
 			throw new FireStationNoteFoundException("the address  :"
 					+ fireStation.getAddress() + " cannot be changed");
@@ -70,13 +75,12 @@ public class FireStationService implements IFireStationService {
 
 	}
 	@Override
-	public FireStation deleteFireStation(String address)
+	public FireStationDTO deleteFireStation(String address)
 			throws FireStationNoteFoundException {
-		FireStation fstationByAdress = fireStationRepository
-				.FindByAddress(address);
-		if (fstationByAdress != null) {
-			fireStationRepository.deleteFireStation(fstationByAdress);
-			return fstationByAdress;
+		FireStation fstation = fireStationRepository.FindByAddress(address);
+		if (fstation != null) {
+			fireStationRepository.deleteFireStation(fstation);
+			return fireStationConverter.toFireStationDTO(fstation);
 		} else {
 			throw new FireStationNoteFoundException(
 					"firestation at address  :" + address + " not found");

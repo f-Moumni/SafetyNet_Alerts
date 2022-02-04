@@ -1,7 +1,6 @@
-package com.safetynet.alerts.model;
+package com.safetynet.alerts.DTO;
 
-public class Person {
-
+public class PersonDTO {
 	private String firstName;
 	private String lastName;
 	private String address;
@@ -9,9 +8,10 @@ public class Person {
 	private int zip;
 	private String phone;
 	private String email;
-	public Person() {
+
+	public PersonDTO() {
 	}
-	public Person(String firstName, String lastName, String address,
+	public PersonDTO(String firstName, String lastName, String address,
 			String city, int zip, String phone, String email) {
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -63,12 +63,11 @@ public class Person {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
 	@Override
 	public String toString() {
-		return "Person [firstName=" + firstName + ", lastName=" + lastName
+		return "PersonDTO [firstName=" + firstName + ", lastName=" + lastName
 				+ ", address=" + address + ", city=" + city + ", zip=" + zip
-				+ ", phone=" + phone + ", email=" + email + "]";
+				+ ", phone=" + phone + "]";
 	}
 
 }

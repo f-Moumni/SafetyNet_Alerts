@@ -16,12 +16,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.safetynet.alerts.DTO.FireStationDTO;
 import com.safetynet.alerts.exceptions.AlreadyExistsException;
 import com.safetynet.alerts.exceptions.BadRequestException;
 import com.safetynet.alerts.exceptions.DataNotFoundException;
 import com.safetynet.alerts.exceptions.FireStationNoteFoundException;
 import com.safetynet.alerts.model.FireStation;
 import com.safetynet.alerts.service.IFireStationService;
+import com.safetynet.alerts.util.FireStationConverter;
 
 @RestController
 @RequestMapping("/firestation")
@@ -35,29 +37,32 @@ public class FireStationController {
 	public FireStationController(IFireStationService fireStationService) {
 		this.fireStationService = fireStationService;
 	}
-
+	@Autowired
+	FireStationConverter fireStationConverter;
 	@GetMapping
-	public ResponseEntity<List<FireStation>> findAll()
+	public ResponseEntity<List<FireStationDTO>> findAll()
 			throws DataNotFoundException {
 		return new ResponseEntity<>(fireStationService.findAll(),
 				HttpStatus.OK);
 
 	}
 	@PostMapping
-	public ResponseEntity<FireStation> addFireStation(
+	public ResponseEntity<FireStationDTO> addFireStation(
 			@RequestBody FireStation fireStation)
 			throws AlreadyExistsException, BadRequestException {
 		if ((fireStation.getStation() > 0)
 				&& (!fireStation.getAddress().isBlank())) {
 			fireStationService.addFireStation(fireStation);
-			return new ResponseEntity<>(fireStation, HttpStatus.CREATED);
+			return new ResponseEntity<>(
+					fireStationConverter.toFireStationDTO(fireStation),
+					HttpStatus.CREATED);
 		} else {
 			throw new BadRequestException(
 					"All fields (fire station numero and adresse) are required ");
 		}
 	}
 	@PutMapping
-	public ResponseEntity<FireStation> updateFireStation(
+	public ResponseEntity<FireStationDTO> updateFireStation(
 			@RequestBody FireStation fireStation)
 			throws BadRequestException, FireStationNoteFoundException {
 		if ((fireStation.getStation() > 0)
@@ -71,7 +76,7 @@ public class FireStationController {
 		}
 	}
 	@DeleteMapping
-	public ResponseEntity<FireStation> deleteFireStation(
+	public ResponseEntity<FireStationDTO> deleteFireStation(
 			@RequestParam String address)
 			throws BadRequestException, FireStationNoteFoundException {
 		if (!address.isBlank()) {

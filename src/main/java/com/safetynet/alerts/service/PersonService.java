@@ -5,11 +5,13 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.safetynet.alerts.DTO.PersonDTO;
 import com.safetynet.alerts.exceptions.AlreadyExistsException;
 import com.safetynet.alerts.exceptions.DataNotFoundException;
 import com.safetynet.alerts.exceptions.PersonNotFoundException;
 import com.safetynet.alerts.model.Person;
 import com.safetynet.alerts.repository.PersonRepository;
+import com.safetynet.alerts.util.PersonConverter;
 
 @Service
 public class PersonService implements IPersonService {
@@ -17,11 +19,14 @@ public class PersonService implements IPersonService {
 	@Autowired
 	private PersonRepository personRepository;
 
+	@Autowired
+	private PersonConverter personConverter;
+
 	@Override
-	public List<Person> findAll() throws DataNotFoundException {
+	public List<PersonDTO> findAll() throws DataNotFoundException {
 		List<Person> persons = personRepository.findAll();
 		if (persons != null) {
-			return persons;
+			return personConverter.toListOfPersonDTO(persons);
 		} else
 			throw new DataNotFoundException("Person data not found");
 	}
@@ -39,11 +44,11 @@ public class PersonService implements IPersonService {
 	}
 
 	@Override
-	public Person deletePerson(String firstName, String lastName)
+	public PersonDTO deletePerson(String firstName, String lastName)
 			throws PersonNotFoundException {
 		Person person = findByName(firstName, lastName);
 		personRepository.deletePerson(person);
-		return person;
+		return personConverter.toPersonDTO(person);
 	}
 
 	@Override
@@ -61,12 +66,13 @@ public class PersonService implements IPersonService {
 	}
 
 	@Override
-	public Person updatePerson(Person personToUpdate)
+	public PersonDTO updatePerson(Person personToUpdate)
 			throws PersonNotFoundException {
 		Person person = personRepository.findByName(
 				personToUpdate.getFirstName(), personToUpdate.getLastName());
 		if (person != null) {
-			return personRepository.updatePerson(personToUpdate);
+			return personConverter
+					.toPersonDTO(personRepository.updatePerson(personToUpdate));
 		} else {
 			throw new PersonNotFoundException("the name cannot be changed");
 		}

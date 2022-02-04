@@ -14,12 +14,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.safetynet.alerts.DTO.MedicalRecordDTO;
 import com.safetynet.alerts.exceptions.AlreadyExistsException;
 import com.safetynet.alerts.exceptions.BadRequestException;
 import com.safetynet.alerts.exceptions.DataNotFoundException;
 import com.safetynet.alerts.exceptions.MedicalRecordNotFoundException;
 import com.safetynet.alerts.model.MedicalRecord;
 import com.safetynet.alerts.service.IMedicalRecordService;
+import com.safetynet.alerts.util.MedicalRecordConverter;
 
 import lombok.Data;
 @Data
@@ -33,16 +35,18 @@ public class MedicalRecordController {
 			final IMedicalRecordService medicalRecordService) {
 		this.medicalRecordService = medicalRecordService;
 	}
+	@Autowired
+	MedicalRecordConverter medicalRecordConverter;
 
 	@GetMapping
-	public ResponseEntity<List<MedicalRecord>> getPersons()
+	public ResponseEntity<List<MedicalRecordDTO>> getPersons()
 			throws DataNotFoundException {
 		return new ResponseEntity<>(medicalRecordService.findAll(),
 				HttpStatus.OK);
 
 	}
 	@PostMapping
-	public ResponseEntity<MedicalRecord> addMedicalRecord(
+	public ResponseEntity<MedicalRecordDTO> addMedicalRecord(
 			@RequestBody MedicalRecord medicalRecord)
 			throws AlreadyExistsException, BadRequestException {
 
@@ -54,13 +58,16 @@ public class MedicalRecordController {
 					"the first and the last name are required ");
 		} else {
 			medicalRecordService.addMedicalRecord(medicalRecord);
-			return new ResponseEntity<>(medicalRecord, HttpStatus.CREATED);
+
+			return new ResponseEntity<>(
+					medicalRecordConverter.toMedicalRecordDTO(medicalRecord),
+					HttpStatus.CREATED);
 
 		}
 
 	}
 	@PutMapping
-	public ResponseEntity<MedicalRecord> updateMedicalRecord(
+	public ResponseEntity<MedicalRecordDTO> updateMedicalRecord(
 			@RequestBody MedicalRecord medicalRecord)
 			throws BadRequestException, MedicalRecordNotFoundException {
 
@@ -72,11 +79,13 @@ public class MedicalRecordController {
 					"the first and the last name are required ");
 		} else {
 			medicalRecordService.updateMedicalRecord(medicalRecord);
-			return new ResponseEntity<>(medicalRecord, HttpStatus.OK);
+			return new ResponseEntity<>(
+					medicalRecordConverter.toMedicalRecordDTO(medicalRecord),
+					HttpStatus.OK);
 		}
 	}
 	@DeleteMapping
-	public ResponseEntity<MedicalRecord> deleteMedicalRecord(
+	public ResponseEntity<MedicalRecordDTO> deleteMedicalRecord(
 			@RequestParam String firstName, @RequestParam String lastName)
 			throws MedicalRecordNotFoundException, BadRequestException {
 		if (((firstName == null) || (lastName == null)) || (firstName.isBlank())
@@ -84,7 +93,7 @@ public class MedicalRecordController {
 			throw new BadRequestException(
 					"firstName and lastName are required");
 		} else {
-			MedicalRecord medicalRecord = medicalRecordService
+			MedicalRecordDTO medicalRecord = medicalRecordService
 					.deleteMedicalRecord(firstName, lastName);
 			return new ResponseEntity<>(medicalRecord, HttpStatus.OK);
 		}
