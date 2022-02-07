@@ -20,6 +20,7 @@ public class MedicalRecordRepository implements IMedicalRecordRepository {
 		medicalRecords.add(medicalRecord);
 
 	}
+	@Override
 	public MedicalRecord findByName(String firstName, String lastName) {
 		MedicalRecord medicalRecord = null;
 		for (MedicalRecord medRecord : medicalRecords) {

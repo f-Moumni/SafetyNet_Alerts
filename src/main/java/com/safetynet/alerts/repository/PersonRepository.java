@@ -41,6 +41,39 @@ public class PersonRepository implements IPersonRepository {
 
 	}
 	@Override
+	public List<Person> findPersonsByLastName(String lastName) {
+		List<Person> PersonsWithSameName = new ArrayList<Person>();
+		for (Person pr : persons) {
+			if (pr.getLastName().equalsIgnoreCase(lastName)) {
+				PersonsWithSameName.add(pr);
+			}
+		}
+		return PersonsWithSameName;
+
+	}
+	@Override
+	public List<Person> findByAddress(String address) {
+		List<Person> personsByAddress = new ArrayList<Person>();
+		for (Person pr : persons) {
+			if ((pr.getAddress().equalsIgnoreCase(address))) {
+				personsByAddress.add(pr);
+			}
+		}
+		return personsByAddress;
+
+	}
+	@Override
+	public List<Person> findByCity(String city) {
+		List<Person> personsByCity = new ArrayList<Person>();
+		for (Person pr : persons) {
+			if ((pr.getCity().equals(city))) {
+				personsByCity.add(pr);
+			}
+		}
+		return personsByCity;
+
+	}
+	@Override
 	public Person updatePerson(Person person) {
 		Person persontoUpdate = findByName(person.getFirstName(),
 				person.getLastName());

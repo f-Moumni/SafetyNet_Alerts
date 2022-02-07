@@ -14,4 +14,6 @@ public interface IMedicalRecordRepository {
 
 	MedicalRecord updateMedicalRecord(MedicalRecord medicalRecordUpdated);
 
+	MedicalRecord findByName(String firstName, String lastName);
+
 }

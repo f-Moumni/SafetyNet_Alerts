@@ -16,6 +16,6 @@ public interface IFireStationRepository {
 
 	FireStation updateFireStation(FireStation fireStation);
 
-	FireStation FindByStation(int station);
+	List<String> FindByStation(int station);
 
 }

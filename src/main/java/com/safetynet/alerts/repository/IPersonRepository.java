@@ -12,8 +12,14 @@ public interface IPersonRepository {
 
 	public void deletePerson(Person person);
 
-	Person findByName(String firstName, String lastName);
+	public Person findByName(String firstName, String lastName);
 
-	Person updatePerson(Person person);
+	public Person updatePerson(Person person);
+
+	public List<Person> findByAddress(String address);
+
+	public List<Person> findPersonsByLastName(String lastName);
+
+	public List<Person> findByCity(String city);
 
 }

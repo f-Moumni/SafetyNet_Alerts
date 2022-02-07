@@ -43,15 +43,14 @@ public class FireStationRepository implements IFireStationRepository {
 
 	}
 	@Override
-	public FireStation FindByStation(int station) {
-		FireStation fireStation = null;
+	public List<String> FindByStation(int station) {
+		List<String> addresses = new ArrayList<>();
 		for (FireStation fStation : fireStations) {
 			if (fStation.getStation() == station) {
-				fireStation = fStation;
-				break;
+				addresses.add(fStation.getAddress());
 			}
 		}
-		return fireStation;
+		return addresses;
 
 	}
 	@Override
