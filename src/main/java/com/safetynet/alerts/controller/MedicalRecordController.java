@@ -2,6 +2,8 @@ package com.safetynet.alerts.controller;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,18 +18,17 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.safetynet.alerts.DTO.MedicalRecordDTO;
 import com.safetynet.alerts.exceptions.AlreadyExistsException;
-import com.safetynet.alerts.exceptions.BadRequestException;
 import com.safetynet.alerts.exceptions.DataNotFoundException;
 import com.safetynet.alerts.exceptions.MedicalRecordNotFoundException;
 import com.safetynet.alerts.model.MedicalRecord;
 import com.safetynet.alerts.service.IMedicalRecordService;
 import com.safetynet.alerts.util.MedicalRecordConverter;
 
-import lombok.Data;
-@Data
 @RestController
 @RequestMapping("medicalRecord")
 public class MedicalRecordController {
+	private static final Logger LOGGER = LoggerFactory
+			.getLogger(MedicalRecordController.class);
 	private final IMedicalRecordService medicalRecordService;
 
 	@Autowired
@@ -39,62 +40,77 @@ public class MedicalRecordController {
 	MedicalRecordConverter medicalRecordConverter;
 
 	@GetMapping
-	public ResponseEntity<List<MedicalRecordDTO>> getPersons()
+	public ResponseEntity<List<MedicalRecordDTO>> getMedicalRecords()
 			throws DataNotFoundException {
-		return new ResponseEntity<>(medicalRecordService.findAll(),
+		LOGGER.debug("at getMedicalRecords methode ");
+		List<MedicalRecordDTO> medicalRecordList = medicalRecordService
+				.findAll();
+		LOGGER.info("MedicalRecords list getted with success   HttpStatus :{}",
 				HttpStatus.OK);
+		return new ResponseEntity<>(medicalRecordList, HttpStatus.OK);
 
 	}
 	@PostMapping
-	public ResponseEntity<MedicalRecordDTO> addMedicalRecord(
+	public ResponseEntity<?> addMedicalRecord(
 			@RequestBody MedicalRecord medicalRecord)
-			throws AlreadyExistsException, BadRequestException {
-
+			throws AlreadyExistsException {
+		LOGGER.debug("at addMedicalRecord methode ");
 		if (((medicalRecord.getFirstName() == null)
 				|| (medicalRecord.getLastName() == null))
 				|| (medicalRecord.getFirstName().isBlank())
 				|| (medicalRecord.getLastName().isBlank())) {
-			throw new BadRequestException(
-					"the first and the last name are required ");
-		} else {
-			medicalRecordService.addMedicalRecord(medicalRecord);
-
-			return new ResponseEntity<>(
-					medicalRecordConverter.toMedicalRecordDTO(medicalRecord),
-					HttpStatus.CREATED);
-
+			LOGGER.error("Invalid name  HttpStatus :{}", HttpStatus.NO_CONTENT);
+			return ResponseEntity.badRequest().body("Invalid name");
 		}
+		medicalRecordService.addMedicalRecord(medicalRecord);
+		LOGGER.info(
+				"MedicalRecord of {} {} saved with success   HttpStatus :{}",
+				medicalRecord.getFirstName(), medicalRecord.getLastName(),
+				HttpStatus.CREATED);
+		return new ResponseEntity<>(
+				medicalRecordConverter.toMedicalRecordDTO(medicalRecord),
+				HttpStatus.CREATED);
 
 	}
 	@PutMapping
-	public ResponseEntity<MedicalRecordDTO> updateMedicalRecord(
+	public ResponseEntity<?> updateMedicalRecord(
 			@RequestBody MedicalRecord medicalRecord)
-			throws BadRequestException, MedicalRecordNotFoundException {
-
+			throws MedicalRecordNotFoundException {
+		LOGGER.debug("at updateMedicalRecord methode ");
 		if (((medicalRecord.getFirstName() == null)
 				|| (medicalRecord.getLastName() == null))
 				|| (medicalRecord.getFirstName().isBlank())
 				|| (medicalRecord.getLastName().isBlank())) {
-			throw new BadRequestException(
-					"the first and the last name are required ");
+			LOGGER.error("Invalid name  HttpStatus :{}", HttpStatus.NO_CONTENT);
+			return ResponseEntity.badRequest().body("Invalid name");
 		} else {
 			medicalRecordService.updateMedicalRecord(medicalRecord);
+			LOGGER.info(
+					"MedicalRecord of {} {} Updated with success   HttpStatus :{}",
+					medicalRecord.getFirstName(), medicalRecord.getLastName(),
+					HttpStatus.OK);
 			return new ResponseEntity<>(
 					medicalRecordConverter.toMedicalRecordDTO(medicalRecord),
 					HttpStatus.OK);
 		}
 	}
 	@DeleteMapping
-	public ResponseEntity<MedicalRecordDTO> deleteMedicalRecord(
-			@RequestParam String firstName, @RequestParam String lastName)
-			throws MedicalRecordNotFoundException, BadRequestException {
+	public ResponseEntity<?> deleteMedicalRecord(@RequestParam String firstName,
+			@RequestParam String lastName)
+			throws MedicalRecordNotFoundException {
+		LOGGER.debug("at deleteMedicalRecord methode ");
 		if (((firstName == null) || (lastName == null)) || (firstName.isBlank())
 				|| (lastName.isBlank())) {
-			throw new BadRequestException(
-					"firstName and lastName are required");
+			LOGGER.error("Invalid name  HttpStatus :{}",
+					HttpStatus.BAD_REQUEST);
+			return ResponseEntity.badRequest().body("Invalid name");
 		} else {
 			MedicalRecordDTO medicalRecord = medicalRecordService
 					.deleteMedicalRecord(firstName, lastName);
+			LOGGER.info(
+					"MedicalRecord of {} {} deleted with success   HttpStatus :{}",
+					medicalRecord.getFirstName(), medicalRecord.getLastName(),
+					HttpStatus.OK);
 			return new ResponseEntity<>(medicalRecord, HttpStatus.OK);
 		}
 	}

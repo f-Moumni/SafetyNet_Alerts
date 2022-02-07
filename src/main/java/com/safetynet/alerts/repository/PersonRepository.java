@@ -7,9 +7,6 @@ import org.springframework.stereotype.Repository;
 
 import com.safetynet.alerts.model.Person;
 
-import lombok.Data;
-@Data
-
 @Repository
 public class PersonRepository implements IPersonRepository {
 

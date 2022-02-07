@@ -12,13 +12,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.safetynet.alerts.DTO.FireStationDTO;
 import com.safetynet.alerts.exceptions.AlreadyExistsException;
-import com.safetynet.alerts.exceptions.BadRequestException;
 import com.safetynet.alerts.exceptions.DataNotFoundException;
 import com.safetynet.alerts.exceptions.FireStationNoteFoundException;
 import com.safetynet.alerts.model.FireStation;
@@ -26,7 +24,7 @@ import com.safetynet.alerts.service.IFireStationService;
 import com.safetynet.alerts.util.FireStationConverter;
 
 @RestController
-@RequestMapping("/firestation")
+
 public class FireStationController {
 	private final Logger LOGGER = LoggerFactory
 			.getLogger(FireStationController.class);
@@ -39,54 +37,74 @@ public class FireStationController {
 	}
 	@Autowired
 	FireStationConverter fireStationConverter;
-	@GetMapping
-	public ResponseEntity<List<FireStationDTO>> findAll()
+	@GetMapping("/firestations")
+	public ResponseEntity<List<FireStationDTO>> getFireStations()
 			throws DataNotFoundException {
-		return new ResponseEntity<>(fireStationService.findAll(),
+		LOGGER.debug("at get FireStations methode ");
+		List<FireStationDTO> fireStations = fireStationService.findAll();
+		LOGGER.info("fireStations list getted with success   HttpStatus :{}",
 				HttpStatus.OK);
+		return new ResponseEntity<>(fireStations, HttpStatus.OK);
 
 	}
-	@PostMapping
-	public ResponseEntity<FireStationDTO> addFireStation(
+	@PostMapping("/firestation")
+	public ResponseEntity<?> addFireStation(
 			@RequestBody FireStation fireStation)
-			throws AlreadyExistsException, BadRequestException {
-		if ((fireStation.getStation() > 0)
-				&& (!fireStation.getAddress().isBlank())) {
-			fireStationService.addFireStation(fireStation);
-			return new ResponseEntity<>(
-					fireStationConverter.toFireStationDTO(fireStation),
-					HttpStatus.CREATED);
-		} else {
-			throw new BadRequestException(
-					"All fields (fire station numero and adresse) are required ");
+			throws AlreadyExistsException {
+		LOGGER.debug("at addFireStation methode ");
+		if ((fireStation.getStation() <= 0)
+				|| (fireStation.getAddress().isBlank())) {
+			LOGGER.error(
+					"Invalid fire station numero or adresse HttpStatus :{}",
+					HttpStatus.NO_CONTENT);
+			return ResponseEntity.badRequest()
+					.body("Invalid fire station numero or adresse");
 		}
-	}
-	@PutMapping
-	public ResponseEntity<FireStationDTO> updateFireStation(
-			@RequestBody FireStation fireStation)
-			throws BadRequestException, FireStationNoteFoundException {
-		if ((fireStation.getStation() > 0)
-				&& (!fireStation.getAddress().isBlank())) {
-			return new ResponseEntity<>(
-					fireStationService.updateFireStation(fireStation),
-					HttpStatus.OK);
-		} else {
-			throw new BadRequestException(
-					"All fields (fire station numero and adresse) are required ");
-		}
-	}
-	@DeleteMapping
-	public ResponseEntity<FireStationDTO> deleteFireStation(
-			@RequestParam String address)
-			throws BadRequestException, FireStationNoteFoundException {
-		if (!address.isBlank()) {
+		fireStationService.addFireStation(fireStation);
+		LOGGER.info(
+				"fireStation {} at the address{} saved with success   HttpStatus :{}",
+				fireStation.getStation(), fireStation.getAddress(),
+				HttpStatus.CREATED);
+		return new ResponseEntity<>(
+				fireStationConverter.toFireStationDTO(fireStation),
+				HttpStatus.CREATED);
 
-			return new ResponseEntity<>(
-					fireStationService.deleteFireStation(address),
-					HttpStatus.OK);
-		} else {
-			throw new BadRequestException(
-					"All fields (fire station numero and adresse) are required ");
+	}
+	@PutMapping("/firestation")
+	public ResponseEntity<?> updateFireStation(
+			@RequestBody FireStation fireStation)
+			throws FireStationNoteFoundException {
+		LOGGER.debug("at updateFireStation methode ");
+		if ((fireStation.getStation() <= 0)
+				|| (fireStation.getAddress().isBlank())) {
+			LOGGER.error(
+					"Invalid fire station numero or adresse HttpStatus :{}",
+					HttpStatus.NO_CONTENT);
+			return ResponseEntity.badRequest()
+					.body("Invalid fire station numero or adresse");
 		}
+		FireStationDTO fStation = fireStationService
+				.updateFireStation(fireStation);
+		LOGGER.info(
+				"fireStation {} at the address{} updated with success   HttpStatus :{}",
+				fireStation.getStation(), fireStation.getAddress(),
+				HttpStatus.OK);
+		return new ResponseEntity<>(fStation, HttpStatus.OK);
+	}
+	@DeleteMapping("/firestation")
+	public ResponseEntity<?> deleteFireStation(@RequestParam String address)
+			throws FireStationNoteFoundException {
+		LOGGER.debug("at deleteFireStation methode ");
+		if ((address.isBlank()) || (address.equals(null))) {
+			LOGGER.error("Invalid fire station adresse HttpStatus :{}",
+					HttpStatus.BAD_REQUEST);
+			return ResponseEntity.badRequest()
+					.body("Invalid fire station numero or adresse");
+		}
+		FireStationDTO fStation = fireStationService.deleteFireStation(address);
+		LOGGER.info(
+				"fireStation {} at the address{} deleted with success   HttpStatus :{}",
+				fStation.getStation(), fStation.getAddress(), HttpStatus.OK);
+		return new ResponseEntity<>(fStation, HttpStatus.OK);
 	}
 }

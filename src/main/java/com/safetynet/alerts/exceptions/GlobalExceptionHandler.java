@@ -21,16 +21,7 @@ public class GlobalExceptionHandler {
 		return new ResponseEntity<>(exception, HttpStatus.NOT_FOUND);
 
 	}
-	@ExceptionHandler(BadRequestException.class)
-	public ResponseEntity<?> handleBadRequestException(BadRequestException e,
-			WebRequest request) {
 
-		ExceptionDetails exception = new ExceptionDetails(new Date(),
-				e.getMessage(), HttpStatus.BAD_REQUEST,
-				request.getDescription(false));
-		return new ResponseEntity<>(exception, HttpStatus.BAD_REQUEST);
-
-	}
 	@ExceptionHandler(PersonNotFoundException.class)
 	public ResponseEntity<?> handlePersonNotFoundException(
 			PersonNotFoundException e, WebRequest request) {

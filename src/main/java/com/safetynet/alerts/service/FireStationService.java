@@ -2,6 +2,8 @@ package com.safetynet.alerts.service;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,10 +15,10 @@ import com.safetynet.alerts.model.FireStation;
 import com.safetynet.alerts.repository.FireStationRepository;
 import com.safetynet.alerts.util.FireStationConverter;
 
-import lombok.Data;
-@Data
 @Service
 public class FireStationService implements IFireStationService {
+	private static final Logger LOGGER = LoggerFactory
+			.getLogger(FireStationService.class);
 	@Autowired
 	private FireStationRepository fireStationRepository;
 	@Autowired
@@ -28,6 +30,7 @@ public class FireStationService implements IFireStationService {
 		if (firestations != null) {
 			return fireStationConverter.toFireStationDTOList(firestations);
 		} else {
+			LOGGER.error("Firestation Data note found");
 			throw new DataNotFoundException("Firestation Data note found");
 		}
 	}
@@ -38,9 +41,12 @@ public class FireStationService implements IFireStationService {
 		FireStation fstation = fireStationRepository
 				.FindByAddress(fireStation.getAddress());
 		if (fstation != null) {
+			LOGGER.error("this FireStation " + fstation.getStation()
+					+ " at the address " + fstation.getAddress()
+					+ " is already exsits");
 			throw new AlreadyExistsException("this FireStation "
-					+ fireStation.getStation() + " at the address "
-					+ fireStation.getAddress() + " is already exsits");
+					+ fstation.getStation() + " at the address "
+					+ fstation.getAddress() + " is already exsits");
 		} else {
 			fireStationRepository.addFireStation(fireStation);
 
@@ -54,6 +60,7 @@ public class FireStationService implements IFireStationService {
 		if (fstation != null) {
 			return fstation;
 		} else {
+			LOGGER.error("fire station in address :" + address + " not found");
 			throw new FireStationNoteFoundException(
 					"fire station in address :" + address + " not found");
 
@@ -69,6 +76,8 @@ public class FireStationService implements IFireStationService {
 			return fireStationConverter.toFireStationDTO(
 					fireStationRepository.updateFireStation(fireStation));
 		} else {
+			LOGGER.error("the address  :" + fireStation.getAddress()
+					+ " cannot be changed");
 			throw new FireStationNoteFoundException("the address  :"
 					+ fireStation.getAddress() + " cannot be changed");
 		}
@@ -82,6 +91,7 @@ public class FireStationService implements IFireStationService {
 			fireStationRepository.deleteFireStation(fstation);
 			return fireStationConverter.toFireStationDTO(fstation);
 		} else {
+			LOGGER.error("firestation at address  :" + address + " not found");
 			throw new FireStationNoteFoundException(
 					"firestation at address  :" + address + " not found");
 		}

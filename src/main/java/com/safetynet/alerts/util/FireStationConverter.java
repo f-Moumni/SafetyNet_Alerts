@@ -14,10 +14,6 @@ public class FireStationConverter {
 		return new FireStationDTO(fireStation.getAddress(),
 				fireStation.getStation());
 	}
-	public FireStation toFireStation(FireStationDTO fireStationDTO) {
-		return new FireStation(fireStationDTO.getAddress(),
-				fireStationDTO.getStation());
-	}
 	public List<FireStationDTO> toFireStationDTOList(
 			List<FireStation> fireStations) {
 		List<FireStationDTO> FireStationsDTO = new ArrayList<FireStationDTO>();

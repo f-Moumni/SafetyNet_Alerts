@@ -16,13 +16,6 @@ public class MedicalRecordConverter {
 				medicalRecord.getMedications(), medicalRecord.getAllergies());
 	}
 
-	public MedicalRecord toMedicalRecord(MedicalRecordDTO medicalRecordDTO) {
-		return new MedicalRecord(medicalRecordDTO.getFirstName(),
-				medicalRecordDTO.getLastName(), medicalRecordDTO.getBirthdate(),
-				medicalRecordDTO.getMedications(),
-				medicalRecordDTO.getAllergies());
-	}
-
 	public List<MedicalRecordDTO> toMedicalRecordDTOList(
 			List<MedicalRecord> medicalRecords) {
 		List<MedicalRecordDTO> medicalRecordsDTO = new ArrayList<MedicalRecordDTO>();

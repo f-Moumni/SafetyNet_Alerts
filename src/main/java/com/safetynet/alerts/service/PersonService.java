@@ -2,6 +2,8 @@ package com.safetynet.alerts.service;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +17,8 @@ import com.safetynet.alerts.util.PersonConverter;
 
 @Service
 public class PersonService implements IPersonService {
-
+	private static final Logger LOGGER = LoggerFactory
+			.getLogger(PersonService.class);
 	@Autowired
 	private PersonRepository personRepository;
 
@@ -28,7 +31,8 @@ public class PersonService implements IPersonService {
 		if (persons != null) {
 			return personConverter.toListOfPersonDTO(persons);
 		} else
-			throw new DataNotFoundException("Person data not found");
+			LOGGER.error("Person data not found");
+		throw new DataNotFoundException("Person data not found");
 	}
 
 	@Override
@@ -38,6 +42,7 @@ public class PersonService implements IPersonService {
 		if (person != null) {
 			return person;
 		} else {
+			LOGGER.error("person " + firstName + " " + lastName + " not found");
 			throw new PersonNotFoundException(
 					"person " + firstName + " " + lastName + " not found");
 		}
@@ -58,6 +63,8 @@ public class PersonService implements IPersonService {
 		if (person == null) {
 			personRepository.addPerson(personToAdd);
 		} else {
+			LOGGER.error("this person " + personToAdd.getFirstName() + " "
+					+ personToAdd.getLastName() + " already exists");
 			throw new AlreadyExistsException(
 					"this person " + personToAdd.getFirstName() + " "
 							+ personToAdd.getLastName() + " already exists");
@@ -74,6 +81,7 @@ public class PersonService implements IPersonService {
 			return personConverter
 					.toPersonDTO(personRepository.updatePerson(personToUpdate));
 		} else {
+			LOGGER.error("the name cannot be changed");
 			throw new PersonNotFoundException("the name cannot be changed");
 		}
 	}

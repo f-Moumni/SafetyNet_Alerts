@@ -2,6 +2,8 @@ package com.safetynet.alerts.service;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +16,8 @@ import com.safetynet.alerts.repository.MedicalRecordRepository;
 import com.safetynet.alerts.util.MedicalRecordConverter;
 @Service
 public class MedicalRecordService implements IMedicalRecordService {
-
+	private static final Logger LOGGER = LoggerFactory
+			.getLogger(MedicalRecordService.class);
 	@Autowired
 	MedicalRecordRepository medicalRecordRepository;
 	@Autowired
@@ -27,8 +30,8 @@ public class MedicalRecordService implements IMedicalRecordService {
 			return medicalRecordConverter
 					.toMedicalRecordDTOList(medicaleRecords);
 		} else
-			throw new DataNotFoundException("Medical records Data not found");
-
+			LOGGER.error("Medical records Data not found");
+		throw new DataNotFoundException("Medical records Data not found");
 	}
 
 	@Override
@@ -38,6 +41,9 @@ public class MedicalRecordService implements IMedicalRecordService {
 				medicalRecordToAdd.getFirstName(),
 				medicalRecordToAdd.getLastName());
 		if (medicalRecord != null) {
+			LOGGER.error(medicalRecordToAdd.getFirstName() + "  "
+					+ medicalRecordToAdd.getLastName()
+					+ " already has a medical record");
 			throw new AlreadyExistsException(medicalRecordToAdd.getFirstName()
 					+ "  " + medicalRecordToAdd.getLastName()
 					+ " already has a medical record");
@@ -60,6 +66,7 @@ public class MedicalRecordService implements IMedicalRecordService {
 					.toMedicalRecordDTO(medicalRecordRepository
 							.updateMedicalRecord(medicalRecordToUpdate));
 		} else {
+			LOGGER.error("the name cannot be changed");
 			throw new MedicalRecordNotFoundException(
 					"the name cannot be changed");
 		}
@@ -81,6 +88,7 @@ public class MedicalRecordService implements IMedicalRecordService {
 		if (medicalRecord != null) {
 			return medicalRecord;
 		} else {
+			LOGGER.error("person " + firstName + " " + lastName + " not found");
 			throw new MedicalRecordNotFoundException(
 					"person " + firstName + " " + lastName + " not found");
 		}

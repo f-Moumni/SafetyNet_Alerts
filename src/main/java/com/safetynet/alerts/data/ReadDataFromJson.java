@@ -6,6 +6,8 @@ import java.io.IOException;
 
 import javax.annotation.PostConstruct;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -20,13 +22,10 @@ import com.safetynet.alerts.repository.IFireStationRepository;
 import com.safetynet.alerts.repository.IMedicalRecordRepository;
 import com.safetynet.alerts.repository.IPersonRepository;
 
-import lombok.Data;
-import lombok.extern.slf4j.Slf4j;
-@Data
-@Slf4j
 @Service
 public class ReadDataFromJson implements IReadData {
-
+	private static final Logger LOGGER = LoggerFactory
+			.getLogger(ReadDataFromJson.class);
 	@Value("${data.jsonFilePath}")
 	private String jsonFilePath;
 
@@ -43,20 +42,20 @@ public class ReadDataFromJson implements IReadData {
 	@Override
 	@PostConstruct
 	public void readData() throws IOException {
-		log.info("reading JSON data from file");
-
+		LOGGER.debug("at get readData methode ");
 		try {
-
+			LOGGER.debug("reading json file ");
 			dataNode = mapper.readTree(new File(jsonFilePath));
 			loadPersons();
 			loadFirestation();
 			loadMedicalRecord();
 		} catch (FileNotFoundException e) {
-			log.error("ERROR fetching json file", e);
+			LOGGER.error("ERROR fetching json file", e);
 		}
 	}
 
 	private void loadPersons() {
+		LOGGER.debug("loading person data ");
 		JsonNode personsNode = dataNode.path("persons");
 
 		Person person = null;
@@ -64,15 +63,15 @@ public class ReadDataFromJson implements IReadData {
 			try {
 				person = mapper.treeToValue(personNode, Person.class);
 			} catch (JsonProcessingException | IllegalArgumentException e) {
-				log.error("error converting json data to person object ", e);
+				LOGGER.error("error converting json data to person object ", e);
 			}
-
 			personRepository.addPerson(person);
 		}
 
 	}
 
 	private void loadFirestation() {
+		LOGGER.debug("loading Fire station data ");
 		JsonNode firestationsNode = dataNode.path("firestations");
 		FireStation fireStation = null;
 		for (JsonNode fireStationNode : firestationsNode) {
@@ -80,8 +79,8 @@ public class ReadDataFromJson implements IReadData {
 				fireStation = mapper.treeToValue(fireStationNode,
 						FireStation.class);
 			} catch (JsonProcessingException | IllegalArgumentException e) {
-				log.error("error converting json data to FireStations object ",
-						e);
+				LOGGER.error(
+						"error converting json data to FireStation object ", e);
 			}
 			fireStationRepository.addFireStation(fireStation);
 		}
@@ -89,16 +88,16 @@ public class ReadDataFromJson implements IReadData {
 	}
 
 	private void loadMedicalRecord() {
+		LOGGER.debug("loading Medical record data ");
 		JsonNode medicalRecordsNode = dataNode.path("medicalrecords");
 		MedicalRecord medicalRecord = null;
 		for (JsonNode medicalRecordNode : medicalRecordsNode) {
 			try {
-
 				medicalRecord = mapper.treeToValue(medicalRecordNode,
 						MedicalRecord.class);
 			} catch (JsonProcessingException | IllegalArgumentException e) {
-				log.error(
-						"error converting json data to medicalrecords object ",
+				LOGGER.error(
+						"error converting json data to medicalrecord object ",
 						e);
 			}
 			medicalRecordRepository.addMedicalRecord(medicalRecord);

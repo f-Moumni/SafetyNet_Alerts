@@ -1,8 +1,7 @@
 package com.safetynet.alerts.controller;
 
-import java.util.HashSet;
-import java.util.List;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,15 +10,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.safetynet.alerts.DTO.ChildAlertDTO;
-import com.safetynet.alerts.DTO.CoveredPopulationDTO;
-import com.safetynet.alerts.DTO.FireDTO;
-import com.safetynet.alerts.DTO.FloodDTO;
-import com.safetynet.alerts.DTO.PersonInfosDTO;
-import com.safetynet.alerts.exceptions.BadRequestException;
 import com.safetynet.alerts.service.IAlertsService;
 
 @RestController
 public class AlertsController {
+
+	private static final Logger LOGGER = LoggerFactory
+			.getLogger(AlertsController.class);
 	private final IAlertsService alertsService;
 
 	@Autowired
@@ -27,55 +24,97 @@ public class AlertsController {
 		this.alertsService = alertsService;
 	}
 
-	@GetMapping("/firestationAlert")
-	public ResponseEntity<CoveredPopulationDTO> getCoveredPopulationByStation(
-			@RequestParam int station) throws BadRequestException {
-		String nbrString = String.valueOf(station);
-		if (nbrString.equals(null) || nbrString.isBlank()) {
-			throw new BadRequestException("Station number is required");
-		} else
-			return new ResponseEntity<>(
-					alertsService.getPopulationCovredByStation(station),
-					HttpStatus.OK);
+	@GetMapping("/firestation")
+	public ResponseEntity<?> getCoveredPopulationByStation(
+			@RequestParam int station) {
+		LOGGER.debug("at get mapping couverd pupulation by station methode ");
+
+		if (station <= 0) {
+			LOGGER.error("invalid Station number  HttpStatus :{}",
+					HttpStatus.BAD_REQUEST);
+			return ResponseEntity.badRequest().body("Invalid Station number");
+		}
+
+		LOGGER.info("population covered by station getted   HttpStatus :{}",
+				HttpStatus.OK);
+		return new ResponseEntity<>(
+				alertsService.getPopulationCovredByStation(station),
+				HttpStatus.OK);
 
 	}
 
 	@GetMapping("/childAlert")
-	public ResponseEntity<ChildAlertDTO> getChildenByaddress(
-			@RequestParam String address) throws BadRequestException {
-
-		if (address.equals(null) || address.isBlank()) {
-			throw new BadRequestException("address is required");
-		} else
-			return new ResponseEntity<>(
-					alertsService.getChildrenByAddress(address), HttpStatus.OK);
+	public ResponseEntity<?> getChildenByaddress(@RequestParam String address) {
+		LOGGER.debug("at get mapping Childen By address methode ");
+		ChildAlertDTO childAlert = alertsService.getChildrenByAddress(address);
+		if (address == null || address.isBlank()) {
+			LOGGER.error("invalid address HttpStatus :{}",
+					HttpStatus.BAD_REQUEST);
+			return ResponseEntity.badRequest().body("Invalid address");
+		}
+		LOGGER.info(" Childen By address getted   HttpStatus :{}",
+				HttpStatus.OK);
+		return new ResponseEntity<>(childAlert, HttpStatus.OK);
 
 	}
 	@GetMapping("/phoneAlert")
-	public ResponseEntity<HashSet<String>> getphonesByaddress(
-			@RequestParam int station) throws BadRequestException {
+	public ResponseEntity<?> getphonesByaddress(@RequestParam int station) {
+		LOGGER.debug("at get mapping phones By address methode ");
 
+		if (station <= 0) {
+			LOGGER.error("invalid Station number  HttpStatus :{}",
+					HttpStatus.BAD_REQUEST);
+			return ResponseEntity.badRequest().body("Invalid Station number");
+		}
+
+		LOGGER.info(
+				"phone numbers of population covered by station getted   HttpStatus :{}",
+				HttpStatus.OK);
 		return new ResponseEntity<>(
 				alertsService.getPhoneNumberByAddress(station), HttpStatus.OK);
 
 	}
 	@GetMapping("/fire")
-	public ResponseEntity<FireDTO> getInhabitantsByAddress(
+	public ResponseEntity<?> getInhabitantsByAddress(
 			@RequestParam String address) {
+		LOGGER.debug("at get Inhabitants By Address methode ");
+		if (address == null || address.isBlank()) {
+			LOGGER.error("invalid address HttpStatus :{}",
+					HttpStatus.BAD_REQUEST);
+			return ResponseEntity.badRequest().body("Invalid address");
+		}
+		LOGGER.info(" Inhabitants By Address getted   HttpStatus :{}",
+				HttpStatus.OK);
 		return new ResponseEntity<>(
 				alertsService.getInhabitantByAddress(address), HttpStatus.OK);
 
 	}
 	@GetMapping("/flood")
-	public ResponseEntity<List<FloodDTO>> getfloodsByStation(
-			@RequestParam int station) {
+	public ResponseEntity<?> getfloodsByStation(@RequestParam int station) {
+		LOGGER.debug("at get floods By Station methode ");
+		if (station <= 0) {
+			LOGGER.error("invalid Station number  HttpStatus :{}",
+					HttpStatus.BAD_REQUEST);
+			return ResponseEntity.badRequest().body("Invalid Station number");
+		}
+		LOGGER.info(" floods By Station getted   HttpStatus :{}",
+				HttpStatus.OK);
 		return new ResponseEntity<>(alertsService.getFloodsByStation(station),
 				HttpStatus.OK);
 
 	}
 	@GetMapping("/personInfo")
-	public ResponseEntity<List<PersonInfosDTO>> getPersonInfosByName(
+	public ResponseEntity<?> getPersonInfosByName(
 			@RequestParam String firstName, @RequestParam String lastName) {
+		LOGGER.debug("at Person Infos By Name methode ");
+		if (((firstName == null) || (lastName == null)) || (firstName.isBlank())
+				|| (lastName.isBlank())) {
+			LOGGER.error("Invalid name  HttpStatus :{}",
+					HttpStatus.BAD_REQUEST);
+			return ResponseEntity.badRequest().body("Invalid name");
+		}
+		LOGGER.info("Person Infos By Name getted   HttpStatus :{}",
+				HttpStatus.OK);
 		return new ResponseEntity<>(
 				alertsService.getPersonInfosByName(firstName, lastName),
 				HttpStatus.OK);
@@ -83,8 +122,14 @@ public class AlertsController {
 	}
 
 	@GetMapping("/CommunityEmail")
-	public ResponseEntity<HashSet<String>> getCommunityEmail(
-			@RequestParam String city) {
+	public ResponseEntity<?> getCommunityEmails(@RequestParam String city) {
+		LOGGER.debug("at Community Emails methode ");
+		if (city == null || city.isBlank()) {
+			LOGGER.error("invalid city  HttpStatus :{}",
+					HttpStatus.BAD_REQUEST);
+			return ResponseEntity.badRequest().body("Invalid city");
+		}
+		LOGGER.info("Community Emails getted   HttpStatus :{}", HttpStatus.OK);
 		return new ResponseEntity<>(alertsService.getCommunityEmail(city),
 				HttpStatus.OK);
 

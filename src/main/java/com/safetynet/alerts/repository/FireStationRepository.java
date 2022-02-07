@@ -7,10 +7,6 @@ import org.springframework.stereotype.Repository;
 
 import com.safetynet.alerts.model.FireStation;
 
-import lombok.Data;
-import lombok.extern.slf4j.Slf4j;
-@Slf4j
-@Data
 @Repository
 public class FireStationRepository implements IFireStationRepository {
 

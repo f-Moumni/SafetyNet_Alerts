@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,7 +26,8 @@ import com.safetynet.alerts.util.AgeCalculator;
 
 @Service
 public class AlerstService implements IAlertsService {
-
+	private static final Logger LOGGER = LoggerFactory
+			.getLogger(AlerstService.class);
 	private final IPersonRepository personRepository;
 
 	private final IMedicalRecordRepository medicalRecordRepository;
@@ -44,12 +47,11 @@ public class AlerstService implements IAlertsService {
 	}
 	@Override
 	public CoveredPopulationDTO getPopulationCovredByStation(int station) {
-
+		LOGGER.debug("at getPopulationCovredByStation methode ");
 		List<String> addresses = fireStationRepository.FindByStation(station);
 		List<PersonAlertDTO> Personscouvred = new ArrayList<>();
 		int numberoOfAddulte = 0;
 		int numberOfchildren = 0;
-
 		for (String address : addresses) {
 			List<Person> persons = personRepository.findByAddress(address);
 			for (Person person : persons) {
@@ -79,6 +81,7 @@ public class AlerstService implements IAlertsService {
 
 	@Override
 	public ChildAlertDTO getChildrenByAddress(String address) {
+		LOGGER.debug("at getChildrenByAddress methode ");
 		ChildAlertDTO childrenAlert;
 		List<Person> persons = personRepository.findByAddress(address);
 		List<String> family = new ArrayList<String>();
@@ -106,6 +109,7 @@ public class AlerstService implements IAlertsService {
 		}
 		if (children.isEmpty()) {
 			childrenAlert = new ChildAlertDTO();
+			LOGGER.info("there are no children in this address: {}", address);
 		} else {
 			childrenAlert = new ChildAlertDTO(children, family);
 		}
@@ -115,6 +119,7 @@ public class AlerstService implements IAlertsService {
 
 	@Override
 	public HashSet<String> getPhoneNumberByAddress(int station) {
+		LOGGER.debug("at getPhoneNumberByAddress methode ");
 		List<PersonAlertDTO> PersonsCouverd = new ArrayList<PersonAlertDTO>();
 		HashSet<String> phoneNumbers = new HashSet<String>();
 		CoveredPopulationDTO covredPopulation = getPopulationCovredByStation(
@@ -129,6 +134,7 @@ public class AlerstService implements IAlertsService {
 
 	@Override
 	public FireDTO getInhabitantByAddress(String address) {
+		LOGGER.debug("at getInhabitantByAddress methode ");
 		List<InhabitantDTO> Inhabitants = new ArrayList<InhabitantDTO>();
 		List<Person> persons = personRepository.findByAddress(address);
 		int station = fireStationRepository.FindByAddress(address).getStation();
@@ -146,6 +152,7 @@ public class AlerstService implements IAlertsService {
 	}
 	@Override
 	public List<FloodDTO> getFloodsByStation(int station) {
+		LOGGER.debug("at getFloodsByStation methode ");
 		List<FloodDTO> floods = new ArrayList<FloodDTO>();
 
 		List<String> addresses = fireStationRepository.FindByStation(station);
@@ -163,6 +170,7 @@ public class AlerstService implements IAlertsService {
 
 	public List<PersonInfosDTO> getPersonInfosByName(String firstName,
 			String lastName) {
+		LOGGER.debug("at getPersonInfosByName methode ");
 		List<PersonInfosDTO> personsInfos = new ArrayList<PersonInfosDTO>();
 		List<Person> personsByAddress = personRepository
 				.findPersonsByLastName(lastName);
@@ -190,6 +198,7 @@ public class AlerstService implements IAlertsService {
 	}
 	@Override
 	public HashSet<String> getCommunityEmail(String City) {
+		LOGGER.debug("at getCommunityEmail methode ");
 		HashSet<String> emails = new HashSet<String>();
 		List<Person> personsByCity = personRepository.findByCity(City);
 		emails.add(personsByCity.get(0).getEmail());
