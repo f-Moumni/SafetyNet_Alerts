@@ -15,13 +15,17 @@ public class MedicalRecordConverter {
 				medicalRecord.getLastName(), medicalRecord.getBirthdate(),
 				medicalRecord.getMedications(), medicalRecord.getAllergies());
 	}
+	public MedicalRecord toMedicalRecord(MedicalRecordDTO medicalRecord) {
+		return new MedicalRecord(medicalRecord.getFirstName(),
+				medicalRecord.getLastName(), medicalRecord.getBirthdate(),
+				medicalRecord.getMedications(), medicalRecord.getAllergies());
+	}
 
 	public List<MedicalRecordDTO> toMedicalRecordDTOList(
 			List<MedicalRecord> medicalRecords) {
 		List<MedicalRecordDTO> medicalRecordsDTO = new ArrayList<MedicalRecordDTO>();
-		for (MedicalRecord medicalRecord : medicalRecords) {
-			medicalRecordsDTO.add(toMedicalRecordDTO(medicalRecord));
-		}
+		medicalRecords.forEach(medicalRecord -> medicalRecordsDTO
+				.add(toMedicalRecordDTO(medicalRecord)));
 		return medicalRecordsDTO;
 
 	}

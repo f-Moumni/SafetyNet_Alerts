@@ -10,17 +10,21 @@ import com.safetynet.alerts.model.FireStation;
 
 public interface IFireStationService {
 
-	List<FireStationDTO> findAll() throws DataNotFoundException;
+	public List<FireStationDTO> findAll() throws DataNotFoundException;
 
-	void addFireStation(FireStation fireStation) throws AlreadyExistsException;
+	public void addFireStation(FireStation fireStation)
+			throws AlreadyExistsException;
 
-	FireStation FindByAdress(String address)
+	public FireStationDTO updateFireStation(FireStation fireStation)
 			throws FireStationNoteFoundException;
 
-	FireStationDTO updateFireStation(FireStation fireStation)
+	public FireStationDTO deleteFireStation(String address)
 			throws FireStationNoteFoundException;
 
-	FireStationDTO deleteFireStation(String address)
+	public List<String> FindByStation(int station)
+			throws FireStationNoteFoundException;
+
+	public FireStation FindByAddress(String address)
 			throws FireStationNoteFoundException;
 
 }

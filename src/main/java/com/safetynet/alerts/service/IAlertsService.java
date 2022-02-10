@@ -8,22 +8,33 @@ import com.safetynet.alerts.DTO.CoveredPopulationDTO;
 import com.safetynet.alerts.DTO.FireDTO;
 import com.safetynet.alerts.DTO.FloodDTO;
 import com.safetynet.alerts.DTO.PersonInfosDTO;
+import com.safetynet.alerts.exceptions.FireStationNoteFoundException;
+import com.safetynet.alerts.exceptions.MedicalRecordNotFoundException;
+import com.safetynet.alerts.exceptions.PersonNotFoundException;
 
 public interface IAlertsService {
 
-	CoveredPopulationDTO getPopulationCovredByStation(int station);
+	public CoveredPopulationDTO getPopulationCovredByStation(int station)
+			throws MedicalRecordNotFoundException;
 
-	ChildAlertDTO getChildrenByAddress(String address);
+	public ChildAlertDTO getChildrenByAddress(String address)
+			throws MedicalRecordNotFoundException;
 
-	HashSet<String> getPhoneNumberByAddress(int station);
+	public FireDTO getInhabitantByAddress(String address)
+			throws MedicalRecordNotFoundException,
+			FireStationNoteFoundException;
 
-	FireDTO getInhabitantByAddress(String address);
+	public List<FloodDTO> getFloodsByStation(int station)
+			throws MedicalRecordNotFoundException,
+			FireStationNoteFoundException;
 
-	List<FloodDTO> getFloodsByStation(int station);
+	public List<PersonInfosDTO> getPersonInfosByName(String firstName,
+			String lastName)
+			throws MedicalRecordNotFoundException, PersonNotFoundException;
 
-	List<PersonInfosDTO> getPersonInfosByName(String firstName,
-			String lastName);
+	public HashSet<String> getCommunityEmail(String City);
 
-	HashSet<String> getCommunityEmail(String City);
+	public HashSet<String> getPhoneNumberByStation(int station)
+			throws MedicalRecordNotFoundException;
 
 }

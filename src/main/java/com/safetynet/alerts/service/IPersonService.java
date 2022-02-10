@@ -15,10 +15,16 @@ public interface IPersonService {
 	public Person findByName(String firstName, String lastName)
 			throws PersonNotFoundException;
 
-	PersonDTO deletePerson(String firstName, String lastName)
-			throws PersonNotFoundException;
-
 	public void addPerson(Person person) throws AlreadyExistsException;
 
 	public PersonDTO updatePerson(Person person) throws PersonNotFoundException;
+
+	public PersonDTO deletePerson(String firstName, String lastName)
+			throws PersonNotFoundException;
+
+	public List<Person> findByAddress(String address);
+
+	public List<Person> findPersonsByLastName(String lastName);
+
+	public List<Person> findByCity(String city);
 }

@@ -41,9 +41,9 @@ public class MedicalRecordService implements IMedicalRecordService {
 				medicalRecordToAdd.getFirstName(),
 				medicalRecordToAdd.getLastName());
 		if (medicalRecord != null) {
-			LOGGER.error(medicalRecordToAdd.getFirstName() + "  "
-					+ medicalRecordToAdd.getLastName()
-					+ " already has a medical record");
+			LOGGER.error("{} {} already has a medical record",
+					medicalRecordToAdd.getFirstName(),
+					medicalRecordToAdd.getLastName());
 			throw new AlreadyExistsException(medicalRecordToAdd.getFirstName()
 					+ "  " + medicalRecordToAdd.getLastName()
 					+ " already has a medical record");
@@ -51,7 +51,6 @@ public class MedicalRecordService implements IMedicalRecordService {
 			medicalRecordRepository.addMedicalRecord(medicalRecordToAdd);
 
 		}
-
 	}
 
 	@Override
@@ -88,9 +87,10 @@ public class MedicalRecordService implements IMedicalRecordService {
 		if (medicalRecord != null) {
 			return medicalRecord;
 		} else {
-			LOGGER.error("person " + firstName + " " + lastName + " not found");
-			throw new MedicalRecordNotFoundException(
-					"person " + firstName + " " + lastName + " not found");
+			LOGGER.error("person {} {} do not have medical records", firstName,
+					lastName);
+			throw new MedicalRecordNotFoundException("person " + firstName + " "
+					+ lastName + " not do not have medical records");
 		}
 
 	}

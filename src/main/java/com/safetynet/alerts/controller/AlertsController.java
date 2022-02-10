@@ -7,12 +7,16 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.safetynet.alerts.DTO.ChildAlertDTO;
+import com.safetynet.alerts.exceptions.MedicalRecordNotFoundException;
+import com.safetynet.alerts.exceptions.PersonNotFoundException;
 import com.safetynet.alerts.service.IAlertsService;
 
 @RestController
+@ResponseBody
 public class AlertsController {
 
 	private static final Logger LOGGER = LoggerFactory
@@ -26,7 +30,7 @@ public class AlertsController {
 
 	@GetMapping("/firestation")
 	public ResponseEntity<?> getCoveredPopulationByStation(
-			@RequestParam int station) {
+			@RequestParam int station) throws MedicalRecordNotFoundException {
 		LOGGER.debug("at get mapping couverd pupulation by station methode ");
 
 		if (station <= 0) {
@@ -44,7 +48,8 @@ public class AlertsController {
 	}
 
 	@GetMapping("/childAlert")
-	public ResponseEntity<?> getChildenByaddress(@RequestParam String address) {
+	public ResponseEntity<?> getChildenByaddress(@RequestParam String address)
+			throws MedicalRecordNotFoundException {
 		LOGGER.debug("at get mapping Childen By address methode ");
 		ChildAlertDTO childAlert = alertsService.getChildrenByAddress(address);
 		if (address == null || address.isBlank()) {
@@ -58,7 +63,8 @@ public class AlertsController {
 
 	}
 	@GetMapping("/phoneAlert")
-	public ResponseEntity<?> getphonesByaddress(@RequestParam int station) {
+	public ResponseEntity<?> getphonesByStation(int station)
+			throws MedicalRecordNotFoundException {
 		LOGGER.debug("at get mapping phones By address methode ");
 
 		if (station <= 0) {
@@ -70,13 +76,15 @@ public class AlertsController {
 		LOGGER.info(
 				"phone numbers of population covered by station getted   HttpStatus :{}",
 				HttpStatus.OK);
+
 		return new ResponseEntity<>(
-				alertsService.getPhoneNumberByAddress(station), HttpStatus.OK);
+				alertsService.getPhoneNumberByStation(station), HttpStatus.OK);
 
 	}
 	@GetMapping("/fire")
 	public ResponseEntity<?> getInhabitantsByAddress(
-			@RequestParam String address) {
+			@RequestParam String address)
+			throws MedicalRecordNotFoundException {
 		LOGGER.debug("at get Inhabitants By Address methode ");
 		if (address == null || address.isBlank()) {
 			LOGGER.error("invalid address HttpStatus :{}",
@@ -90,7 +98,8 @@ public class AlertsController {
 
 	}
 	@GetMapping("/flood")
-	public ResponseEntity<?> getfloodsByStation(@RequestParam int station) {
+	public ResponseEntity<?> getfloodsByStation(@RequestParam int station)
+			throws MedicalRecordNotFoundException {
 		LOGGER.debug("at get floods By Station methode ");
 		if (station <= 0) {
 			LOGGER.error("invalid Station number  HttpStatus :{}",
@@ -105,7 +114,8 @@ public class AlertsController {
 	}
 	@GetMapping("/personInfo")
 	public ResponseEntity<?> getPersonInfosByName(
-			@RequestParam String firstName, @RequestParam String lastName) {
+			@RequestParam String firstName, @RequestParam String lastName)
+			throws MedicalRecordNotFoundException, PersonNotFoundException {
 		LOGGER.debug("at Person Infos By Name methode ");
 		if (((firstName == null) || (lastName == null)) || (firstName.isBlank())
 				|| (lastName.isBlank())) {
@@ -128,6 +138,7 @@ public class AlertsController {
 			LOGGER.error("invalid city  HttpStatus :{}",
 					HttpStatus.BAD_REQUEST);
 			return ResponseEntity.badRequest().body("Invalid city");
+
 		}
 		LOGGER.info("Community Emails getted   HttpStatus :{}", HttpStatus.OK);
 		return new ResponseEntity<>(alertsService.getCommunityEmail(city),

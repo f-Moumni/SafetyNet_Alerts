@@ -19,7 +19,6 @@ import com.safetynet.alerts.DTO.FireStationDTO;
 import com.safetynet.alerts.exceptions.AlreadyExistsException;
 import com.safetynet.alerts.exceptions.DataNotFoundException;
 import com.safetynet.alerts.exceptions.FireStationNoteFoundException;
-import com.safetynet.alerts.model.FireStation;
 import com.safetynet.alerts.service.IFireStationService;
 import com.safetynet.alerts.util.FireStationConverter;
 
@@ -30,13 +29,14 @@ public class FireStationController {
 			.getLogger(FireStationController.class);
 
 	private final IFireStationService fireStationService;
+	private final FireStationConverter fireStationConverter;
 
 	@Autowired
-	public FireStationController(IFireStationService fireStationService) {
+	public FireStationController(IFireStationService fireStationService,
+			FireStationConverter fireStationConverter) {
 		this.fireStationService = fireStationService;
+		this.fireStationConverter = fireStationConverter;
 	}
-	@Autowired
-	FireStationConverter fireStationConverter;
 	@GetMapping("/firestations")
 	public ResponseEntity<List<FireStationDTO>> getFireStations()
 			throws DataNotFoundException {
@@ -47,9 +47,10 @@ public class FireStationController {
 		return new ResponseEntity<>(fireStations, HttpStatus.OK);
 
 	}
+
 	@PostMapping("/firestation")
 	public ResponseEntity<?> addFireStation(
-			@RequestBody FireStation fireStation)
+			@RequestBody FireStationDTO fireStation)
 			throws AlreadyExistsException {
 		LOGGER.debug("at addFireStation methode ");
 		if ((fireStation.getStation() <= 0)
@@ -60,19 +61,18 @@ public class FireStationController {
 			return ResponseEntity.badRequest()
 					.body("Invalid fire station numero or adresse");
 		}
-		fireStationService.addFireStation(fireStation);
+		fireStationService.addFireStation(
+				fireStationConverter.toFireStation(fireStation));
 		LOGGER.info(
 				"fireStation {} at the address{} saved with success   HttpStatus :{}",
 				fireStation.getStation(), fireStation.getAddress(),
 				HttpStatus.CREATED);
-		return new ResponseEntity<>(
-				fireStationConverter.toFireStationDTO(fireStation),
-				HttpStatus.CREATED);
+		return new ResponseEntity<>(fireStation, HttpStatus.CREATED);
 
 	}
 	@PutMapping("/firestation")
 	public ResponseEntity<?> updateFireStation(
-			@RequestBody FireStation fireStation)
+			@RequestBody FireStationDTO fireStation)
 			throws FireStationNoteFoundException {
 		LOGGER.debug("at updateFireStation methode ");
 		if ((fireStation.getStation() <= 0)
@@ -83,8 +83,8 @@ public class FireStationController {
 			return ResponseEntity.badRequest()
 					.body("Invalid fire station numero or adresse");
 		}
-		FireStationDTO fStation = fireStationService
-				.updateFireStation(fireStation);
+		FireStationDTO fStation = fireStationService.updateFireStation(
+				fireStationConverter.toFireStation(fireStation));
 		LOGGER.info(
 				"fireStation {} at the address{} updated with success   HttpStatus :{}",
 				fireStation.getStation(), fireStation.getAddress(),

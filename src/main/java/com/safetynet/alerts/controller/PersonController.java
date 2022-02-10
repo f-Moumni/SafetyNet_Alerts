@@ -21,7 +21,6 @@ import com.safetynet.alerts.DTO.PersonDTO;
 import com.safetynet.alerts.exceptions.AlreadyExistsException;
 import com.safetynet.alerts.exceptions.DataNotFoundException;
 import com.safetynet.alerts.exceptions.PersonNotFoundException;
-import com.safetynet.alerts.model.Person;
 import com.safetynet.alerts.service.IPersonService;
 import com.safetynet.alerts.util.PersonConverter;
 
@@ -31,14 +30,17 @@ import com.safetynet.alerts.util.PersonConverter;
 public class PersonController {
 	private static final Logger LOGGER = LoggerFactory
 			.getLogger(PersonController.class);
-	private final IPersonService personService;
-	@Autowired
-	private PersonConverter personConverter;
-	@Autowired
-	public PersonController(final IPersonService personService) {
-		this.personService = personService;
-	}
 
+	private final IPersonService personService;
+	private final PersonConverter personConverter;
+	private final ResponseEntity<String> badRequestResponse = ResponseEntity
+			.badRequest().body("Invalid name");
+	@Autowired
+	public PersonController(IPersonService personService,
+			PersonConverter personConverter) {
+		this.personService = personService;
+		this.personConverter = personConverter;
+	}
 	@GetMapping("/persons")
 	public ResponseEntity<List<PersonDTO>> getPersons()
 			throws DataNotFoundException {
@@ -56,10 +58,9 @@ public class PersonController {
 		LOGGER.debug("at get Person By Name methode ");
 		if (((firstName == null) || (lastName == null)) || (firstName.isBlank())
 				|| (lastName.isBlank())) {
-			LOGGER.error("Invalid name  HttpStatus :{}",
+			LOGGER.error("Invalid Name  HttpStatus :{}",
 					HttpStatus.BAD_REQUEST);
-			return ResponseEntity.badRequest().body("Invalid name");
-
+			return badRequestResponse;
 		}
 		PersonDTO person = personConverter
 				.toPersonDTO(personService.findByName(firstName, lastName));
@@ -76,7 +77,7 @@ public class PersonController {
 				|| (lastName.isBlank())) {
 			LOGGER.error("Invalid name  HttpStatus :{}",
 					HttpStatus.BAD_REQUEST);
-			return ResponseEntity.badRequest().body("Invalid name");
+			return badRequestResponse;
 		} else {
 			PersonDTO person = personService.deletePerson(firstName, lastName);
 			LOGGER.info("person {} {} deleted with success   HttpStatus :{}",
@@ -86,36 +87,38 @@ public class PersonController {
 	}
 
 	@PostMapping
-	public ResponseEntity<?> addPerson(@RequestBody Person person)
+	public ResponseEntity<?> addPerson(@RequestBody PersonDTO person)
 			throws AlreadyExistsException {
 		LOGGER.debug("at addPerson methode ");
 		if (((person.getFirstName() == null) || (person.getLastName() == null))
 				|| (person.getFirstName().isBlank())
 				|| (person.getLastName().isBlank())) {
-			LOGGER.error("Invalid name  HttpStatus :{}", HttpStatus.NO_CONTENT);
-			return ResponseEntity.badRequest().body("Invalid name");
+			LOGGER.error("Invalid name  HttpStatus :{}",
+					HttpStatus.BAD_REQUEST);
+			return badRequestResponse;
 		} else {
-			personService.addPerson(person);
+			personService.addPerson(personConverter.toPerson(person));
 			LOGGER.info("person {} {} saved with success   HttpStatus :{}",
 					person.getFirstName(), person.getLastName(),
 					HttpStatus.CREATED);
 
-			return new ResponseEntity<>(personConverter.toPersonDTO(person),
-					HttpStatus.CREATED);
+			return new ResponseEntity<>(person, HttpStatus.CREATED);
 		}
 	}
 
 	@PutMapping
-	public ResponseEntity<?> updatePerson(@RequestBody Person person)
+	public ResponseEntity<?> updatePerson(@RequestBody PersonDTO person)
 			throws PersonNotFoundException {
 		LOGGER.debug("at updatePerson methode ");
 		if (((person.getFirstName() == null) || (person.getLastName() == null))
 				|| (person.getFirstName().isBlank())
 				|| (person.getLastName().isBlank())) {
-			LOGGER.error("Invalid name  HttpStatus :{}", HttpStatus.NO_CONTENT);
-			return ResponseEntity.badRequest().body("Invalid name");
+			LOGGER.error("Invalid name  HttpStatus :{}",
+					HttpStatus.BAD_REQUEST);
+			return badRequestResponse;
 		} else {
-			PersonDTO pers = personService.updatePerson(person);
+			PersonDTO pers = personService
+					.updatePerson(personConverter.toPerson(person));
 
 			LOGGER.info("person {} {} Updated with success   HttpStatus :{}",
 					person.getFirstName(), person.getLastName(), HttpStatus.OK);

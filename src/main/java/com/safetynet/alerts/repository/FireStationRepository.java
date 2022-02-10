@@ -2,6 +2,7 @@ package com.safetynet.alerts.repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Repository;
 
@@ -28,25 +29,16 @@ public class FireStationRepository implements IFireStationRepository {
 	}
 	@Override
 	public FireStation FindByAddress(String address) {
-		FireStation fireStation = null;
-		for (FireStation fStation : fireStations) {
-			if (fStation.getAddress().equalsIgnoreCase(address)) {
-				fireStation = fStation;
-				break;
-			}
-		}
-		return fireStation;
-
+		return fireStations.stream()
+				.filter(fireStation -> fireStation.getAddress()
+						.equalsIgnoreCase(address))
+				.collect(Collectors.toList()).get(0);
 	}
 	@Override
 	public List<String> FindByStation(int station) {
-		List<String> addresses = new ArrayList<>();
-		for (FireStation fStation : fireStations) {
-			if (fStation.getStation() == station) {
-				addresses.add(fStation.getAddress());
-			}
-		}
-		return addresses;
+		return fireStations.stream()
+				.filter(fireStation -> fireStation.getStation() == station)
+				.map(FireStation::getAddress).collect(Collectors.toList());
 
 	}
 	@Override

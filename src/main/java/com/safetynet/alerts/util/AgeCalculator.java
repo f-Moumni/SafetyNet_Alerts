@@ -6,7 +6,7 @@ import java.time.format.DateTimeFormatter;
 
 public class AgeCalculator {
 
-	public static long calculate(String birthdate) {
+	public static int calculate(String birthdate) {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
 		LocalDate date = LocalDate.parse(birthdate, formatter);
 		LocalDate now = LocalDate.now();

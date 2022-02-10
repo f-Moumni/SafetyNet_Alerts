@@ -41,9 +41,9 @@ public class FireStationService implements IFireStationService {
 		FireStation fstation = fireStationRepository
 				.FindByAddress(fireStation.getAddress());
 		if (fstation != null) {
-			LOGGER.error("this FireStation " + fstation.getStation()
-					+ " at the address " + fstation.getAddress()
-					+ " is already exsits");
+			LOGGER.error(
+					"this FireStation {} at the address {} is already exsits",
+					fstation.getStation(), fstation.getAddress());
 			throw new AlreadyExistsException("this FireStation "
 					+ fstation.getStation() + " at the address "
 					+ fstation.getAddress() + " is already exsits");
@@ -54,15 +54,15 @@ public class FireStationService implements IFireStationService {
 
 	}
 	@Override
-	public FireStation FindByAdress(String address)
+	public FireStation FindByAddress(String address)
 			throws FireStationNoteFoundException {
 		FireStation fstation = fireStationRepository.FindByAddress(address);
 		if (fstation != null) {
 			return fstation;
 		} else {
-			LOGGER.error("fire station in address :" + address + " not found");
+			LOGGER.error("firestation at address  :{} not found", address);
 			throw new FireStationNoteFoundException(
-					"fire station in address :" + address + " not found");
+					"firestation at address :" + address + " not found");
 
 		}
 
@@ -76,8 +76,8 @@ public class FireStationService implements IFireStationService {
 			return fireStationConverter.toFireStationDTO(
 					fireStationRepository.updateFireStation(fireStation));
 		} else {
-			LOGGER.error("the address  :" + fireStation.getAddress()
-					+ " cannot be changed");
+			LOGGER.error("the address :{} cannot be changed",
+					fireStation.getAddress());
 			throw new FireStationNoteFoundException("the address  :"
 					+ fireStation.getAddress() + " cannot be changed");
 		}
@@ -91,9 +91,23 @@ public class FireStationService implements IFireStationService {
 			fireStationRepository.deleteFireStation(fstation);
 			return fireStationConverter.toFireStationDTO(fstation);
 		} else {
-			LOGGER.error("firestation at address  :" + address + " not found");
+			LOGGER.error("firestation at address  :{} not found", address);
 			throw new FireStationNoteFoundException(
 					"firestation at address  :" + address + " not found");
+		}
+
+	}
+
+	@Override
+	public List<String> FindByStation(int station)
+			throws FireStationNoteFoundException {
+		List<String> addresses = fireStationRepository.FindByStation(station);
+		if (!addresses.isEmpty()) {
+			return addresses;
+		} else {
+			LOGGER.error("firestation {} not found", station);
+			throw new FireStationNoteFoundException(
+					"firestation " + station + " not found");
 		}
 
 	}

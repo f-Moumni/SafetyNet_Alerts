@@ -14,13 +14,17 @@ public class PersonConverter {
 		return new PersonDTO(person.getFirstName(), person.getLastName(),
 				person.getAddress(), person.getCity(), person.getZip(),
 				person.getPhone(), person.getEmail());
+	}
+
+	public Person toPerson(PersonDTO person) {
+		return new Person(person.getFirstName(), person.getLastName(),
+				person.getAddress(), person.getCity(), person.getZip(),
+				person.getPhone(), person.getEmail());
 
 	}
-	public List<PersonDTO> toListOfPersonDTO(List<Person> persons) {
-		List<PersonDTO> personsDTO = new ArrayList<PersonDTO>();
-		for (Person person : persons) {
-			personsDTO.add(toPersonDTO(person));
-		}
+	public List<PersonDTO> toPersonDTOList(List<Person> persons) {
+		List<PersonDTO> personsDTO = new ArrayList<>();
+		persons.forEach(person -> personsDTO.add(toPersonDTO(person)));
 		return personsDTO;
 	}
 

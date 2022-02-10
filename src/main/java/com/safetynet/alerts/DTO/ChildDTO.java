@@ -1,7 +1,5 @@
 package com.safetynet.alerts.DTO;
 
-import java.util.List;
-
 public class ChildDTO {
 	private String firstName;
 	private String lastName;
@@ -9,9 +7,7 @@ public class ChildDTO {
 	public ChildDTO() {
 
 	}
-	public ChildDTO(String firstName, String lastName, int age,
-			List<String> persons) {
-
+	public ChildDTO(String firstName, String lastName, int age) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.age = age;

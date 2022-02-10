@@ -2,6 +2,7 @@ package com.safetynet.alerts.repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Repository;
 
@@ -12,6 +13,11 @@ public class PersonRepository implements IPersonRepository {
 
 	private List<Person> persons = new ArrayList<>();
 
+	public PersonRepository() {
+	}
+	public PersonRepository(List<Person> persons) {
+		this.persons = persons;
+	}
 	@Override
 	public List<Person> findAll() {
 		return persons;
@@ -26,48 +32,34 @@ public class PersonRepository implements IPersonRepository {
 	}
 	@Override
 	public Person findByName(String firstName, String lastName) {
-		Person person = null;
-		for (Person pr : persons) {
-			if ((pr.getFirstName().equalsIgnoreCase(firstName))
-					&& (pr.getLastName().equalsIgnoreCase(lastName))) {
-				person = pr;
-				break;
-			}
-		}
-		return person;
+		return persons.stream()
+				.filter(person -> person.getLastName()
+						.equalsIgnoreCase(lastName))
+				.filter(person -> person.getFirstName()
+						.equalsIgnoreCase(firstName))
+				.collect(Collectors.toList()).get(0);
 
 	}
 	@Override
 	public List<Person> findPersonsByLastName(String lastName) {
-		List<Person> PersonsWithSameName = new ArrayList<Person>();
-		for (Person pr : persons) {
-			if (pr.getLastName().equalsIgnoreCase(lastName)) {
-				PersonsWithSameName.add(pr);
-			}
-		}
-		return PersonsWithSameName;
+
+		return persons.stream().filter(
+				person -> person.getLastName().equalsIgnoreCase(lastName))
+				.collect(Collectors.toList());
 
 	}
 	@Override
 	public List<Person> findByAddress(String address) {
-		List<Person> personsByAddress = new ArrayList<Person>();
-		for (Person pr : persons) {
-			if ((pr.getAddress().equalsIgnoreCase(address))) {
-				personsByAddress.add(pr);
-			}
-		}
-		return personsByAddress;
+		return persons.stream()
+				.filter(person -> person.getAddress().equalsIgnoreCase(address))
+				.collect(Collectors.toList());
 
 	}
 	@Override
 	public List<Person> findByCity(String city) {
-		List<Person> personsByCity = new ArrayList<Person>();
-		for (Person pr : persons) {
-			if ((pr.getCity().equals(city))) {
-				personsByCity.add(pr);
-			}
-		}
-		return personsByCity;
+		return persons.stream()
+				.filter(person -> person.getCity().equalsIgnoreCase(city))
+				.collect(Collectors.toList());
 
 	}
 	@Override
