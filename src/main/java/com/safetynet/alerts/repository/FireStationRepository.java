@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.safetynet.alerts.model.FireStation;
@@ -12,7 +13,11 @@ import com.safetynet.alerts.model.FireStation;
 public class FireStationRepository implements IFireStationRepository {
 
 	private List<FireStation> fireStations = new ArrayList<>();
+	@Autowired
+	public FireStationRepository(List<FireStation> fireStations) {
 
+		this.fireStations = fireStations;
+	}
 	@Override
 	public List<FireStation> findAll() {
 		return fireStations;

@@ -15,7 +15,8 @@ import com.safetynet.alerts.exceptions.PersonNotFoundException;
 public interface IAlertsService {
 
 	public CoveredPopulationDTO getPopulationCovredByStation(int station)
-			throws MedicalRecordNotFoundException;
+			throws MedicalRecordNotFoundException,
+			FireStationNoteFoundException;
 
 	public ChildAlertDTO getChildrenByAddress(String address)
 			throws MedicalRecordNotFoundException;
@@ -35,6 +36,7 @@ public interface IAlertsService {
 	public HashSet<String> getCommunityEmail(String City);
 
 	public HashSet<String> getPhoneNumberByStation(int station)
-			throws MedicalRecordNotFoundException;
+			throws MedicalRecordNotFoundException,
+			FireStationNoteFoundException;
 
 }

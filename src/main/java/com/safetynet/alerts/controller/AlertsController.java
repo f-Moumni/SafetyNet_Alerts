@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.safetynet.alerts.DTO.ChildAlertDTO;
+import com.safetynet.alerts.exceptions.FireStationNoteFoundException;
 import com.safetynet.alerts.exceptions.MedicalRecordNotFoundException;
 import com.safetynet.alerts.exceptions.PersonNotFoundException;
 import com.safetynet.alerts.service.IAlertsService;
@@ -30,7 +31,8 @@ public class AlertsController {
 
 	@GetMapping("/firestation")
 	public ResponseEntity<?> getCoveredPopulationByStation(
-			@RequestParam int station) throws MedicalRecordNotFoundException {
+			@RequestParam int station) throws MedicalRecordNotFoundException,
+			FireStationNoteFoundException {
 		LOGGER.debug("at get mapping couverd pupulation by station methode ");
 
 		if (station <= 0) {
@@ -64,7 +66,8 @@ public class AlertsController {
 	}
 	@GetMapping("/phoneAlert")
 	public ResponseEntity<?> getphonesByStation(int station)
-			throws MedicalRecordNotFoundException {
+			throws MedicalRecordNotFoundException,
+			FireStationNoteFoundException {
 		LOGGER.debug("at get mapping phones By address methode ");
 
 		if (station <= 0) {
@@ -83,8 +86,8 @@ public class AlertsController {
 	}
 	@GetMapping("/fire")
 	public ResponseEntity<?> getInhabitantsByAddress(
-			@RequestParam String address)
-			throws MedicalRecordNotFoundException {
+			@RequestParam String address) throws MedicalRecordNotFoundException,
+			FireStationNoteFoundException {
 		LOGGER.debug("at get Inhabitants By Address methode ");
 		if (address == null || address.isBlank()) {
 			LOGGER.error("invalid address HttpStatus :{}",
@@ -99,7 +102,8 @@ public class AlertsController {
 	}
 	@GetMapping("/flood")
 	public ResponseEntity<?> getfloodsByStation(@RequestParam int station)
-			throws MedicalRecordNotFoundException {
+			throws MedicalRecordNotFoundException,
+			FireStationNoteFoundException {
 		LOGGER.debug("at get floods By Station methode ");
 		if (station <= 0) {
 			LOGGER.error("invalid Station number  HttpStatus :{}",

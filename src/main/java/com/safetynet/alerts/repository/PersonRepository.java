@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.safetynet.alerts.model.Person;
@@ -12,9 +13,7 @@ import com.safetynet.alerts.model.Person;
 public class PersonRepository implements IPersonRepository {
 
 	private List<Person> persons = new ArrayList<>();
-
-	public PersonRepository() {
-	}
+	@Autowired
 	public PersonRepository(List<Person> persons) {
 		this.persons = persons;
 	}

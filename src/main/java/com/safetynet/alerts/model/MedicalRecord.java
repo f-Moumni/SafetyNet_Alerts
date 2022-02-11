@@ -1,6 +1,7 @@
 package com.safetynet.alerts.model;
 
 import java.util.List;
+import java.util.Objects;
 
 public class MedicalRecord {
 
@@ -57,6 +58,22 @@ public class MedicalRecord {
 		return "MedicalRecord [firstName=" + firstName + ", lastName="
 				+ lastName + ", birthdate=" + birthdate + ", medications="
 				+ medications + ", allergies=" + allergies + "]";
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		MedicalRecord other = (MedicalRecord) obj;
+		return Objects.equals(allergies, other.allergies)
+				&& Objects.equals(birthdate, other.birthdate)
+				&& Objects.equals(firstName, other.firstName)
+				&& Objects.equals(lastName, other.lastName)
+				&& Objects.equals(medications, other.medications);
 	}
 
 }

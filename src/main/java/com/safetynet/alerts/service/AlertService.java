@@ -47,7 +47,8 @@ public class AlertService implements IAlertsService {
 
 	@Override
 	public CoveredPopulationDTO getPopulationCovredByStation(int station)
-			throws MedicalRecordNotFoundException {
+			throws MedicalRecordNotFoundException,
+			FireStationNoteFoundException {
 		LOGGER.debug(
 				"at Alert Service in getPopulationCovredByStation methode ");
 		List<String> addresses = fireStationService.FindByStation(station);
@@ -100,7 +101,8 @@ public class AlertService implements IAlertsService {
 
 	@Override
 	public HashSet<String> getPhoneNumberByStation(int station)
-			throws MedicalRecordNotFoundException {
+			throws MedicalRecordNotFoundException,
+			FireStationNoteFoundException {
 		LOGGER.debug("at Alert Service in getPhoneNumberByAddress methode ");
 		HashSet<String> phones = new HashSet<String>();
 		phones.addAll(getPopulationCovredByStation(station).getPersonsCouverd()
@@ -149,7 +151,7 @@ public class AlertService implements IAlertsService {
 			String lastName)
 			throws MedicalRecordNotFoundException, PersonNotFoundException {
 		LOGGER.debug("at Alert Service in getPersonInfosByName methode ");
-		List<PersonInfosDTO> personsInfos = new ArrayList<PersonInfosDTO>();
+		List<PersonInfosDTO> personsInfos = new ArrayList<>();
 		List<Person> personsByLastName = personService
 				.findPersonsByLastName(lastName);
 		Person person = personService.findByName(firstName, lastName);
