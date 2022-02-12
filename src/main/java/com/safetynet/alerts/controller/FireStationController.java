@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.safetynet.alerts.DTO.FireStationDTO;
 import com.safetynet.alerts.exceptions.AlreadyExistsException;
 import com.safetynet.alerts.exceptions.DataNotFoundException;
-import com.safetynet.alerts.exceptions.FireStationNoteFoundException;
+import com.safetynet.alerts.exceptions.FireStationNotFoundException;
 import com.safetynet.alerts.service.IFireStationService;
 import com.safetynet.alerts.util.FireStationConverter;
 
@@ -73,7 +73,7 @@ public class FireStationController {
 	@PutMapping("/firestation")
 	public ResponseEntity<?> updateFireStation(
 			@RequestBody FireStationDTO fireStation)
-			throws FireStationNoteFoundException {
+			throws FireStationNotFoundException {
 		LOGGER.debug("at updateFireStation methode ");
 		if ((fireStation.getStation() <= 0)
 				|| (fireStation.getAddress().isBlank())) {
@@ -93,7 +93,7 @@ public class FireStationController {
 	}
 	@DeleteMapping("/firestation")
 	public ResponseEntity<?> deleteFireStation(@RequestParam String address)
-			throws FireStationNoteFoundException {
+			throws FireStationNotFoundException {
 		LOGGER.debug("at deleteFireStation methode ");
 		if ((address.isBlank()) || (address.equals(null))) {
 			LOGGER.error("Invalid fire station adresse HttpStatus :{}",

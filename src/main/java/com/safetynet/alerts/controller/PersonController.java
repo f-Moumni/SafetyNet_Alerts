@@ -62,8 +62,7 @@ public class PersonController {
 					HttpStatus.BAD_REQUEST);
 			return badRequestResponse;
 		}
-		PersonDTO person = personConverter
-				.toPersonDTO(personService.findByName(firstName, lastName));
+		PersonDTO person = personService.findByName(firstName, lastName);
 		LOGGER.info("person {} {} getted with success   HttpStatus :{}",
 				person.getFirstName(), person.getLastName(), HttpStatus.OK);
 		return new ResponseEntity<>(person, HttpStatus.OK);

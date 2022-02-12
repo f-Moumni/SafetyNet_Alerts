@@ -13,6 +13,7 @@ import com.safetynet.alerts.model.MedicalRecord;
 public class MedicalRecordRepository implements IMedicalRecordRepository {
 
 	private List<MedicalRecord> medicalRecords = new ArrayList<>();
+
 	@Autowired
 	public MedicalRecordRepository(List<MedicalRecord> medicalRecords) {
 		this.medicalRecords = medicalRecords;

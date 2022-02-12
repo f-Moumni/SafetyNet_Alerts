@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import com.safetynet.alerts.model.MedicalRecord;
@@ -37,6 +39,9 @@ class MedicalRecordRepositoryTest {
 		medicalRecordRepository = new MedicalRecordRepository(medicalRecords);
 	}
 	@Test
+	@Tag("findAll")
+	@DisplayName("find all test should return a list of medicalRecord")
+
 	void findAll_test() {
 		// act
 		List<MedicalRecord> result = medicalRecordRepository.findAll();
@@ -44,6 +49,8 @@ class MedicalRecordRepositoryTest {
 		assertThat(result).isEqualTo(medicalRecords);
 	}
 	@Test
+	@Tag("findByName")
+	@DisplayName("find by name test should return medical record for a given name")
 	void findByName_test() {
 		// arrange
 		MedicalRecord medicalRecord = new MedicalRecord("John", "Boyd",
@@ -59,6 +66,8 @@ class MedicalRecordRepositoryTest {
 
 	}
 	@Test
+	@Tag("save")
+	@DisplayName("add medical record test should save medical record in the list")
 	void addMedicalRecord_test() {
 		// arrange
 		MedicalRecord medicalRecord = new MedicalRecord("Sarah", "Boyd",
@@ -72,7 +81,10 @@ class MedicalRecordRepositoryTest {
 		assertThat(medicalRecords).contains(medicalRecord);
 
 	}
+
 	@Test
+	@Tag("delete")
+	@DisplayName("delete medical record test should remove medical record for given name frome the list")
 	void deleteMedicalRecord_test() {
 		// arrange
 		MedicalRecord medicalRecord = new MedicalRecord("John", "Boyd",
@@ -87,6 +99,8 @@ class MedicalRecordRepositoryTest {
 
 	}
 	@Test
+	@Tag("update")
+	@DisplayName("update medical record test should update medical record for given name and return e medical record updated")
 	void updateMedicalRecord_test() {
 		// arrange
 		MedicalRecord medicalRecord = new MedicalRecord("Clive", "Ferguson",

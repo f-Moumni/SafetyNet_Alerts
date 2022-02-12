@@ -5,7 +5,7 @@ import java.util.List;
 import com.safetynet.alerts.DTO.FireStationDTO;
 import com.safetynet.alerts.exceptions.AlreadyExistsException;
 import com.safetynet.alerts.exceptions.DataNotFoundException;
-import com.safetynet.alerts.exceptions.FireStationNoteFoundException;
+import com.safetynet.alerts.exceptions.FireStationNotFoundException;
 import com.safetynet.alerts.model.FireStation;
 
 public interface IFireStationService {
@@ -16,15 +16,15 @@ public interface IFireStationService {
 			throws AlreadyExistsException;
 
 	public FireStationDTO updateFireStation(FireStation fireStation)
-			throws FireStationNoteFoundException;
+			throws FireStationNotFoundException;
 
 	public FireStationDTO deleteFireStation(String address)
-			throws FireStationNoteFoundException;
+			throws FireStationNotFoundException;
 
 	public List<String> FindByStation(int station)
-			throws FireStationNoteFoundException;
+			throws FireStationNotFoundException;
 
 	public FireStation FindByAddress(String address)
-			throws FireStationNoteFoundException;
+			throws FireStationNotFoundException;
 
 }

@@ -13,9 +13,9 @@ import com.safetynet.alerts.model.FireStation;
 public class FireStationRepository implements IFireStationRepository {
 
 	private List<FireStation> fireStations = new ArrayList<>();
+
 	@Autowired
 	public FireStationRepository(List<FireStation> fireStations) {
-
 		this.fireStations = fireStations;
 	}
 	@Override

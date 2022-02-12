@@ -19,15 +19,10 @@ import com.safetynet.alerts.util.PersonConverter;
 public class PersonService implements IPersonService {
 	private static final Logger LOGGER = LoggerFactory
 			.getLogger(PersonService.class);
-
-	private IPersonRepository personRepository;
-	private PersonConverter personConverter;
 	@Autowired
-	public PersonService(IPersonRepository personRepository,
-			PersonConverter personConverter) {
-		this.personRepository = personRepository;
-		this.personConverter = personConverter;
-	}
+	private IPersonRepository personRepository;
+	@Autowired
+	private PersonConverter personConverter;
 
 	@Override
 	public List<PersonDTO> findAll() throws DataNotFoundException {
@@ -40,11 +35,11 @@ public class PersonService implements IPersonService {
 	}
 
 	@Override
-	public Person findByName(String firstName, String lastName)
+	public PersonDTO findByName(String firstName, String lastName)
 			throws PersonNotFoundException {
 		Person person = personRepository.findByName(firstName, lastName);
 		if (person != null) {
-			return person;
+			return personConverter.toPersonDTO(person);
 		}
 		LOGGER.error("person {} {} not found", firstName, lastName);
 		throw new PersonNotFoundException(
@@ -55,9 +50,14 @@ public class PersonService implements IPersonService {
 	@Override
 	public PersonDTO deletePerson(String firstName, String lastName)
 			throws PersonNotFoundException {
-		Person person = findByName(firstName, lastName);
-		personRepository.deletePerson(person);
-		return personConverter.toPersonDTO(person);
+		Person person = personRepository.findByName(firstName, lastName);
+		if (person != null) {
+			personRepository.deletePerson(person);
+			return personConverter.toPersonDTO(person);
+		}
+		LOGGER.error("person {} {} not found", firstName, lastName);
+		throw new PersonNotFoundException(
+				"person " + firstName + " " + lastName + " not found");
 	}
 
 	@Override
@@ -66,41 +66,64 @@ public class PersonService implements IPersonService {
 				personToAdd.getLastName());
 		if (person == null) {
 			personRepository.addPerson(personToAdd);
+		} else {
+			LOGGER.error("this person {} {} already exists",
+					personToAdd.getFirstName(), personToAdd.getLastName());
+			throw new AlreadyExistsException(
+					"this person " + personToAdd.getFirstName() + " "
+							+ personToAdd.getLastName() + " already exists");
 		}
-		LOGGER.error("this person {} {} already exists",
-				personToAdd.getFirstName(), personToAdd.getLastName());
-		throw new AlreadyExistsException(
-				"this person " + personToAdd.getFirstName() + " "
-						+ personToAdd.getLastName() + " already exists");
 
 	}
 
 	@Override
-	public PersonDTO updatePerson(Person personToUpdate)
+	public PersonDTO updatePerson(Person person)
 			throws PersonNotFoundException {
-		Person person = personRepository.findByName(
-				personToUpdate.getFirstName(), personToUpdate.getLastName());
-		if (person != null) {
+		Person personToUpdate = personRepository
+				.findByName(person.getFirstName(), person.getLastName());
+		if (personToUpdate != null) {
 			return personConverter
-					.toPersonDTO(personRepository.updatePerson(personToUpdate));
+					.toPersonDTO(personRepository.updatePerson(person));
 		}
 		LOGGER.error("the name cannot be changed");
 		throw new PersonNotFoundException("the name cannot be changed");
 	}
 
 	@Override
-	public List<Person> findByAddress(String address) {
-		return personRepository.findByAddress(address);
+	public List<Person> findByAddress(String address)
+			throws PersonNotFoundException {
+		List<Person> persons = personRepository.findByAddress(address);
+		if (persons != null) {
+			return persons;
+		}
+		LOGGER.error("there is no person at this address : {}", address);
+		throw new PersonNotFoundException(
+				"there is no person at this address " + address);
 	}
 
 	@Override
-	public List<Person> findPersonsByLastName(String lastName) {
-		return personRepository.findPersonsByLastName(lastName);
+	public List<Person> findPersonsByLastName(String lastName)
+			throws PersonNotFoundException {
+		List<Person> persons = personRepository.findPersonsByLastName(lastName);
+		if (persons != null) {
+			return persons;
+		}
+		LOGGER.error("there is no person with this last name : {}", lastName);
+		throw new PersonNotFoundException(
+				"there is no person with this last name " + lastName);
+
 	}
 
 	@Override
-	public List<Person> findByCity(String city) {
-		return personRepository.findByCity(city);
+	public List<Person> findByCity(String city) throws PersonNotFoundException {
+
+		List<Person> persons = personRepository.findByCity(city);
+		if (persons != null) {
+			return persons;
+		}
+		LOGGER.error("there is no person in this city : {}", city);
+		throw new PersonNotFoundException(
+				"there is no person in this city " + city);
 	}
 
 }

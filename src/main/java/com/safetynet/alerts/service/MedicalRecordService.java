@@ -12,21 +12,21 @@ import com.safetynet.alerts.exceptions.AlreadyExistsException;
 import com.safetynet.alerts.exceptions.DataNotFoundException;
 import com.safetynet.alerts.exceptions.MedicalRecordNotFoundException;
 import com.safetynet.alerts.model.MedicalRecord;
-import com.safetynet.alerts.repository.MedicalRecordRepository;
+import com.safetynet.alerts.repository.IMedicalRecordRepository;
 import com.safetynet.alerts.util.MedicalRecordConverter;
 @Service
 public class MedicalRecordService implements IMedicalRecordService {
 	private static final Logger LOGGER = LoggerFactory
 			.getLogger(MedicalRecordService.class);
 	@Autowired
-	MedicalRecordRepository medicalRecordRepository;
+	IMedicalRecordRepository medicalRecordRepository;
 	@Autowired
 	MedicalRecordConverter medicalRecordConverter;
 
 	@Override
 	public List<MedicalRecordDTO> findAll() throws DataNotFoundException {
 		List<MedicalRecord> medicaleRecords = medicalRecordRepository.findAll();
-		if (!medicaleRecords.isEmpty()) {
+		if (medicaleRecords != null) {
 			return medicalRecordConverter
 					.toMedicalRecordDTOList(medicaleRecords);
 		} else
@@ -64,11 +64,10 @@ public class MedicalRecordService implements IMedicalRecordService {
 			return medicalRecordConverter
 					.toMedicalRecordDTO(medicalRecordRepository
 							.updateMedicalRecord(medicalRecordToUpdate));
-		} else {
-			LOGGER.error("the name cannot be changed");
-			throw new MedicalRecordNotFoundException(
-					"the name cannot be changed");
 		}
+		LOGGER.error("the name cannot be changed");
+		throw new MedicalRecordNotFoundException("the name cannot be changed");
+
 	}
 
 	@Override

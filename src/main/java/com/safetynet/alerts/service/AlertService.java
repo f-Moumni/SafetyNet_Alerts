@@ -17,8 +17,9 @@ import com.safetynet.alerts.DTO.FireDTO;
 import com.safetynet.alerts.DTO.FloodDTO;
 import com.safetynet.alerts.DTO.InhabitantDTO;
 import com.safetynet.alerts.DTO.PersonAlertDTO;
+import com.safetynet.alerts.DTO.PersonDTO;
 import com.safetynet.alerts.DTO.PersonInfosDTO;
-import com.safetynet.alerts.exceptions.FireStationNoteFoundException;
+import com.safetynet.alerts.exceptions.FireStationNotFoundException;
 import com.safetynet.alerts.exceptions.MedicalRecordNotFoundException;
 import com.safetynet.alerts.exceptions.PersonNotFoundException;
 import com.safetynet.alerts.model.MedicalRecord;
@@ -47,19 +48,20 @@ public class AlertService implements IAlertsService {
 
 	@Override
 	public CoveredPopulationDTO getPopulationCovredByStation(int station)
-			throws MedicalRecordNotFoundException,
-			FireStationNoteFoundException {
+			throws MedicalRecordNotFoundException, FireStationNotFoundException,
+			PersonNotFoundException {
 		LOGGER.debug(
 				"at Alert Service in getPopulationCovredByStation methode ");
 		List<String> addresses = fireStationService.FindByStation(station);
 		List<PersonAlertDTO> personsCouvred = new ArrayList<>();
 		int numberOfAdults = 0;
 		int numberOfChildren = 0;
-
-		addresses.forEach(address -> personService.findByAddress(address)
-				.forEach(person -> personsCouvred.add(new PersonAlertDTO(
-						person.getFirstName(), person.getLastName(),
-						person.getAddress(), person.getPhone()))));
+		for (String address : addresses) {
+			personService.findByAddress(address)
+					.forEach(person -> personsCouvred.add(new PersonAlertDTO(
+							person.getFirstName(), person.getLastName(),
+							person.getAddress(), person.getPhone())));
+		}
 		for (PersonAlertDTO person : personsCouvred) {
 			MedicalRecord medicalRecord = medicalRecordService
 					.findByName(person.getFirstName(), person.getLastName());
@@ -76,7 +78,7 @@ public class AlertService implements IAlertsService {
 
 	@Override
 	public ChildAlertDTO getChildrenByAddress(String address)
-			throws MedicalRecordNotFoundException {
+			throws MedicalRecordNotFoundException, PersonNotFoundException {
 		LOGGER.debug("at Alert Service in getChildrenByAddress methode ");
 
 		List<Person> persons = personService.findByAddress(address);
@@ -101,8 +103,8 @@ public class AlertService implements IAlertsService {
 
 	@Override
 	public HashSet<String> getPhoneNumberByStation(int station)
-			throws MedicalRecordNotFoundException,
-			FireStationNoteFoundException {
+			throws MedicalRecordNotFoundException, FireStationNotFoundException,
+			PersonNotFoundException {
 		LOGGER.debug("at Alert Service in getPhoneNumberByAddress methode ");
 		HashSet<String> phones = new HashSet<String>();
 		phones.addAll(getPopulationCovredByStation(station).getPersonsCouverd()
@@ -114,8 +116,8 @@ public class AlertService implements IAlertsService {
 
 	@Override
 	public FireDTO getInhabitantByAddress(String address)
-			throws MedicalRecordNotFoundException,
-			FireStationNoteFoundException {
+			throws MedicalRecordNotFoundException, FireStationNotFoundException,
+			PersonNotFoundException {
 		LOGGER.debug("at Alert Service in getInhabitantByAddress methode ");
 		List<InhabitantDTO> inhabitants = new ArrayList<InhabitantDTO>();
 		List<Person> persons = personService.findByAddress(address);
@@ -133,8 +135,8 @@ public class AlertService implements IAlertsService {
 	}
 	@Override
 	public List<FloodDTO> getFloodsByStation(int station)
-			throws MedicalRecordNotFoundException,
-			FireStationNoteFoundException {
+			throws MedicalRecordNotFoundException, FireStationNotFoundException,
+			PersonNotFoundException {
 		LOGGER.debug("at Alert Service in getFloodsByStation methode ");
 		List<FloodDTO> floods = new ArrayList<FloodDTO>();
 		List<String> addresses = fireStationService.FindByStation(station);
@@ -154,7 +156,7 @@ public class AlertService implements IAlertsService {
 		List<PersonInfosDTO> personsInfos = new ArrayList<>();
 		List<Person> personsByLastName = personService
 				.findPersonsByLastName(lastName);
-		Person person = personService.findByName(firstName, lastName);
+		PersonDTO person = personService.findByName(firstName, lastName);
 
 		MedicalRecord medicalRecord = medicalRecordService
 				.findByName(person.getFirstName(), person.getLastName());;
@@ -177,7 +179,8 @@ public class AlertService implements IAlertsService {
 		return personsInfos;
 	}
 	@Override
-	public HashSet<String> getCommunityEmail(String City) {
+	public HashSet<String> getCommunityEmail(String City)
+			throws PersonNotFoundException {
 		LOGGER.debug("at Alert Service in getCommunityEmail methode ");
 		HashSet<String> emails = new HashSet<>();
 		emails.addAll(personService.findByCity(City).stream()

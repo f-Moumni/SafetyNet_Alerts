@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import com.safetynet.alerts.model.Person;
@@ -30,6 +32,8 @@ class PersonRepositoryTest {
 	}
 
 	@Test
+	@Tag("findAll")
+	@DisplayName("find all test should return a list of person")
 	void findAll_test() {
 		// act
 		List<Person> result = personRepository.findAll();
@@ -37,6 +41,8 @@ class PersonRepositoryTest {
 		assertThat(result).isEqualTo(persons);
 	}
 	@Test
+	@Tag("save")
+	@DisplayName("add person test should add person to persons list")
 	void addPerson_test() {
 		// arrange
 		Person person = new Person("Roger", "Boyd", "1509 Culver st", "Culver",
@@ -48,6 +54,8 @@ class PersonRepositoryTest {
 	}
 
 	@Test
+	@Tag("delete")
+	@DisplayName("delete person test should remove a person from the list")
 	void deletePerson_test() {
 		// arrange
 		Person person = new Person("John", "Boyd", "1509 Culver st", "Culver",
@@ -58,6 +66,8 @@ class PersonRepositoryTest {
 		assertThat(persons).doesNotContain(person);
 	}
 	@Test
+	@Tag("findbyName")
+	@DisplayName("find person by name test should return a person with the given name")
 	void findPersonByName_test() {
 		// arrange
 		Person person = new Person("Sophia", "Zemicks", "892 Downing Ct",
@@ -70,6 +80,8 @@ class PersonRepositoryTest {
 
 	}
 	@Test
+	@Tag("findbyName")
+	@DisplayName("find person by name test should return list of person with the given last name")
 	void findPersonsByLastName_test() {
 		// arrange
 		Person person = new Person("Jacob", "Boyd", "1509 Culver st", "Culver",
@@ -81,6 +93,8 @@ class PersonRepositoryTest {
 		assertThat(result).contains(person);
 	}
 	@Test
+	@Tag("findbyCity")
+	@DisplayName("find person by city test should return a list of person living in the given city")
 	void findByCityTest() {
 		// arrange
 		Person person = new Person("Jacob", "Boyd", "1509 Culver st", "Culver",
@@ -91,7 +105,9 @@ class PersonRepositoryTest {
 		assertThat(result).contains(person);
 	}
 	@Test
-	void updatePersonTest() {
+	@Tag("Update")
+	@DisplayName("update person test should Update and return the updated person")
+	void updatePerson_Test() {
 		// arrange
 		Person person = new Person("John", "Boyd", "2000 Culver st", "Culver",
 				97451, "841-874-2222", "jboyd@email.com");
@@ -102,7 +118,9 @@ class PersonRepositoryTest {
 
 	}
 	@Test
-	void findByAddressTest() {
+	@Tag("findByAdress")
+	@DisplayName("find person by address test should return a list of person living in the given address")
+	void findByAddress_Test() {
 		// arrange
 		Person person = new Person("Jacob", "Boyd", "1509 Culver st", "Culver",
 				97451, "841-874-6513", "drk@email.com");
