@@ -28,15 +28,10 @@ import com.safetynet.alerts.util.MedicalRecordConverter;
 public class MedicalRecordController {
 	private static final Logger LOGGER = LoggerFactory
 			.getLogger(MedicalRecordController.class);
-	private final IMedicalRecordService medicalRecordService;
-
-	private final MedicalRecordConverter medicalRecordConverter;
 	@Autowired
-	public MedicalRecordController(IMedicalRecordService medicalRecordService,
-			MedicalRecordConverter medicalRecordConverter) {
-		this.medicalRecordService = medicalRecordService;
-		this.medicalRecordConverter = medicalRecordConverter;
-	}
+	private IMedicalRecordService medicalRecordService;
+	@Autowired
+	private MedicalRecordConverter medicalRecordConverter;
 
 	@GetMapping
 	public ResponseEntity<List<MedicalRecordDTO>> getMedicalRecords()

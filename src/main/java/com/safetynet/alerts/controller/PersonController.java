@@ -30,17 +30,14 @@ import com.safetynet.alerts.util.PersonConverter;
 public class PersonController {
 	private static final Logger LOGGER = LoggerFactory
 			.getLogger(PersonController.class);
+	@Autowired
+	private IPersonService personService;
+	@Autowired
+	private PersonConverter personConverter;
 
-	private final IPersonService personService;
-	private final PersonConverter personConverter;
 	private final ResponseEntity<String> badRequestResponse = ResponseEntity
 			.badRequest().body("Invalid name");
-	@Autowired
-	public PersonController(IPersonService personService,
-			PersonConverter personConverter) {
-		this.personService = personService;
-		this.personConverter = personConverter;
-	}
+
 	@GetMapping("/persons")
 	public ResponseEntity<List<PersonDTO>> getPersons()
 			throws DataNotFoundException {

@@ -30,21 +30,14 @@ import com.safetynet.alerts.util.AgeCalculator;
 public class AlertService implements IAlertsService {
 	private static final Logger LOGGER = LoggerFactory
 			.getLogger(AlertService.class);
-
-	private final IPersonService personService;
-	private final IMedicalRecordService medicalRecordService;
-	private final IFireStationService fireStationService;
+	@Autowired
+	private IPersonService personService;
+	@Autowired
+	private IMedicalRecordService medicalRecordService;
+	@Autowired
+	private IFireStationService fireStationService;
 
 	private final int CHLIDREN_AGE_MAX = 18;
-
-	@Autowired
-	public AlertService(IPersonService personService,
-			IMedicalRecordService medicalRecordService,
-			IFireStationService fireStationService) {
-		this.personService = personService;
-		this.medicalRecordService = medicalRecordService;
-		this.fireStationService = fireStationService;
-	}
 
 	@Override
 	public CoveredPopulationDTO getPopulationCovredByStation(int station)

@@ -26,8 +26,6 @@ import com.safetynet.alerts.exceptions.PersonNotFoundException;
 import com.safetynet.alerts.model.Person;
 import com.safetynet.alerts.repository.IPersonRepository;
 import com.safetynet.alerts.util.PersonConverter;
-
-import nl.altindag.log.LogCaptor;
 @ExtendWith(MockitoExtension.class)
 class PersonServiceTest {
 	@InjectMocks
@@ -36,7 +34,7 @@ class PersonServiceTest {
 	private static IPersonRepository personRepository;
 	@Mock
 	private static PersonConverter personConverter;
-	private static LogCaptor logCaptor;
+	// private static LogCaptor logCaptor;
 
 	private static List<Person> persons = new ArrayList<>();
 	static {
@@ -63,8 +61,8 @@ class PersonServiceTest {
 
 	@BeforeEach
 	void setUp() throws Exception {
-		logCaptor = LogCaptor.forName("PersonService");
-		logCaptor.getDebugLogs();
+		// logCaptor = LogCaptor.forName("PersonService");
+		// logCaptor.getDebugLogs();
 	}
 
 	@Test

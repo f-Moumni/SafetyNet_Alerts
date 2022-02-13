@@ -27,16 +27,11 @@ import com.safetynet.alerts.util.FireStationConverter;
 public class FireStationController {
 	private final Logger LOGGER = LoggerFactory
 			.getLogger(FireStationController.class);
-
-	private final IFireStationService fireStationService;
-	private final FireStationConverter fireStationConverter;
-
 	@Autowired
-	public FireStationController(IFireStationService fireStationService,
-			FireStationConverter fireStationConverter) {
-		this.fireStationService = fireStationService;
-		this.fireStationConverter = fireStationConverter;
-	}
+	private IFireStationService fireStationService;
+	@Autowired
+	private FireStationConverter fireStationConverter;
+
 	@GetMapping("/firestations")
 	public ResponseEntity<List<FireStationDTO>> getFireStations()
 			throws DataNotFoundException {

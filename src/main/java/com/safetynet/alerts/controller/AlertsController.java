@@ -22,12 +22,8 @@ public class AlertsController {
 
 	private static final Logger LOGGER = LoggerFactory
 			.getLogger(AlertsController.class);
-	private final IAlertsService alertsService;
-
 	@Autowired
-	public AlertsController(IAlertsService alertsService) {
-		this.alertsService = alertsService;
-	}
+	private IAlertsService alertsService;
 
 	@GetMapping("/firestation")
 	public ResponseEntity<?> getCoveredPopulationByStation(
