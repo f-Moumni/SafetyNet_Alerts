@@ -90,7 +90,7 @@ public class FireStationController {
 	public ResponseEntity<?> deleteFireStation(@RequestParam String address)
 			throws FireStationNotFoundException {
 		LOGGER.debug("at deleteFireStation methode ");
-		if ((address.isBlank()) || (address.equals(null))) {
+		if (address.isBlank()) {
 			LOGGER.error("Invalid fire station adresse HttpStatus :{}",
 					HttpStatus.BAD_REQUEST);
 			return ResponseEntity.badRequest()

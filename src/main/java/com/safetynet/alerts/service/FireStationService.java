@@ -39,7 +39,7 @@ public class FireStationService implements IFireStationService {
 	public void addFireStation(FireStation fireStation)
 			throws AlreadyExistsException {
 		FireStation fstation = fireStationRepository
-				.FindByAddress(fireStation.getAddress());
+				.findByAddress(fireStation.getAddress());
 		if (fstation != null) {
 			LOGGER.error(
 					"this FireStation {} at the address {} is already exsits",
@@ -54,9 +54,9 @@ public class FireStationService implements IFireStationService {
 
 	}
 	@Override
-	public FireStation FindByAddress(String address)
+	public FireStation findByAddress(String address)
 			throws FireStationNotFoundException {
-		FireStation fstation = fireStationRepository.FindByAddress(address);
+		FireStation fstation = fireStationRepository.findByAddress(address);
 		if (fstation != null) {
 			return fstation;
 		} else {
@@ -71,7 +71,7 @@ public class FireStationService implements IFireStationService {
 	public FireStationDTO updateFireStation(FireStation fireStation)
 			throws FireStationNotFoundException {
 		FireStation fstation = fireStationRepository
-				.FindByAddress(fireStation.getAddress());
+				.findByAddress(fireStation.getAddress());
 		if (fstation != null) {
 			return fireStationConverter.toFireStationDTO(
 					fireStationRepository.updateFireStation(fireStation));
@@ -86,7 +86,7 @@ public class FireStationService implements IFireStationService {
 	@Override
 	public FireStationDTO deleteFireStation(String address)
 			throws FireStationNotFoundException {
-		FireStation fstation = fireStationRepository.FindByAddress(address);
+		FireStation fstation = fireStationRepository.findByAddress(address);
 		if (fstation != null) {
 			fireStationRepository.deleteFireStation(fstation);
 			return fireStationConverter.toFireStationDTO(fstation);
@@ -99,9 +99,9 @@ public class FireStationService implements IFireStationService {
 	}
 
 	@Override
-	public List<String> FindByStation(int station)
+	public List<String> findByStation(int station)
 			throws FireStationNotFoundException {
-		List<String> addresses = fireStationRepository.FindByStation(station);
+		List<String> addresses = fireStationRepository.findByStation(station);
 		if (!addresses.isEmpty()) {
 			return addresses;
 		} else {

@@ -21,10 +21,10 @@ public interface IFireStationService {
 	public FireStationDTO deleteFireStation(String address)
 			throws FireStationNotFoundException;
 
-	public List<String> FindByStation(int station)
+	public List<String> findByStation(int station)
 			throws FireStationNotFoundException;
 
-	public FireStation FindByAddress(String address)
+	public FireStation findByAddress(String address)
 			throws FireStationNotFoundException;
 
 }

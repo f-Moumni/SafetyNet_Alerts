@@ -12,10 +12,10 @@ public interface IFireStationRepository {
 
 	void deleteFireStation(FireStation fireStation);
 
-	FireStation FindByAddress(String address);
+	FireStation findByAddress(String address);
 
 	FireStation updateFireStation(FireStation fireStation);
 
-	List<String> FindByStation(int station);
+	List<String> findByStation(int station);
 
 }

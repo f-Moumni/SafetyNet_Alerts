@@ -9,16 +9,16 @@ public class ExceptionDetails {
 	private final String message;
 	private final HttpStatus httpStatus;
 	private final String details;
-	public ExceptionDetails(Date timestamp, String message,
-			HttpStatus httpStatus, String details) {
-		super();
-		this.timestamp = timestamp;
+	public ExceptionDetails(Date times, String message, HttpStatus httpStatus,
+			String details) {
+
+		this.timestamp = times;
 		this.message = message;
 		this.httpStatus = httpStatus;
 		this.details = details;
 	}
 	public Date getTimestamp() {
-		return timestamp;
+		return this.timestamp;
 	}
 	public String getMessage() {
 		return message;

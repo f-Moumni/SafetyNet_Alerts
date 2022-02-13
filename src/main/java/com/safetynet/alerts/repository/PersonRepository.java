@@ -13,9 +13,7 @@ import com.safetynet.alerts.model.Person;
 public class PersonRepository implements IPersonRepository {
 
 	private List<Person> persons = new ArrayList<>();
-	@Autowired
-	public PersonRepository() {
-	}
+
 	@Autowired
 	public PersonRepository(List<Person> persons) {
 		this.persons = persons;

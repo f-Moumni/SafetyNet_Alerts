@@ -33,14 +33,14 @@ public class FireStationRepository implements IFireStationRepository {
 
 	}
 	@Override
-	public FireStation FindByAddress(String address) {
+	public FireStation findByAddress(String address) {
 		return fireStations.stream()
 				.filter(fireStation -> fireStation.getAddress()
 						.equalsIgnoreCase(address))
 				.collect(Collectors.toList()).get(0);
 	}
 	@Override
-	public List<String> FindByStation(int station) {
+	public List<String> findByStation(int station) {
 		return fireStations.stream()
 				.filter(fireStation -> fireStation.getStation() == station)
 				.map(FireStation::getAddress).collect(Collectors.toList());
@@ -48,7 +48,7 @@ public class FireStationRepository implements IFireStationRepository {
 	}
 	@Override
 	public FireStation updateFireStation(FireStation fireStation) {
-		FireStation fStation = FindByAddress(fireStation.getAddress());
+		FireStation fStation = findByAddress(fireStation.getAddress());
 		deleteFireStation(fStation);
 		addFireStation(fireStation);
 		return fireStation;

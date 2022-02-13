@@ -89,7 +89,7 @@ class FireStationServiceTest {
 			throws AlreadyExistsException {
 		// arrange
 		FireStation fireStation = new FireStation("748 Townings Dr", 3);
-		when(fireStationRepository.FindByAddress(anyString())).thenReturn(null);
+		when(fireStationRepository.findByAddress(anyString())).thenReturn(null);
 		// act
 		fireStationService.addFireStation(fireStation);
 		// assert
@@ -103,7 +103,7 @@ class FireStationServiceTest {
 			throws AlreadyExistsException {
 		// arrange
 		FireStation fireStation = fireStations.get(0);
-		when(fireStationRepository.FindByAddress(anyString()))
+		when(fireStationRepository.findByAddress(anyString()))
 				.thenReturn(fireStation);
 		// assert
 		assertThrows(AlreadyExistsException.class,
@@ -117,14 +117,14 @@ class FireStationServiceTest {
 			throws FireStationNotFoundException {
 		// arrange
 		FireStation fireStation = fireStations.get(0);
-		when(fireStationRepository.FindByAddress(anyString()))
+		when(fireStationRepository.findByAddress(anyString()))
 				.thenReturn(fireStation);
 		// Act
 		FireStation result = fireStationService
-				.FindByAddress(fireStation.getAddress());
+				.findByAddress(fireStation.getAddress());
 		// assert
 		assertThat(result).isEqualTo(fireStation);
-		verify(fireStationRepository).FindByAddress(anyString());
+		verify(fireStationRepository).findByAddress(anyString());
 
 	}
 	@Test
@@ -134,12 +134,12 @@ class FireStationServiceTest {
 			throws FireStationNotFoundException {
 		// arrange
 		FireStation fireStation = fireStations.get(0);
-		when(fireStationRepository.FindByAddress(anyString())).thenReturn(null);
+		when(fireStationRepository.findByAddress(anyString())).thenReturn(null);
 		// assert
 		assertThrows(FireStationNotFoundException.class,
 				() -> fireStationService
-						.FindByAddress(fireStation.getAddress()));
-		verify(fireStationRepository).FindByAddress(anyString());
+						.findByAddress(fireStation.getAddress()));
+		verify(fireStationRepository).findByAddress(anyString());
 	}
 	@Test
 	@Tag("update")
@@ -148,11 +148,11 @@ class FireStationServiceTest {
 			throws FireStationNotFoundException {
 		// arrange
 		FireStation fireStation = new FireStation("1509 Culver St", 2);
-		when(fireStationRepository.FindByAddress(anyString())).thenReturn(null);
+		when(fireStationRepository.findByAddress(anyString())).thenReturn(null);
 		// assert
 		assertThrows(FireStationNotFoundException.class,
 				() -> fireStationService.updateFireStation(fireStation));
-		verify(fireStationRepository).FindByAddress(anyString());
+		verify(fireStationRepository).findByAddress(anyString());
 
 	}
 	@Test
@@ -165,7 +165,7 @@ class FireStationServiceTest {
 		FireStation fireStationToUpdate = fireStations.get(0);
 		FireStationDTO fireStationUpdated = new FireStationDTO("1509 Culver St",
 				2);
-		when(fireStationRepository.FindByAddress(anyString()))
+		when(fireStationRepository.findByAddress(anyString()))
 				.thenReturn(fireStationToUpdate);
 		when(fireStationRepository.updateFireStation(fireStation))
 				.thenReturn(fireStation);
@@ -177,7 +177,7 @@ class FireStationServiceTest {
 		// assert
 		assertThat(result).isEqualTo(fireStationUpdated);
 		verify(fireStationRepository).updateFireStation(fireStation);
-		verify(fireStationRepository).FindByAddress(anyString());
+		verify(fireStationRepository).findByAddress(anyString());
 	}
 	@Test
 	@Tag("delete")
@@ -187,7 +187,7 @@ class FireStationServiceTest {
 		// arrange
 		FireStation fireStation = fireStations.get(0);
 		FireStationDTO fireStationDTO = fireStationsDTO.get(0);
-		when(fireStationRepository.FindByAddress(anyString()))
+		when(fireStationRepository.findByAddress(anyString()))
 				.thenReturn(fireStation);
 		when(fireStationConverter.toFireStationDTO(fireStation))
 				.thenReturn(fireStationDTO);
@@ -206,7 +206,7 @@ class FireStationServiceTest {
 			throws FireStationNotFoundException {
 		// arrange
 		FireStation fireStation = fireStations.get(0);
-		when(fireStationRepository.FindByAddress(anyString())).thenReturn(null);
+		when(fireStationRepository.findByAddress(anyString())).thenReturn(null);
 		// assert
 		assertThrows(FireStationNotFoundException.class,
 				() -> fireStationService
@@ -221,12 +221,12 @@ class FireStationServiceTest {
 		List<String> addresses = new ArrayList<String>(
 				List.of("1509 Culver St", "834 Binoc Ave"));
 
-		when(fireStationRepository.FindByStation(3)).thenReturn(addresses);
+		when(fireStationRepository.findByStation(3)).thenReturn(addresses);
 		// act
-		List<String> result = fireStationService.FindByStation(3);
+		List<String> result = fireStationService.findByStation(3);
 		// assert
 		assertThat(result).containsAll(addresses);
-		verify(fireStationRepository).FindByStation(any(Integer.class));
+		verify(fireStationRepository).findByStation(any(Integer.class));
 	}
 	@Test
 	@Tag("findByStation")
@@ -235,10 +235,10 @@ class FireStationServiceTest {
 			throws FireStationNotFoundException {
 		// arrange
 		List<String> addresses = new ArrayList<String>();
-		when(fireStationRepository.FindByStation(8)).thenReturn(addresses);
+		when(fireStationRepository.findByStation(8)).thenReturn(addresses);
 		// assert
 		assertThrows(FireStationNotFoundException.class,
-				() -> fireStationService.FindByStation(8));
-		verify(fireStationRepository).FindByStation(any(Integer.class));
+				() -> fireStationService.findByStation(8));
+		verify(fireStationRepository).findByStation(any(Integer.class));
 	}
 }

@@ -59,7 +59,11 @@ public class MedicalRecord {
 				+ lastName + ", birthdate=" + birthdate + ", medications="
 				+ medications + ", allergies=" + allergies + "]";
 	}
-
+	@Override
+	public int hashCode() {
+		return Objects.hash(allergies, birthdate, firstName, lastName,
+				medications);
+	}
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

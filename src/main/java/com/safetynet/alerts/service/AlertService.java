@@ -45,7 +45,7 @@ public class AlertService implements IAlertsService {
 			PersonNotFoundException {
 		LOGGER.debug(
 				"at Alert Service in getPopulationCovredByStation methode ");
-		List<String> addresses = fireStationService.FindByStation(station);
+		List<String> addresses = fireStationService.findByStation(station);
 		List<PersonAlertDTO> personsCouvred = new ArrayList<>();
 		int numberOfAdults = 0;
 		int numberOfChildren = 0;
@@ -114,7 +114,7 @@ public class AlertService implements IAlertsService {
 		LOGGER.debug("at Alert Service in getInhabitantByAddress methode ");
 		List<InhabitantDTO> inhabitants = new ArrayList<InhabitantDTO>();
 		List<Person> persons = personService.findByAddress(address);
-		int station = fireStationService.FindByAddress(address).getStation();
+		int station = fireStationService.findByAddress(address).getStation();
 		for (Person person : persons) {
 			MedicalRecord medicalRecord = medicalRecordService
 					.findByName(person.getFirstName(), person.getLastName());
@@ -132,7 +132,7 @@ public class AlertService implements IAlertsService {
 			PersonNotFoundException {
 		LOGGER.debug("at Alert Service in getFloodsByStation methode ");
 		List<FloodDTO> floods = new ArrayList<FloodDTO>();
-		List<String> addresses = fireStationService.FindByStation(station);
+		List<String> addresses = fireStationService.findByStation(station);
 		for (String address : addresses) {
 			floods.add(new FloodDTO(address,
 					getInhabitantByAddress(address).getInhabitants()));

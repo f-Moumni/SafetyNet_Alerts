@@ -34,6 +34,11 @@ public class FireStation {
 	}
 
 	@Override
+	public int hashCode() {
+		return Objects.hash(address, station);
+	}
+
+	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;

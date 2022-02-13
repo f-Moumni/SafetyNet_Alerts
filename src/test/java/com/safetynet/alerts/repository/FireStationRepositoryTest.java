@@ -70,7 +70,7 @@ class FireStationRepositoryTest {
 		FireStation fireStation = new FireStation("1509 Culver St", 3);
 		// act
 		FireStation result = fireStationRepository
-				.FindByAddress(fireStation.getAddress());
+				.findByAddress(fireStation.getAddress());
 		// assert
 		assertThat(result).isEqualTo(fireStation);
 
@@ -82,7 +82,7 @@ class FireStationRepositoryTest {
 		// arrange
 		FireStation fireStation = new FireStation("1509 Culver St", 3);
 		// act
-		List<String> result = fireStationRepository.FindByStation(3);
+		List<String> result = fireStationRepository.findByStation(3);
 		// assert
 		assertThat(result).contains(fireStation.getAddress());
 
