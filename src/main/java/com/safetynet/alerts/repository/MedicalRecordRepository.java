@@ -2,7 +2,6 @@ package com.safetynet.alerts.repository;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -33,7 +32,7 @@ public class MedicalRecordRepository implements IMedicalRecordRepository {
 						.equalsIgnoreCase(lastName))
 				.filter(medicalRecord -> medicalRecord.getFirstName()
 						.equalsIgnoreCase(firstName))
-				.collect(Collectors.toList()).get(0);
+				.findFirst().orElse(null);
 	}
 	@Override
 	public void deleteMedicalRecord(MedicalRecord medicalRecord) {
@@ -45,9 +44,12 @@ public class MedicalRecordRepository implements IMedicalRecordRepository {
 		MedicalRecord medicalRecord = findByName(
 				medicalRecordUpdated.getFirstName(),
 				medicalRecordUpdated.getLastName());
-		deleteMedicalRecord(medicalRecord);
-		addMedicalRecord(medicalRecordUpdated);
-		return medicalRecordUpdated;
+		if (medicalRecord != null) {
+			deleteMedicalRecord(medicalRecord);
+			addMedicalRecord(medicalRecordUpdated);
+			return medicalRecordUpdated;
+		}
+		return medicalRecord;
 
 	}
 }

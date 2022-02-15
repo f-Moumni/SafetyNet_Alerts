@@ -15,8 +15,6 @@ public interface IPersonService {
 	public PersonDTO findByName(String firstName, String lastName)
 			throws PersonNotFoundException;
 
-	public void addPerson(Person person) throws AlreadyExistsException;
-
 	public PersonDTO updatePerson(Person person) throws PersonNotFoundException;
 
 	public PersonDTO deletePerson(String firstName, String lastName)
@@ -29,4 +27,6 @@ public interface IPersonService {
 			throws PersonNotFoundException;
 
 	public List<Person> findByCity(String city) throws PersonNotFoundException;
+
+	PersonDTO addPerson(Person personToAdd) throws AlreadyExistsException;
 }

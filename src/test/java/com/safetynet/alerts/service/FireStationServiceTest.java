@@ -89,10 +89,15 @@ class FireStationServiceTest {
 			throws AlreadyExistsException {
 		// arrange
 		FireStation fireStation = new FireStation("748 Townings Dr", 3);
+		FireStationDTO fireStationDTO = new FireStationDTO("748 Townings Dr",
+				3);
 		when(fireStationRepository.findByAddress(anyString())).thenReturn(null);
+		when(fireStationConverter.toFireStationDTO(fireStation))
+				.thenReturn(fireStationDTO);
 		// act
-		fireStationService.addFireStation(fireStation);
+		FireStationDTO result = fireStationService.addFireStation(fireStation);
 		// assert
+		assertThat(result).isEqualTo(fireStationDTO);
 		verify(fireStationRepository).addFireStation(fireStation);
 
 	}

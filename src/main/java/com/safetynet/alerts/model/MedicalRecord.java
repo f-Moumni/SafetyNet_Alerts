@@ -3,10 +3,14 @@ package com.safetynet.alerts.model;
 import java.util.List;
 import java.util.Objects;
 
-public class MedicalRecord {
+import javax.validation.constraints.NotNull;
 
+public class MedicalRecord {
+	@NotNull
 	private String firstName;
+	@NotNull
 	private String lastName;
+
 	private String birthdate;
 	private List<String> medications;
 	private List<String> allergies;

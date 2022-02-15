@@ -37,6 +37,7 @@ public class CoveredPopulationDTO {
 	public void setNumberOfChildren(int numberOfChildren) {
 		this.numberOfChildren = numberOfChildren;
 	}
+
 	@Override
 	public String toString() {
 		return "CoveredPopulationDTO [PersonsCouverd=" + PersonsCouverd

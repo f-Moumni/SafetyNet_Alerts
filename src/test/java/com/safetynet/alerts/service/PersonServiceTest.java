@@ -165,11 +165,15 @@ class PersonServiceTest {
 		// arrange
 		Person person = new Person("sofi", "Boyd", "1509 Culver st", "Culver",
 				97451, "841-874-2222", "sarahboyd@email.com");
+		PersonDTO personDTO = new PersonDTO("sofi", "Boyd", "1509 Culver st",
+				"Culver", 97451, "841-874-2222", "sarahboyd@email.com");
 		when(personRepository.findByName(anyString(), anyString()))
 				.thenReturn(null);
+		when(personConverter.toPersonDTO(person)).thenReturn(personDTO);
 		// act
-		personService.addPerson(person);
+		PersonDTO result = personService.addPerson(person);
 		// assert
+		assertThat(result).isEqualTo(personDTO);
 		verify(personRepository).addPerson(person);
 
 	}

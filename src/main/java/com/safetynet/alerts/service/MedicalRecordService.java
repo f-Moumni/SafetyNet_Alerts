@@ -35,7 +35,7 @@ public class MedicalRecordService implements IMedicalRecordService {
 	}
 
 	@Override
-	public void addMedicalRecord(MedicalRecord medicalRecordToAdd)
+	public MedicalRecordDTO addMedicalRecord(MedicalRecord medicalRecordToAdd)
 			throws AlreadyExistsException {
 		MedicalRecord medicalRecord = medicalRecordRepository.findByName(
 				medicalRecordToAdd.getFirstName(),
@@ -49,8 +49,10 @@ public class MedicalRecordService implements IMedicalRecordService {
 					+ " already has a medical record");
 		} else {
 			medicalRecordRepository.addMedicalRecord(medicalRecordToAdd);
-
+			return medicalRecordConverter
+					.toMedicalRecordDTO(medicalRecordToAdd);
 		}
+
 	}
 
 	@Override

@@ -115,5 +115,20 @@ class MedicalRecordRepositoryTest {
 		assertThat(result.getMedications()).isEmpty();
 
 	}
+	@Test
+	@Tag("update")
+	@DisplayName("update medical record test for an unregistered person should return null")
+	void updateMedicalRecord_forAnUNregiterdMedicalRecord_test() {
+		// arrange
+		MedicalRecord medicalRecord = new MedicalRecord("lola", "laod",
+				"03/06/1994", new ArrayList<String>(),
+				new ArrayList<String>(List.of("nillacilan")));
+		// act
+		MedicalRecord result = medicalRecordRepository
+				.updateMedicalRecord(medicalRecord);
+		// assert
+		assertThat(result).isNull();
+
+	}
 
 }

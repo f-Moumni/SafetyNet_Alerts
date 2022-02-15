@@ -53,8 +53,7 @@ public class PersonController {
 	public ResponseEntity<?> getPersonByName(@RequestParam String firstName,
 			@RequestParam String lastName) throws PersonNotFoundException {
 		LOGGER.debug("at get Person By Name methode ");
-		if (((firstName == null) || (lastName == null)) || (firstName.isBlank())
-				|| (lastName.isBlank())) {
+		if (firstName.isBlank() || lastName.isBlank()) {
 			LOGGER.error("Invalid Name  HttpStatus :{}",
 					HttpStatus.BAD_REQUEST);
 			return badRequestResponse;
@@ -69,10 +68,8 @@ public class PersonController {
 	public ResponseEntity<?> deletePerson(@RequestParam String firstName,
 			@RequestParam String lastName) throws PersonNotFoundException {
 		LOGGER.debug("at deletePerson methode ");
-		if (((firstName == null) || (lastName == null)) || (firstName.isBlank())
-				|| (lastName.isBlank())) {
-			LOGGER.error("Invalid name  HttpStatus :{}",
-					HttpStatus.BAD_REQUEST);
+		if (firstName.isBlank() || lastName.isBlank()) {
+			LOGGER.error("Invalid name HttpStatus :{}", HttpStatus.BAD_REQUEST);
 			return badRequestResponse;
 		} else {
 			PersonDTO person = personService.deletePerson(firstName, lastName);
@@ -86,19 +83,17 @@ public class PersonController {
 	public ResponseEntity<?> addPerson(@RequestBody PersonDTO person)
 			throws AlreadyExistsException {
 		LOGGER.debug("at addPerson methode ");
-		if (((person.getFirstName() == null) || (person.getLastName() == null))
-				|| (person.getFirstName().isBlank())
-				|| (person.getLastName().isBlank())) {
+		if (person.getFirstName().isBlank() || person.getLastName().isBlank()) {
 			LOGGER.error("Invalid name  HttpStatus :{}",
 					HttpStatus.BAD_REQUEST);
 			return badRequestResponse;
 		} else {
-			personService.addPerson(personConverter.toPerson(person));
+			PersonDTO personSaved = personService
+					.addPerson(personConverter.toPerson(person));
 			LOGGER.info("person {} {} saved with success   HttpStatus :{}",
 					person.getFirstName(), person.getLastName(),
 					HttpStatus.CREATED);
-
-			return new ResponseEntity<>(person, HttpStatus.CREATED);
+			return new ResponseEntity<>(personSaved, HttpStatus.CREATED);
 		}
 	}
 
@@ -106,9 +101,7 @@ public class PersonController {
 	public ResponseEntity<?> updatePerson(@RequestBody PersonDTO person)
 			throws PersonNotFoundException {
 		LOGGER.debug("at updatePerson methode ");
-		if (((person.getFirstName() == null) || (person.getLastName() == null))
-				|| (person.getFirstName().isBlank())
-				|| (person.getLastName().isBlank())) {
+		if (person.getFirstName().isBlank() || person.getLastName().isBlank()) {
 			LOGGER.error("Invalid name  HttpStatus :{}",
 					HttpStatus.BAD_REQUEST);
 			return badRequestResponse;

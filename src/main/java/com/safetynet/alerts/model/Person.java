@@ -2,9 +2,12 @@ package com.safetynet.alerts.model;
 
 import java.util.Objects;
 
-public class Person {
+import javax.validation.constraints.NotNull;
 
+public class Person {
+	@NotNull
 	private String firstName;
+	@NotNull
 	private String lastName;
 	private String address;
 	private String city;

@@ -50,11 +50,9 @@ public class MedicalRecordController {
 			@RequestBody MedicalRecordDTO medicalRecord)
 			throws AlreadyExistsException {
 		LOGGER.debug("at addMedicalRecord methode ");
-		if (((medicalRecord.getFirstName() == null)
-				|| (medicalRecord.getLastName() == null))
-				|| (medicalRecord.getFirstName().isBlank())
-				|| (medicalRecord.getLastName().isBlank())) {
-			LOGGER.error("Invalid name  HttpStatus :{}", HttpStatus.NO_CONTENT);
+		if (medicalRecord.getFirstName().isBlank()
+				|| medicalRecord.getLastName().isBlank()) {
+			LOGGER.error("Invalid name HttpStatus:{}", HttpStatus.NO_CONTENT);
 			return ResponseEntity.badRequest().body("Invalid name");
 		}
 		medicalRecordService.addMedicalRecord(
@@ -71,11 +69,9 @@ public class MedicalRecordController {
 			@RequestBody MedicalRecordDTO medicalRecord)
 			throws MedicalRecordNotFoundException {
 		LOGGER.debug("at updateMedicalRecord methode ");
-		if (((medicalRecord.getFirstName() == null)
-				|| (medicalRecord.getLastName() == null))
-				|| (medicalRecord.getFirstName().isBlank())
-				|| (medicalRecord.getLastName().isBlank())) {
-			LOGGER.error("Invalid name  HttpStatus :{}", HttpStatus.NO_CONTENT);
+		if (medicalRecord.getFirstName().isBlank()
+				|| medicalRecord.getLastName().isBlank()) {
+			LOGGER.error("Invalid name HttpStatus :{}", HttpStatus.NO_CONTENT);
 			return ResponseEntity.badRequest().body("Invalid name");
 		} else {
 			medicalRecordService.updateMedicalRecord(
@@ -92,10 +88,8 @@ public class MedicalRecordController {
 			@RequestParam String lastName)
 			throws MedicalRecordNotFoundException {
 		LOGGER.debug("at deleteMedicalRecord methode ");
-		if (((firstName == null) || (lastName == null)) || (firstName.isBlank())
-				|| (lastName.isBlank())) {
-			LOGGER.error("Invalid name  HttpStatus :{}",
-					HttpStatus.BAD_REQUEST);
+		if (firstName.isBlank() || lastName.isBlank()) {
+			LOGGER.error("Invalid name HttpStatus :{}", HttpStatus.BAD_REQUEST);
 			return ResponseEntity.badRequest().body("Invalid name");
 		} else {
 			MedicalRecordDTO medicalRecord = medicalRecordService

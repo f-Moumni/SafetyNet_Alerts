@@ -34,10 +34,9 @@ public class FireStationRepository implements IFireStationRepository {
 	}
 	@Override
 	public FireStation findByAddress(String address) {
-		return fireStations.stream()
-				.filter(fireStation -> fireStation.getAddress()
-						.equalsIgnoreCase(address))
-				.collect(Collectors.toList()).get(0);
+		return fireStations.stream().filter(fireStation -> fireStation
+				.getAddress().equalsIgnoreCase(address)).findFirst()
+				.orElse(null);
 	}
 	@Override
 	public List<String> findByStation(int station) {

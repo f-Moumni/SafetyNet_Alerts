@@ -85,7 +85,7 @@ public class AlertService implements IAlertsService {
 				children.add(new ChildDTO(person.getFirstName(),
 						person.getLastName(), age));
 			} else {
-				family.add(person.getFirstName() + "  " + person.getLastName());
+				family.add(person.getFirstName() + " " + person.getLastName());
 			}
 		}
 		return ((children.isEmpty())
@@ -112,7 +112,7 @@ public class AlertService implements IAlertsService {
 			throws MedicalRecordNotFoundException, FireStationNotFoundException,
 			PersonNotFoundException {
 		LOGGER.debug("at Alert Service in getInhabitantByAddress methode ");
-		List<InhabitantDTO> inhabitants = new ArrayList<InhabitantDTO>();
+		List<InhabitantDTO> inhabitants = new ArrayList<>();
 		List<Person> persons = personService.findByAddress(address);
 		int station = fireStationService.findByAddress(address).getStation();
 		for (Person person : persons) {
@@ -141,7 +141,6 @@ public class AlertService implements IAlertsService {
 
 	}
 	@Override
-
 	public List<PersonInfosDTO> getPersonInfosByName(String firstName,
 			String lastName)
 			throws MedicalRecordNotFoundException, PersonNotFoundException {
@@ -152,7 +151,7 @@ public class AlertService implements IAlertsService {
 		PersonDTO person = personService.findByName(firstName, lastName);
 
 		MedicalRecord medicalRecord = medicalRecordService
-				.findByName(person.getFirstName(), person.getLastName());;
+				.findByName(person.getFirstName(), person.getLastName());
 		int age = AgeCalculator.calculate(medicalRecord.getBirthdate());
 		personsInfos.add(new PersonInfosDTO(medicalRecord.getFirstName(),
 				medicalRecord.getLastName(), age, person.getEmail(),
@@ -161,7 +160,7 @@ public class AlertService implements IAlertsService {
 		for (Person pr : personsByLastName) {
 			if (!pr.getFirstName().equals(person.getFirstName())) {
 				MedicalRecord mr = medicalRecordService
-						.findByName(pr.getFirstName(), pr.getLastName());;
+						.findByName(pr.getFirstName(), pr.getLastName());
 				int old = AgeCalculator.calculate(mr.getBirthdate());
 				personsInfos.add(new PersonInfosDTO(mr.getFirstName(),
 						mr.getLastName(), old, person.getEmail(),

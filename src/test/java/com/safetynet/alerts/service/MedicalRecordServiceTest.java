@@ -114,11 +114,16 @@ class MedicalRecordServiceTest {
 			throws MedicalRecordNotFoundException, AlreadyExistsException {
 		// arrange
 		MedicalRecord medicalRecord = medicalRecords.get(0);
+		MedicalRecordDTO medicalRecordDTO = medicalRecordsDTO.get(0);
 		when(medicalRecordRepository.findByName(anyString(), anyString()))
 				.thenReturn(null);
+		when(medicalRecordConverter.toMedicalRecordDTO(medicalRecord))
+				.thenReturn(medicalRecordDTO);
 		// act
-		medicalRecordService.addMedicalRecord(medicalRecord);
+		MedicalRecordDTO result = medicalRecordService
+				.addMedicalRecord(medicalRecord);
 		// assert
+		assertThat(result).isEqualTo(medicalRecordDTO);
 		verify(medicalRecordRepository).findByName(anyString(), anyString());
 		verify(medicalRecordRepository).addMedicalRecord(medicalRecord);
 	}

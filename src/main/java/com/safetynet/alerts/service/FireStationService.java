@@ -36,7 +36,7 @@ public class FireStationService implements IFireStationService {
 	}
 
 	@Override
-	public void addFireStation(FireStation fireStation)
+	public FireStationDTO addFireStation(FireStation fireStation)
 			throws AlreadyExistsException {
 		FireStation fstation = fireStationRepository
 				.findByAddress(fireStation.getAddress());
@@ -49,7 +49,7 @@ public class FireStationService implements IFireStationService {
 					+ fstation.getAddress() + " is already exsits");
 		} else {
 			fireStationRepository.addFireStation(fireStation);
-
+			return fireStationConverter.toFireStationDTO(fireStation);
 		}
 
 	}

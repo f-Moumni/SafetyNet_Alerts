@@ -61,11 +61,13 @@ public class PersonService implements IPersonService {
 	}
 
 	@Override
-	public void addPerson(Person personToAdd) throws AlreadyExistsException {
+	public PersonDTO addPerson(Person personToAdd)
+			throws AlreadyExistsException {
 		Person person = personRepository.findByName(personToAdd.getFirstName(),
 				personToAdd.getLastName());
 		if (person == null) {
 			personRepository.addPerson(personToAdd);
+			return personConverter.toPersonDTO(personToAdd);
 		} else {
 			LOGGER.error("this person {} {} already exists",
 					personToAdd.getFirstName(), personToAdd.getLastName());

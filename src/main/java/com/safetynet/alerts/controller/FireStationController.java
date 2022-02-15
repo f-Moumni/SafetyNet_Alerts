@@ -51,19 +51,19 @@ public class FireStationController {
 		if ((fireStation.getStation() <= 0)
 				|| (fireStation.getAddress().isBlank())) {
 			LOGGER.error(
-					"Invalid fire station numero or adresse HttpStatus :{}",
-					HttpStatus.NO_CONTENT);
+					"Invalid fire station number or address HttpStatus :{}",
+					HttpStatus.BAD_REQUEST);
 			return ResponseEntity.badRequest()
-					.body("Invalid fire station numero or adresse");
+					.body("Invalid fire station number or address");
+		} else {
+			FireStationDTO fireStationSaved = fireStationService.addFireStation(
+					fireStationConverter.toFireStation(fireStation));
+			LOGGER.info(
+					"fireStation {} at the address{} saved with success   HttpStatus :{}",
+					fireStation.getStation(), fireStation.getAddress(),
+					HttpStatus.CREATED);
+			return new ResponseEntity<>(fireStationSaved, HttpStatus.CREATED);
 		}
-		fireStationService.addFireStation(
-				fireStationConverter.toFireStation(fireStation));
-		LOGGER.info(
-				"fireStation {} at the address{} saved with success   HttpStatus :{}",
-				fireStation.getStation(), fireStation.getAddress(),
-				HttpStatus.CREATED);
-		return new ResponseEntity<>(fireStation, HttpStatus.CREATED);
-
 	}
 	@PutMapping("/firestation")
 	public ResponseEntity<?> updateFireStation(
@@ -73,10 +73,10 @@ public class FireStationController {
 		if ((fireStation.getStation() <= 0)
 				|| (fireStation.getAddress().isBlank())) {
 			LOGGER.error(
-					"Invalid fire station numero or adresse HttpStatus :{}",
+					"Invalid fire station number or address HttpStatus :{}",
 					HttpStatus.NO_CONTENT);
 			return ResponseEntity.badRequest()
-					.body("Invalid fire station numero or adresse");
+					.body("Invalid fire station number or address");
 		}
 		FireStationDTO fStation = fireStationService.updateFireStation(
 				fireStationConverter.toFireStation(fireStation));
@@ -91,10 +91,9 @@ public class FireStationController {
 			throws FireStationNotFoundException {
 		LOGGER.debug("at deleteFireStation methode ");
 		if (address.isBlank()) {
-			LOGGER.error("Invalid fire station adresse HttpStatus :{}",
+			LOGGER.error("Invalid fire station address HttpStatus :{}",
 					HttpStatus.BAD_REQUEST);
-			return ResponseEntity.badRequest()
-					.body("Invalid fire station numero or adresse");
+			return ResponseEntity.badRequest().body("Invalid address");
 		}
 		FireStationDTO fStation = fireStationService.deleteFireStation(address);
 		LOGGER.info(

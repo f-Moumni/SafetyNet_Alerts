@@ -81,7 +81,17 @@ class PersonRepositoryTest {
 	}
 	@Test
 	@Tag("findbyName")
-	@DisplayName("find person by name test should return list of person with the given last name")
+	@DisplayName("find person by name test with an unregistered person should return null")
+	void findPersonByName_test_withAnUnregisteredPerson_shouldReturnNull() {
+		// act
+		Person result = personRepository.findByName("lola", "laod");
+		// assert
+		assertThat(result).isNull();
+
+	}
+	@Test
+	@Tag("findbyName")
+	@DisplayName("find person by last name test should return list of person with the given last name")
 	void findPersonsByLastName_test() {
 		// arrange
 		Person person = new Person("Jacob", "Boyd", "1509 Culver st", "Culver",
@@ -91,6 +101,15 @@ class PersonRepositoryTest {
 		List<Person> result = personRepository.findPersonsByLastName("Boyd");
 		// assert
 		assertThat(result).contains(person);
+	}
+	@Test
+	@Tag("findbyName")
+	@DisplayName("find person by last name test no person with the given last name should return EmptyList")
+	void findPersonsByLastName_withNon_ExistentName_returnEmptyList() {
+		// act
+		List<Person> result = personRepository.findPersonsByLastName("Laod");
+		// assert
+		assertThat(result).isEmpty();
 	}
 	@Test
 	@Tag("findbyCity")
@@ -103,6 +122,15 @@ class PersonRepositoryTest {
 		List<Person> result = personRepository.findByCity("Culver");
 		// assert
 		assertThat(result).contains(person);
+	}
+	@Test
+	@Tag("findbyCity")
+	@DisplayName("find person by city test with an unregistered City should return empty list")
+	void findByCityTest_withAnUnregisteredCity_returnEmptyList() {
+		// act
+		List<Person> result = personRepository.findByCity("Londres");
+		// assert
+		assertThat(result).isEmpty();
 	}
 	@Test
 	@Tag("Update")
@@ -118,6 +146,19 @@ class PersonRepositoryTest {
 
 	}
 	@Test
+	@Tag("Update")
+	@DisplayName("update person test with unregistered person should return null")
+	void updatePerson_withAnUnregisteredPerson_retunNull() {
+		// arrange
+		Person person = new Person("John", "Doe", "2000 Culver st", "Culver",
+				97451, "841-874-2222", "jboyd@email.com");
+		// act
+		Person result = personRepository.updatePerson(person);
+		// assert
+		assertThat(result).isNull();
+
+	}
+	@Test
 	@Tag("findByAdress")
 	@DisplayName("find person by address test should return a list of person living in the given address")
 	void findByAddress_Test() {
@@ -129,6 +170,17 @@ class PersonRepositoryTest {
 				.findByAddress(person.getAddress());
 		// assert
 		assertThat(result).contains(person);
+
+	}
+	@Test
+	@Tag("findByAdress")
+	@DisplayName("find person by address test with unregistered address should return empty list")
+	void findByAddress_withAnUnregisteredAddress_retunNull() {
+		// act
+		List<Person> result = personRepository
+				.findByAddress("152 francisco st");
+		// assert
+		assertThat(result).isEmpty();
 
 	}
 

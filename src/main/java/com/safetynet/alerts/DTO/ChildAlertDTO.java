@@ -5,7 +5,7 @@ import java.util.List;
 
 public class ChildAlertDTO {
 	private List<ChildDTO> children;
-	private List<String> family = new ArrayList<String>();
+	private List<String> family = new ArrayList<>();
 
 	public ChildAlertDTO() {
 		super();

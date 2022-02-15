@@ -12,7 +12,7 @@ public interface IMedicalRecordService {
 
 	List<MedicalRecordDTO> findAll() throws DataNotFoundException;
 
-	void addMedicalRecord(MedicalRecord medicalRecord)
+	MedicalRecordDTO addMedicalRecord(MedicalRecord medicalRecord)
 			throws AlreadyExistsException;
 
 	MedicalRecordDTO updateMedicalRecord(MedicalRecord medicalRecord)

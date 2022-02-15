@@ -12,7 +12,7 @@ public interface IFireStationService {
 
 	public List<FireStationDTO> findAll() throws DataNotFoundException;
 
-	public void addFireStation(FireStation fireStation)
+	public FireStationDTO addFireStation(FireStation fireStation)
 			throws AlreadyExistsException;
 
 	public FireStationDTO updateFireStation(FireStation fireStation)

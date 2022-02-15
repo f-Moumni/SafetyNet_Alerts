@@ -37,7 +37,7 @@ public class PersonRepository implements IPersonRepository {
 						.equalsIgnoreCase(lastName))
 				.filter(person -> person.getFirstName()
 						.equalsIgnoreCase(firstName))
-				.collect(Collectors.toList()).get(0);
+				.findFirst().orElse(null);
 
 	}
 	@Override
@@ -66,9 +66,12 @@ public class PersonRepository implements IPersonRepository {
 	public Person updatePerson(Person person) {
 		Person persontoUpdate = findByName(person.getFirstName(),
 				person.getLastName());
-		deletePerson(persontoUpdate);
-		addPerson(person);
-		return person;
+		if (persontoUpdate != null) {
+			deletePerson(persontoUpdate);
+			addPerson(person);
+			return person;
+		}
+		return null;
 
 	}
 
