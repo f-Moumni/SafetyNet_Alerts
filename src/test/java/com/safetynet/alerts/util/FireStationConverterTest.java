@@ -46,8 +46,8 @@ public class FireStationConverterTest {
 		FireStationDTO result = fireStationConverter
 				.toFireStationDTO(fireStation);
 		// assert
-		assertThat(result.getAddress()).isEqualTo(fireStation.getAddress());
-		assertThat(result.getStation()).isEqualTo(fireStation.getStation());
+		assertThat(result).usingRecursiveComparison()
+				.isEqualTo(fireStationsDTO.get(0));
 	}
 	@Test
 	@Tag("toFireStation")
@@ -58,8 +58,8 @@ public class FireStationConverterTest {
 		// act
 		FireStation result = fireStationConverter.toFireStation(fireStationDTO);
 		// assert
-		assertThat(result.getAddress()).isEqualTo(fireStationDTO.getAddress());
-		assertThat(result.getStation()).isEqualTo(fireStationDTO.getStation());
+		assertThat(result).usingRecursiveComparison()
+				.isEqualTo(fireStations.get(0));
 	}
 
 	@Test
@@ -71,7 +71,8 @@ public class FireStationConverterTest {
 		List<FireStationDTO> result = fireStationConverter
 				.toFireStationDTOList(fireStations);
 		// assert
-		assertThat(result.size()).isEqualTo(fireStationsDTO.size());
+		assertThat(result).usingRecursiveComparison()
+				.isEqualTo(fireStationsDTO);
 
 	}
 }

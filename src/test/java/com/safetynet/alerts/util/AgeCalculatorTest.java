@@ -6,15 +6,11 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
-import com.google.inject.Inject;
-
-public class AgeCalculatorTest {
-	@Inject
-	private AgeCalculator ageCalculator;
+class AgeCalculatorTest {
 
 	@Test
 	@Tag("calculate")
-	@DisplayName("getPopulationCovredByStation test should return the age according to the given date of birth ")
+	@DisplayName("calculate_Test test should return the age according to the given date of birth ")
 	void calculate_Test() {
 		// arrange
 		String birthdate = "03/06/1984";
@@ -23,4 +19,5 @@ public class AgeCalculatorTest {
 		// assert
 		assertThat(result).isEqualTo(37);
 	}
+
 }

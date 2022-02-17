@@ -3,16 +3,16 @@ package com.safetynet.alerts.DTO;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FloodDTO {
+public class HomeDTO {
 
 	private String address;
 	private List<InhabitantDTO> inhabitants = new ArrayList<InhabitantDTO>();
 
-	public FloodDTO() {
+	public HomeDTO() {
 		super();
 	}
 
-	public FloodDTO(String address, List<InhabitantDTO> inhabitants) {
+	public HomeDTO(String address, List<InhabitantDTO> inhabitants) {
 		super();
 		this.address = address;
 		this.inhabitants = inhabitants;
@@ -36,7 +36,7 @@ public class FloodDTO {
 
 	@Override
 	public String toString() {
-		return "FloodDTO [address=" + address + ", inhabitants=" + inhabitants
+		return "HomeDTO [address=" + address + ", inhabitants=" + inhabitants
 				+ "]";
 	}
 

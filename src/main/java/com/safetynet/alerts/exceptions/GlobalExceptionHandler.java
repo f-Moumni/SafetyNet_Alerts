@@ -1,6 +1,6 @@
 package com.safetynet.alerts.exceptions;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +15,7 @@ public class GlobalExceptionHandler {
 	public ResponseEntity<?> handleDataNoteFoundException(
 			DataNotFoundException e, WebRequest request) {
 
-		ExceptionDetails exception = new ExceptionDetails(new Date(),
+		ExceptionDetails exception = new ExceptionDetails(LocalDateTime.now(),
 				e.getMessage(), HttpStatus.NOT_FOUND,
 				request.getDescription(false));
 		return new ResponseEntity<>(exception, HttpStatus.NOT_FOUND);
@@ -26,7 +26,7 @@ public class GlobalExceptionHandler {
 	public ResponseEntity<?> handlePersonNotFoundException(
 			PersonNotFoundException e, WebRequest request) {
 
-		ExceptionDetails exception = new ExceptionDetails(new Date(),
+		ExceptionDetails exception = new ExceptionDetails(LocalDateTime.now(),
 				e.getMessage(), HttpStatus.NOT_FOUND,
 				request.getDescription(false));
 		return new ResponseEntity<>(exception, HttpStatus.NOT_FOUND);
@@ -36,7 +36,7 @@ public class GlobalExceptionHandler {
 	public ResponseEntity<?> handleAlreadyExistsException(
 			AlreadyExistsException e, WebRequest request) {
 
-		ExceptionDetails exception = new ExceptionDetails(new Date(),
+		ExceptionDetails exception = new ExceptionDetails(LocalDateTime.now(),
 				e.getMessage(), HttpStatus.ALREADY_REPORTED,
 				request.getDescription(false));
 		return new ResponseEntity<>(exception, HttpStatus.ALREADY_REPORTED);
@@ -46,7 +46,7 @@ public class GlobalExceptionHandler {
 	public ResponseEntity<?> handleFireStationNotFoundException(
 			FireStationNotFoundException e, WebRequest request) {
 
-		ExceptionDetails exception = new ExceptionDetails(new Date(),
+		ExceptionDetails exception = new ExceptionDetails(LocalDateTime.now(),
 				e.getMessage(), HttpStatus.NOT_FOUND,
 				request.getDescription(false));
 		return new ResponseEntity<>(exception, HttpStatus.NOT_FOUND);
@@ -56,7 +56,7 @@ public class GlobalExceptionHandler {
 	public ResponseEntity<?> handleMedicalRecordNotFoundException(
 			MedicalRecordNotFoundException e, WebRequest request) {
 
-		ExceptionDetails exception = new ExceptionDetails(new Date(),
+		ExceptionDetails exception = new ExceptionDetails(LocalDateTime.now(),
 				e.getMessage(), HttpStatus.NOT_FOUND,
 				request.getDescription(false));
 		return new ResponseEntity<>(exception, HttpStatus.NOT_FOUND);

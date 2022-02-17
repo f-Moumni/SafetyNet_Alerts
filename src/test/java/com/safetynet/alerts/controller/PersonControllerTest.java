@@ -60,10 +60,11 @@ class PersonControllerTest {
 	@Tag("getPersons")
 	@DisplayName("getPersons test should return all persons in list and status OK")
 	void getAllPersons_returnAllPersons_OK() throws Exception {
-
+		// arrange
 		when(personService.findAll()).thenReturn(personsDTO);
+		// Act
 		mvc.perform(
-				get("/person/persons").contentType(MediaType.APPLICATION_JSON))
+				get("/person/persons").contentType(MediaType.APPLICATION_JSON))// assert
 				.andDo(print()).andExpect(status().isOk())
 				.andExpect(content().string(asJsonString(personsDTO)));
 	}
@@ -71,10 +72,11 @@ class PersonControllerTest {
 	@Tag("getPersons")
 	@DisplayName("getPersons test with exception should return status NOT_FOUND")
 	void getAllPersons_withDataNotFoundException_NotFound() throws Exception {
-
+		// arrange
 		when(personService.findAll()).thenThrow(DataNotFoundException.class);
+		// act
 		mvc.perform(
-				get("/person/persons").contentType(MediaType.APPLICATION_JSON))
+				get("/person/persons").contentType(MediaType.APPLICATION_JSON))// assert
 				.andDo(print()).andExpect(status().isNotFound());
 	}
 
@@ -82,21 +84,23 @@ class PersonControllerTest {
 	@Tag("PersonByName")
 	@DisplayName("getPersonByName test should return person with given name and status Ok ")
 	void getPersonByName_returnPersonWithName_OK() throws Exception {
+		// arrange
 		when(personService.findByName(anyString(), anyString()))
 				.thenReturn(personsDTO.get(0));
+		// act
 		mvc.perform(get("/person").contentType(MediaType.APPLICATION_JSON)
-				.param("firstName", "john").param("lastName", "Boyd"))
+				.param("firstName", "john").param("lastName", "Boyd"))// assert
 				.andDo(print()).andExpect(status().isOk())
 				.andExpect(content().string(asJsonString(personsDTO.get(0))));
-
+		verify(personService).findByName(anyString(), anyString());
 	}
 	@Test
 	@Tag("PersonByName")
 	@DisplayName("getPersonByName test with invalide name should return status BadRequest ")
 	void getPersonByName_withInvalidName_badRequest() throws Exception {
 		mvc.perform(get("/person").contentType(MediaType.APPLICATION_JSON)
-				.param("firstName", "").param("lastName", "")).andDo(print())
-				.andExpect(status().isBadRequest())
+				.param("firstName", "").param("lastName", ""))// assert
+				.andDo(print()).andExpect(status().isBadRequest())
 				.andExpect(content().string(containsString("Invalid name")));
 
 	}
@@ -145,6 +149,7 @@ class PersonControllerTest {
 		mvc.perform(delete("/person").contentType(MediaType.APPLICATION_JSON)
 				.param("firstName", "John").param("lastName", "Boyd"))
 				.andDo(print()).andExpect(status().isOk());
+		verify(personService).deletePerson(anyString(), anyString());
 	}
 	@Test
 	@Tag("deletePerson")
@@ -185,6 +190,7 @@ class PersonControllerTest {
 		mvc.perform(delete("/person").contentType(MediaType.APPLICATION_JSON)
 				.param("firstName", "Lola").param("lastName", "laod"))
 				.andDo(print()).andExpect(status().isNotFound());
+		verify(personService).deletePerson(anyString(), anyString());
 
 	}
 	@Test

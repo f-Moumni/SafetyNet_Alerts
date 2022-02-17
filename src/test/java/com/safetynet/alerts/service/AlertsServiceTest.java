@@ -1,6 +1,7 @@
 package com.safetynet.alerts.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.tuple;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.times;
@@ -8,6 +9,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 
@@ -22,11 +24,11 @@ import org.mockito.MockedStatic;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import com.safetynet.alerts.DTO.ChildAlertDTO;
 import com.safetynet.alerts.DTO.ChildDTO;
 import com.safetynet.alerts.DTO.CoveredPopulationDTO;
 import com.safetynet.alerts.DTO.FireDTO;
-import com.safetynet.alerts.DTO.FloodDTO;
+import com.safetynet.alerts.DTO.HomeDTO;
+import com.safetynet.alerts.DTO.InhabitantDTO;
 import com.safetynet.alerts.DTO.PersonAlertDTO;
 import com.safetynet.alerts.DTO.PersonDTO;
 import com.safetynet.alerts.DTO.PersonInfosDTO;
@@ -96,12 +98,6 @@ class AlertsServiceTest {
 			throws FireStationNotFoundException, PersonNotFoundException,
 			MedicalRecordNotFoundException {
 		// arrange
-		List<PersonAlertDTO> personsCouvred = new ArrayList<>(List.of(
-				new PersonAlertDTO("John", "Boyd", "1509 Culver st",
-						"841-874-6512"),
-				new PersonAlertDTO("Tessa", "Carman", "1509 Culver st",
-						"841-874-6512")));// persons covered
-
 		when(fireStationService.findByStation(any(Integer.class)))
 				.thenReturn(new ArrayList<String>(List.of("1509 Culver St")));
 
@@ -119,18 +115,20 @@ class AlertsServiceTest {
 			ageCalculator.when(() -> AgeCalculator.calculate("03/01/2018"))
 					.thenReturn(4);
 		}
-		CoveredPopulationDTO couverdP = new CoveredPopulationDTO(personsCouvred,
-				1, 1);
 		// act
 		CoveredPopulationDTO result = alertService
 				.getPopulationCovredByStation(3);
 		// assert
-		assertThat(result.getNumberOfAdults())
-				.isEqualTo(couverdP.getNumberOfAdults());
-		assertThat(result.getNumberOfChildren())
-				.isEqualTo(couverdP.getNumberOfChildren());
-		assertThat(result.getPersonsCouverd().size())
-				.isEqualTo(couverdP.getPersonsCouverd().size());
+		assertThat(result.getNumberOfAdults()).isEqualTo(1);
+		assertThat(result.getNumberOfChildren()).isEqualTo(1);
+		assertThat(result.getPersonsCouverd())
+				.extracting(PersonAlertDTO::getFirstName,
+						PersonAlertDTO::getLastName, PersonAlertDTO::getAddress,
+						PersonAlertDTO::getPhone)
+				.containsExactly(
+						tuple("John", "Boyd", "1509 Culver st", "841-874-6512"),
+						tuple("Tessa", "Carman", "1509 Culver st",
+								"841-874-6512"));
 		verify(fireStationService).findByStation(any(Integer.class));
 		verify(personService).findByAddress(anyString());
 		verify(medicalRecordService, times(2)).findByName(anyString(),
@@ -139,7 +137,7 @@ class AlertsServiceTest {
 	}
 	@Test
 	@Tag("ChildrenByAddress")
-	@DisplayName("getChildrenByAddress test should return all children and their families at a given address")
+	@DisplayName("getChildrenByAddress test should return each child and his family at a given address")
 	void getChildrenByAddress_Test()
 			// arrange
 			throws PersonNotFoundException, MedicalRecordNotFoundException {
@@ -164,13 +162,16 @@ class AlertsServiceTest {
 					.thenReturn(32);
 		}
 		// act
-		ChildAlertDTO result = alertService
+		List<ChildDTO> result = alertService
 				.getChildrenByAddress("1509 Culver St");
 		// assert
-		assertThat(result.getFamily()).containsAll(
-				new ArrayList<String>(List.of("John Boyd", "Jacob Boyd")));
-		assertThat(result.getChildren().toString())
-				.contains(new ChildDTO("Tessa", "Carman", 3).toString());
+		assertThat(result.size()).isEqualTo(1);
+
+		assertThat(result)
+				.extracting(ChildDTO::getFirstName, ChildDTO::getLastName,
+						ChildDTO::getAge, ChildDTO::getFamily)
+				.containsExactly(tuple("Tessa", "Carman", 3,
+						Arrays.asList("John Boyd", "Jacob Boyd")));
 		verify(personService).findByAddress(anyString());
 		verify(medicalRecordService, times(3)).findByName(anyString(),
 				anyString());
@@ -197,10 +198,10 @@ class AlertsServiceTest {
 					.thenReturn(32);
 		}
 		// act
-		ChildAlertDTO result = alertService
+		List<ChildDTO> result = alertService
 				.getChildrenByAddress("1509 Culver St");
 		// assert
-		assertThat(result).isNull();
+		assertThat(result).isEmpty();
 		verify(personService).findByAddress(anyString());
 		verify(medicalRecordService, times(2)).findByName(anyString(),
 				anyString());
@@ -243,7 +244,7 @@ class AlertsServiceTest {
 		try (MockedStatic<AgeCalculator> ageCalculator = Mockito
 				.mockStatic(AgeCalculator.class)) {
 			ageCalculator.when(() -> AgeCalculator.calculate("03/06/1984"))
-					.thenReturn(35);
+					.thenReturn(37);
 			ageCalculator.when(() -> AgeCalculator.calculate("03/06/1989"))
 					.thenReturn(32);
 		}
@@ -252,6 +253,22 @@ class AlertsServiceTest {
 		// assert
 		assertThat(result.getStation()).isEqualTo(3);
 		assertThat(result.getInhabitants().size()).isEqualTo(2);
+		assertThat(result.getInhabitants())
+				.extracting(InhabitantDTO::getFirstName,
+						InhabitantDTO::getLastName, InhabitantDTO::getAge,
+						InhabitantDTO::getPhone, InhabitantDTO::getMedications,
+						InhabitantDTO::getAllergies)
+				.containsExactly(
+						tuple(persons.get(0).getFirstName(),
+								persons.get(0).getLastName(), 37,
+								persons.get(0).getPhone(),
+								medicalRecords.get(0).getMedications(),
+								medicalRecords.get(0).getAllergies()),
+						tuple(persons.get(1).getFirstName(),
+								persons.get(1).getLastName(), 32,
+								persons.get(1).getPhone(),
+								medicalRecords.get(1).getMedications(),
+								medicalRecords.get(1).getAllergies()));
 		verify(personService).findByAddress(anyString());
 		verify(medicalRecordService, times(2)).findByName(anyString(),
 				anyString());
@@ -277,16 +294,31 @@ class AlertsServiceTest {
 		try (MockedStatic<AgeCalculator> ageCalculator = Mockito
 				.mockStatic(AgeCalculator.class)) {
 			ageCalculator.when(() -> AgeCalculator.calculate("03/06/1984"))
-					.thenReturn(35);
+					.thenReturn(37);
 			ageCalculator.when(() -> AgeCalculator.calculate("03/06/1989"))
 					.thenReturn(32);
 		}
 		// act
-		List<FloodDTO> result = alertService.getFloodsByStation(3);
+		List<HomeDTO> result = alertService.getHomesByStation(3);
 		// assert
 		assertThat(result.size()).isEqualTo(1);
 		assertThat(result.get(0).getAddress()).isEqualTo("1509 Culver St");
-		assertThat(result.get(0).getInhabitants().size()).isEqualTo(2);
+		assertThat(result.get(0).getInhabitants())
+				.extracting(InhabitantDTO::getFirstName,
+						InhabitantDTO::getLastName, InhabitantDTO::getAge,
+						InhabitantDTO::getPhone, InhabitantDTO::getMedications,
+						InhabitantDTO::getAllergies)
+				.containsExactly(
+						tuple(persons.get(0).getFirstName(),
+								persons.get(0).getLastName(), 37,
+								persons.get(0).getPhone(),
+								medicalRecords.get(0).getMedications(),
+								medicalRecords.get(0).getAllergies()),
+						tuple(persons.get(1).getFirstName(),
+								persons.get(1).getLastName(), 32,
+								persons.get(1).getPhone(),
+								medicalRecords.get(1).getMedications(),
+								medicalRecords.get(1).getAllergies()));
 		verify(fireStationService).findByStation(3);
 		verify(personService).findByAddress(anyString());
 		verify(medicalRecordService, times(2)).findByName(anyString(),
@@ -310,7 +342,7 @@ class AlertsServiceTest {
 		try (MockedStatic<AgeCalculator> ageCalculator = Mockito
 				.mockStatic(AgeCalculator.class)) {
 			ageCalculator.when(() -> AgeCalculator.calculate("03/06/1984"))
-					.thenReturn(35);
+					.thenReturn(37);
 			ageCalculator.when(() -> AgeCalculator.calculate("03/06/1989"))
 					.thenReturn(32);
 		}
@@ -319,8 +351,24 @@ class AlertsServiceTest {
 				"Boyd");
 		// assert
 		assertThat(result.size()).isEqualTo(2);
-		assertThat(result.get(0).getLastName()).isEqualTo("Boyd");
-		assertThat(result.get(1).getLastName()).isEqualTo("Boyd");
+
+		assertThat(result)
+				.extracting(PersonInfosDTO::getFirstName,
+						PersonInfosDTO::getLastName, PersonInfosDTO::getAge,
+						PersonInfosDTO::getMail, PersonInfosDTO::getMedications,
+						PersonInfosDTO::getAllergies)
+				.containsExactly(
+						tuple(persons.get(0).getFirstName(),
+								persons.get(0).getLastName(), 37,
+								persons.get(0).getEmail(),
+								medicalRecords.get(0).getMedications(),
+								medicalRecords.get(0).getAllergies()),
+						tuple(persons.get(1).getFirstName(),
+								persons.get(1).getLastName(), 32,
+								persons.get(1).getEmail(),
+								medicalRecords.get(1).getMedications(),
+								medicalRecords.get(1).getAllergies()));
+
 		verify(medicalRecordService, times(2)).findByName(anyString(),
 				anyString());
 		verify(personService).findPersonsByLastName("Boyd");

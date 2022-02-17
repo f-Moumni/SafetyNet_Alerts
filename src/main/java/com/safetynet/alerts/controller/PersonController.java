@@ -35,7 +35,7 @@ public class PersonController {
 	@Autowired
 	private PersonConverter personConverter;
 
-	private final ResponseEntity<String> badRequestResponse = ResponseEntity
+	private final ResponseEntity<Object> badRequestResponse = ResponseEntity
 			.badRequest().body("Invalid name");
 
 	@GetMapping("/persons")
@@ -46,12 +46,12 @@ public class PersonController {
 		LOGGER.info("persons list getted with success   HttpStatus :{}",
 				HttpStatus.OK);
 		return new ResponseEntity<>(persons, HttpStatus.OK);
-
 	}
 
 	@GetMapping
-	public ResponseEntity<?> getPersonByName(@RequestParam String firstName,
-			@RequestParam String lastName) throws PersonNotFoundException {
+	public ResponseEntity<Object> getPersonByName(
+			@RequestParam String firstName, @RequestParam String lastName)
+			throws PersonNotFoundException {
 		LOGGER.debug("at get Person By Name methode ");
 		if (firstName.isBlank() || lastName.isBlank()) {
 			LOGGER.error("Invalid Name  HttpStatus :{}",
@@ -65,7 +65,7 @@ public class PersonController {
 	}
 
 	@DeleteMapping
-	public ResponseEntity<?> deletePerson(@RequestParam String firstName,
+	public ResponseEntity<Object> deletePerson(@RequestParam String firstName,
 			@RequestParam String lastName) throws PersonNotFoundException {
 		LOGGER.debug("at deletePerson methode ");
 		if (firstName.isBlank() || lastName.isBlank()) {
@@ -80,7 +80,7 @@ public class PersonController {
 	}
 
 	@PostMapping
-	public ResponseEntity<?> addPerson(@RequestBody PersonDTO person)
+	public ResponseEntity<Object> addPerson(@RequestBody PersonDTO person)
 			throws AlreadyExistsException {
 		LOGGER.debug("at addPerson methode ");
 		if (person.getFirstName().isBlank() || person.getLastName().isBlank()) {
@@ -98,7 +98,7 @@ public class PersonController {
 	}
 
 	@PutMapping
-	public ResponseEntity<?> updatePerson(@RequestBody PersonDTO person)
+	public ResponseEntity<Object> updatePerson(@RequestBody PersonDTO person)
 			throws PersonNotFoundException {
 		LOGGER.debug("at updatePerson methode ");
 		if (person.getFirstName().isBlank() || person.getLastName().isBlank()) {
@@ -108,11 +108,9 @@ public class PersonController {
 		} else {
 			PersonDTO pers = personService
 					.updatePerson(personConverter.toPerson(person));
-
 			LOGGER.info("person {} {} Updated with success   HttpStatus :{}",
 					person.getFirstName(), person.getLastName(), HttpStatus.OK);
 			return new ResponseEntity<>(pers, HttpStatus.OK);
 		}
-
 	}
 }

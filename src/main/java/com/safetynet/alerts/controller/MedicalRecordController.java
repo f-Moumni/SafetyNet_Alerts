@@ -46,7 +46,7 @@ public class MedicalRecordController {
 	}
 
 	@PostMapping
-	public ResponseEntity<?> addMedicalRecord(
+	public ResponseEntity<Object> addMedicalRecord(
 			@RequestBody MedicalRecordDTO medicalRecord)
 			throws AlreadyExistsException {
 		LOGGER.debug("at addMedicalRecord methode ");
@@ -65,7 +65,7 @@ public class MedicalRecordController {
 
 	}
 	@PutMapping
-	public ResponseEntity<?> updateMedicalRecord(
+	public ResponseEntity<Object> updateMedicalRecord(
 			@RequestBody MedicalRecordDTO medicalRecord)
 			throws MedicalRecordNotFoundException {
 		LOGGER.debug("at updateMedicalRecord methode ");
@@ -84,8 +84,8 @@ public class MedicalRecordController {
 		}
 	}
 	@DeleteMapping
-	public ResponseEntity<?> deleteMedicalRecord(@RequestParam String firstName,
-			@RequestParam String lastName)
+	public ResponseEntity<Object> deleteMedicalRecord(
+			@RequestParam String firstName, @RequestParam String lastName)
 			throws MedicalRecordNotFoundException {
 		LOGGER.debug("at deleteMedicalRecord methode ");
 		if (firstName.isBlank() || lastName.isBlank()) {

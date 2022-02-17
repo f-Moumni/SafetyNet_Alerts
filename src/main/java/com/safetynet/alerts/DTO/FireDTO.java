@@ -7,7 +7,7 @@ public class FireDTO {
 
 	private String address;
 	private int station;
-	private List<InhabitantDTO> inhabitants = new ArrayList<InhabitantDTO>();
+	private List<InhabitantDTO> inhabitants = new ArrayList<>();
 
 	public FireDTO() {
 

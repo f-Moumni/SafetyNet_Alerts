@@ -10,11 +10,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.safetynet.alerts.DTO.ChildAlertDTO;
 import com.safetynet.alerts.DTO.ChildDTO;
 import com.safetynet.alerts.DTO.CoveredPopulationDTO;
 import com.safetynet.alerts.DTO.FireDTO;
-import com.safetynet.alerts.DTO.FloodDTO;
+import com.safetynet.alerts.DTO.HomeDTO;
 import com.safetynet.alerts.DTO.InhabitantDTO;
 import com.safetynet.alerts.DTO.PersonAlertDTO;
 import com.safetynet.alerts.DTO.PersonDTO;
@@ -70,28 +69,27 @@ public class AlertService implements IAlertsService {
 	}
 
 	@Override
-	public ChildAlertDTO getChildrenByAddress(String address)
+	public List<ChildDTO> getChildrenByAddress(String address)
 			throws MedicalRecordNotFoundException, PersonNotFoundException {
 		LOGGER.debug("at Alert Service in getChildrenByAddress methode ");
-
+		new ArrayList<>();
 		List<Person> persons = personService.findByAddress(address);
-		List<String> family = new ArrayList<>();
-		List<ChildDTO> children = new ArrayList<>();
+		List<ChildDTO> childrens = new ArrayList<>();
 		for (Person person : persons) {
 			int age = AgeCalculator.calculate(medicalRecordService
 					.findByName(person.getFirstName(), person.getLastName())
 					.getBirthdate());
 			if (age < CHLIDREN_AGE_MAX) {
-				children.add(new ChildDTO(person.getFirstName(),
-						person.getLastName(), age));
-			} else {
-				family.add(person.getFirstName() + " " + person.getLastName());
+				childrens.add(new ChildDTO(person.getFirstName(),
+						person.getLastName(), age,
+						persons.stream()
+								.filter(family -> (!family.equals(person)))
+								.map(per -> per.getFirstName() + " "
+										+ per.getLastName())
+								.toList()));
 			}
 		}
-		return ((children.isEmpty())
-				? null
-				: new ChildAlertDTO(children, family));
-
+		return childrens;
 	}
 
 	@Override
@@ -120,21 +118,21 @@ public class AlertService implements IAlertsService {
 					.findByName(person.getFirstName(), person.getLastName());
 			int age = AgeCalculator.calculate(medicalRecord.getBirthdate());
 			inhabitants.add(new InhabitantDTO(medicalRecord.getFirstName(),
-					medicalRecord.getLastName(), age, address,
+					medicalRecord.getLastName(), age, person.getPhone(),
 					medicalRecord.getMedications(),
 					medicalRecord.getAllergies()));
 		}
 		return new FireDTO(address, station, inhabitants);
 	}
 	@Override
-	public List<FloodDTO> getFloodsByStation(int station)
+	public List<HomeDTO> getHomesByStation(int station)
 			throws MedicalRecordNotFoundException, FireStationNotFoundException,
 			PersonNotFoundException {
 		LOGGER.debug("at Alert Service in getFloodsByStation methode ");
-		List<FloodDTO> floods = new ArrayList<FloodDTO>();
+		List<HomeDTO> floods = new ArrayList<HomeDTO>();
 		List<String> addresses = fireStationService.findByStation(station);
 		for (String address : addresses) {
-			floods.add(new FloodDTO(address,
+			floods.add(new HomeDTO(address,
 					getInhabitantByAddress(address).getInhabitants()));
 		}
 		return floods;
@@ -163,7 +161,7 @@ public class AlertService implements IAlertsService {
 						.findByName(pr.getFirstName(), pr.getLastName());
 				int old = AgeCalculator.calculate(mr.getBirthdate());
 				personsInfos.add(new PersonInfosDTO(mr.getFirstName(),
-						mr.getLastName(), old, person.getEmail(),
+						mr.getLastName(), old, pr.getEmail(),
 						mr.getMedications(), mr.getAllergies()));
 			}
 		}
@@ -171,11 +169,11 @@ public class AlertService implements IAlertsService {
 		return personsInfos;
 	}
 	@Override
-	public HashSet<String> getCommunityEmail(String City)
+	public HashSet<String> getCommunityEmail(String city)
 			throws PersonNotFoundException {
 		LOGGER.debug("at Alert Service in getCommunityEmail methode ");
 		HashSet<String> emails = new HashSet<>();
-		emails.addAll(personService.findByCity(City).stream()
+		emails.addAll(personService.findByCity(city).stream()
 				.map(Person::getEmail).collect(Collectors.toSet()));
 		return emails;
 
