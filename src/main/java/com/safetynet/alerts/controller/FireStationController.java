@@ -44,7 +44,7 @@ public class FireStationController {
 	}
 
 	@PostMapping("/firestation")
-	public ResponseEntity<?> addFireStation(
+	public ResponseEntity<Object> addFireStation(
 			@RequestBody FireStationDTO fireStation)
 			throws AlreadyExistsException {
 		LOGGER.debug("at addFireStation methode ");
@@ -66,7 +66,7 @@ public class FireStationController {
 		}
 	}
 	@PutMapping("/firestation")
-	public ResponseEntity<?> updateFireStation(
+	public ResponseEntity<Object> updateFireStation(
 			@RequestBody FireStationDTO fireStation)
 			throws FireStationNotFoundException {
 		LOGGER.debug("at updateFireStation methode ");
@@ -87,8 +87,8 @@ public class FireStationController {
 		return new ResponseEntity<>(fStation, HttpStatus.OK);
 	}
 	@DeleteMapping("/firestation")
-	public ResponseEntity<?> deleteFireStation(@RequestParam String address)
-			throws FireStationNotFoundException {
+	public ResponseEntity<Object> deleteFireStation(
+			@RequestParam String address) throws FireStationNotFoundException {
 		LOGGER.debug("at deleteFireStation methode ");
 		if (address.isBlank()) {
 			LOGGER.error("Invalid fire station address HttpStatus :{}",
