@@ -18,8 +18,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.safetynet.alerts.DTO.PersonDTO;
+import com.safetynet.alerts.util.JsonAlertMapper;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -69,7 +69,7 @@ public class PersonControllerIT {
 	void deletePerson_returnPersonDeleted_OK() throws Exception {
 		// act
 		mvc.perform(delete("/person").contentType(MediaType.APPLICATION_JSON)
-				.param("firstName", "Jacob").param("lastName", "Boyd"))// asert
+				.param("firstName", "Jacob").param("lastName", "Boyd"))// assert
 				.andDo(print()).andExpectAll(status().isOk(),
 						jsonPath("$.firstName").value("Jacob"),
 						jsonPath("$.lastName").value("Boyd"),
@@ -83,7 +83,7 @@ public class PersonControllerIT {
 			throws Exception {
 		// act
 		mvc.perform(delete("/person").contentType(MediaType.APPLICATION_JSON)
-				.param("firstName", "robert").param("lastName", "Boyd"))// asert
+				.param("firstName", "robert").param("lastName", "Boyd"))// assert
 				.andDo(print())
 				.andExpectAll(status().isNotFound(), jsonPath("$.message")
 						.value("person robert Boyd not found"));
@@ -99,9 +99,9 @@ public class PersonControllerIT {
 		// act
 		mvc.perform(post("/person").contentType(MediaType.APPLICATION_JSON)
 				.accept(MediaType.APPLICATION_JSON)
-				.content(asJsonString(persondto)))// assert
-				.andDo(print()).andExpectAll(status().isCreated(),
-						content().string(asJsonString(persondto)));
+				.content(JsonAlertMapper.asJsonString(persondto)))// assert
+				.andDo(print()).andExpectAll(status().isCreated(), content()
+						.string(JsonAlertMapper.asJsonString(persondto)));
 
 	}
 	@Test
@@ -115,7 +115,7 @@ public class PersonControllerIT {
 		// act
 		mvc.perform(post("/person").contentType(MediaType.APPLICATION_JSON)
 				.accept(MediaType.APPLICATION_JSON)
-				.content(asJsonString(persondto)))// assert
+				.content(JsonAlertMapper.asJsonString(persondto)))// assert
 				.andDo(print()).andExpectAll(status().isAlreadyReported(),
 						jsonPath("$.message")
 								.value("this person John Boyd already exists"));
@@ -128,12 +128,12 @@ public class PersonControllerIT {
 		// arrange
 		PersonDTO persondto = new PersonDTO("Roger", "Boyd", "1509 Culver st",
 				"Culver", 97451, "841-874-6512", "jaboyd@email.com");
-
+		// act
 		mvc.perform(put("/person").contentType(MediaType.APPLICATION_JSON)
 				.accept(MediaType.APPLICATION_JSON)
-				.content(asJsonString(persondto))).andDo(print())
-				.andExpectAll(status().isOk(),
-						content().string(asJsonString(persondto)));
+				.content(JsonAlertMapper.asJsonString(persondto)))// assert
+				.andDo(print()).andExpectAll(status().isOk(), content()
+						.string(JsonAlertMapper.asJsonString(persondto)));
 	}
 	@Test
 	@Tag("updatePerson")
@@ -145,17 +145,11 @@ public class PersonControllerIT {
 		// act
 		mvc.perform(put("/person").contentType(MediaType.APPLICATION_JSON)
 				.accept(MediaType.APPLICATION_JSON)
-				.content(asJsonString(persondto)))// assert
+				.content(JsonAlertMapper.asJsonString(persondto)))// assert
 				.andDo(print())
 				.andExpectAll(status().isNotFound(), jsonPath("$.message")
 						.value("the name cannot be changed"));
 
 	}
-	public static String asJsonString(final Object obj) {
-		try {
-			return new ObjectMapper().writeValueAsString(obj);
-		} catch (Exception e) {
-			throw new RuntimeException(e);
-		}
-	}
+
 }

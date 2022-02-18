@@ -27,12 +27,12 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.safetynet.alerts.DTO.FireStationDTO;
 import com.safetynet.alerts.exceptions.DataNotFoundException;
 import com.safetynet.alerts.model.FireStation;
 import com.safetynet.alerts.service.IFireStationService;
 import com.safetynet.alerts.util.FireStationConverter;
+import com.safetynet.alerts.util.JsonAlertMapper;
 
 @RunWith(SpringRunner.class)
 @WebMvcTest(controllers = FireStationController.class)
@@ -60,8 +60,8 @@ public class FireStationControllerTest {
 		when(fireStationService.findAll()).thenReturn(fireStationsDTO);
 		mvc.perform(
 				get("/firestations").contentType(MediaType.APPLICATION_JSON))
-				.andDo(print()).andExpect(status().isOk())
-				.andExpect(content().string(asJsonString(fireStationsDTO)));
+				.andDo(print()).andExpect(status().isOk()).andExpect(content()
+						.string(JsonAlertMapper.asJsonString(fireStationsDTO)));
 	}
 	@Test
 	@Tag("getFireStations")
@@ -85,8 +85,8 @@ public class FireStationControllerTest {
 				.thenReturn(fireStationdto);
 		mvc.perform(post("/firestation").contentType(MediaType.APPLICATION_JSON)
 				.accept(MediaType.APPLICATION_JSON)
-				.content(asJsonString(fireStationdto))).andDo(print())
-				.andExpect(status().isCreated());
+				.content(JsonAlertMapper.asJsonString(fireStationdto)))
+				.andDo(print()).andExpect(status().isCreated());
 		verify(fireStationConverter).toFireStation(any(FireStationDTO.class));
 	}
 	@Test
@@ -98,8 +98,8 @@ public class FireStationControllerTest {
 				-1);
 		mvc.perform(post("/firestation").contentType(MediaType.APPLICATION_JSON)
 				.accept(MediaType.APPLICATION_JSON)
-				.content(asJsonString(fireStationdto))).andDo(print())
-				.andExpect(status().isBadRequest())
+				.content(JsonAlertMapper.asJsonString(fireStationdto)))
+				.andDo(print()).andExpect(status().isBadRequest())
 				.andExpect(content().string(containsString(
 						"Invalid fire station number or address")));
 	}
@@ -110,8 +110,8 @@ public class FireStationControllerTest {
 		FireStationDTO fireStationdto = new FireStationDTO(" ", 3);
 		mvc.perform(post("/firestation").contentType(MediaType.APPLICATION_JSON)
 				.accept(MediaType.APPLICATION_JSON)
-				.content(asJsonString(fireStationdto))).andDo(print())
-				.andExpect(status().isBadRequest())
+				.content(JsonAlertMapper.asJsonString(fireStationdto)))
+				.andDo(print()).andExpect(status().isBadRequest())
 				.andExpect(content().string(containsString(
 						"Invalid fire station number or address")));
 	}
@@ -124,8 +124,8 @@ public class FireStationControllerTest {
 				-1);
 		mvc.perform(put("/firestation").contentType(MediaType.APPLICATION_JSON)
 				.accept(MediaType.APPLICATION_JSON)
-				.content(asJsonString(fireStationdto))).andDo(print())
-				.andExpect(status().isBadRequest())
+				.content(JsonAlertMapper.asJsonString(fireStationdto)))
+				.andDo(print()).andExpect(status().isBadRequest())
 				.andExpect(content().string(containsString(
 						"Invalid fire station number or address")));
 	}
@@ -136,8 +136,8 @@ public class FireStationControllerTest {
 		FireStationDTO fireStationdto = new FireStationDTO(" ", 2);
 		mvc.perform(put("/firestation").contentType(MediaType.APPLICATION_JSON)
 				.accept(MediaType.APPLICATION_JSON)
-				.content(asJsonString(fireStationdto))).andDo(print())
-				.andExpect(status().isBadRequest())
+				.content(JsonAlertMapper.asJsonString(fireStationdto)))
+				.andDo(print()).andExpect(status().isBadRequest())
 				.andExpect(content().string(containsString(
 						"Invalid fire station number or address")));
 	}
@@ -155,8 +155,8 @@ public class FireStationControllerTest {
 				.thenReturn(fireStation);
 		mvc.perform(put("/firestation").contentType(MediaType.APPLICATION_JSON)
 				.accept(MediaType.APPLICATION_JSON)
-				.content(asJsonString(fireStationdto))).andDo(print())
-				.andExpect(status().isOk());
+				.content(JsonAlertMapper.asJsonString(fireStationdto)))
+				.andDo(print()).andExpect(status().isOk());
 	}
 	@Test
 	@Tag("deleteFireStation")
@@ -180,11 +180,4 @@ public class FireStationControllerTest {
 				.andDo(print()).andExpect(status().isOk());
 	}
 
-	public static String asJsonString(final Object obj) {
-		try {
-			return new ObjectMapper().writeValueAsString(obj);
-		} catch (Exception e) {
-			throw new RuntimeException(e);
-		}
-	}
 }

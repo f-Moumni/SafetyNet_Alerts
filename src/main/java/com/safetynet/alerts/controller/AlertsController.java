@@ -59,7 +59,7 @@ public class AlertsController {
 		} else {
 			List<ChildDTO> childAlert = alertsService
 					.getChildrenByAddress(address);
-			LOGGER.info(" Childen By address getted   HttpStatus :{}",
+			LOGGER.info(" Childen By address getted HttpStatus :{}",
 					HttpStatus.OK);
 			return new ResponseEntity<>(childAlert, HttpStatus.OK);
 		}

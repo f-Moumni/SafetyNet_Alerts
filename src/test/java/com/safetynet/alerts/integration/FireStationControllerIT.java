@@ -20,8 +20,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.safetynet.alerts.model.FireStation;
+import com.safetynet.alerts.util.JsonAlertMapper;
 @SpringBootTest
 @AutoConfigureMockMvc
 class FireStationControllerIT {
@@ -46,9 +46,10 @@ class FireStationControllerIT {
 		FireStation fs = new FireStation("1509 National St", 3);
 		// act
 		mvc.perform(post("/firestation").contentType(MediaType.APPLICATION_JSON)
-				.accept(MediaType.APPLICATION_JSON).content(asJsonString(fs)))
-				.andDo(print()).andExpect(status().isCreated())
-				.andExpect(content().string(asJsonString(fs)));
+				.accept(MediaType.APPLICATION_JSON)
+				.content(JsonAlertMapper.asJsonString(fs))).andDo(print())
+				.andExpect(status().isCreated())
+				.andExpect(content().string(JsonAlertMapper.asJsonString(fs)));
 
 	}
 	@Test
@@ -60,8 +61,9 @@ class FireStationControllerIT {
 		FireStation fs = new FireStation("1509 Culver St", 3);
 		// act
 		mvc.perform(post("/firestation").contentType(MediaType.APPLICATION_JSON)
-				.accept(MediaType.APPLICATION_JSON).content(asJsonString(fs)))
-				.andDo(print()).andExpect(status().isAlreadyReported())
+				.accept(MediaType.APPLICATION_JSON)
+				.content(JsonAlertMapper.asJsonString(fs))).andDo(print())
+				.andExpect(status().isAlreadyReported())
 				.andExpect(content().string(containsString(
 						"this FireStation 3 at the address 1509 Culver St is already exsits")));
 
@@ -74,9 +76,10 @@ class FireStationControllerIT {
 		FireStation fs = new FireStation("834 Binoc Ave", 2);
 		// act
 		mvc.perform(put("/firestation").contentType(MediaType.APPLICATION_JSON)
-				.accept(MediaType.APPLICATION_JSON).content(asJsonString(fs)))// assert
+				.accept(MediaType.APPLICATION_JSON)
+				.content(JsonAlertMapper.asJsonString(fs)))// assert
 				.andDo(print()).andExpect(status().isOk())
-				.andExpect(content().string(asJsonString(fs)));
+				.andExpect(content().string(JsonAlertMapper.asJsonString(fs)));
 
 	}
 	@Test
@@ -88,7 +91,8 @@ class FireStationControllerIT {
 		FireStation fs = new FireStation("1509 national St", 2);
 		// act
 		mvc.perform(put("/firestation").contentType(MediaType.APPLICATION_JSON)
-				.accept(MediaType.APPLICATION_JSON).content(asJsonString(fs)))// assert
+				.accept(MediaType.APPLICATION_JSON)
+				.content(JsonAlertMapper.asJsonString(fs)))// assert
 				.andDo(print()).andExpect(status().isNotFound())
 				.andExpect(content().string(containsString(
 						"the address  :1509 national St cannot be changed")));
@@ -121,14 +125,8 @@ class FireStationControllerIT {
 						.accept(MediaType.APPLICATION_JSON)
 						.param("address", "489 Manchester St"))// assert
 				.andDo(print()).andExpect(status().isOk())
-				.andExpect(content().string(asJsonString(fs)));
+				.andExpect(content().string(JsonAlertMapper.asJsonString(fs)));
 
 	}
-	public static String asJsonString(final Object obj) {
-		try {
-			return new ObjectMapper().writeValueAsString(obj);
-		} catch (Exception e) {
-			throw new RuntimeException(e);
-		}
-	}
+
 }

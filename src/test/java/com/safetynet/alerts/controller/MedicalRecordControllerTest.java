@@ -94,24 +94,24 @@ public class MedicalRecordControllerTest {
 	@DisplayName("addMedicalRecord test should return status CREATED")
 	void addMedicalRecord_returnMedicalRecordSaved_CREATED() throws Exception {
 		// arrange
-		MedicalRecordDTO medicalRecorddto = medicalRecordsDTO.get(0);
+		MedicalRecordDTO medicalRecordDTO = medicalRecordsDTO.get(0);
 		MedicalRecord medicalRecord = new MedicalRecord("John", "Boyd",
 				"03/06/1984",
 				new ArrayList<String>(
 						List.of("aznol:350mg", "hydrapermazol:100mg")),
 				new ArrayList<String>(List.of("nillacilan")));
-		when(medicalRecordConverter.toMedicalRecord(medicalRecorddto))
+		when(medicalRecordConverter.toMedicalRecord(medicalRecordDTO))
 				.thenReturn(medicalRecord);
 		when(medicalRecordService.addMedicalRecord(medicalRecord))
-				.thenReturn(medicalRecorddto);
+				.thenReturn(medicalRecordDTO);
 		// act
 		mvc.perform(
 				post("/medicalRecord").contentType(MediaType.APPLICATION_JSON)
 						.accept(MediaType.APPLICATION_JSON)
-						.content(asJsonString(medicalRecorddto)))
+						.content(asJsonString(medicalRecordDTO)))
 				// assert
 				.andDo(print()).andExpect(status().isCreated())
-				.andExpect(content().string(asJsonString(medicalRecorddto)));
+				.andExpect(content().string(asJsonString(medicalRecordDTO)));
 		verify(medicalRecordConverter)
 				.toMedicalRecord(any(MedicalRecordDTO.class));
 	}
@@ -120,7 +120,7 @@ public class MedicalRecordControllerTest {
 	@DisplayName("addMedicalRecord test with invalde name should return status BAD_REQUEST")
 	void addMedicalRecord_WithInvalidName_BAD_REQUEST() throws Exception {
 		// arrange
-		MedicalRecordDTO medicalRecorddto = new MedicalRecordDTO("", " ",
+		MedicalRecordDTO medicalRecordDTO = new MedicalRecordDTO("", " ",
 				"03/06/1984",
 				new ArrayList<String>(
 						List.of("aznol:350mg", "hydrapermazol:100mg")),
@@ -129,7 +129,7 @@ public class MedicalRecordControllerTest {
 		mvc.perform(
 				post("/medicalRecord").contentType(MediaType.APPLICATION_JSON)
 						.accept(MediaType.APPLICATION_JSON)
-						.content(asJsonString(medicalRecorddto)))
+						.content(asJsonString(medicalRecordDTO)))
 				// assert
 				.andDo(print()).andExpect(status().isBadRequest())
 				.andExpect(content().string(containsString("Invalid name")));
@@ -139,13 +139,13 @@ public class MedicalRecordControllerTest {
 	@DisplayName("addMedicalRecord test with invalde Last name should return status BAD_REQUEST")
 	void addMedicalRecord_WithInvalidLastName_BAD_REQUEST() throws Exception {
 		// arrange
-		MedicalRecordDTO medicalRecorddto = new MedicalRecordDTO("john", " ",
+		MedicalRecordDTO medicalRecordDTO = new MedicalRecordDTO("john", " ",
 				"03/06/1984", null, null);
 		// act
 		mvc.perform(
 				post("/medicalRecord").contentType(MediaType.APPLICATION_JSON)
 						.accept(MediaType.APPLICATION_JSON)
-						.content(asJsonString(medicalRecorddto)))
+						.content(asJsonString(medicalRecordDTO)))
 				// assert
 				.andDo(print()).andExpect(status().isBadRequest())
 				.andExpect(content().string(containsString("Invalid name")));
@@ -155,21 +155,21 @@ public class MedicalRecordControllerTest {
 	@DisplayName("updateMedicalRecord test should return status OK")
 	void updateMedicalRecord_WithValidName_OK() throws Exception {
 		// arrange
-		MedicalRecordDTO medicalRecorddto = medicalRecordsDTO.get(0);
+		MedicalRecordDTO medicalRecordDTO = medicalRecordsDTO.get(0);
 		MedicalRecord medicalRecord = new MedicalRecord("lola", "laod",
 				"03/06/1984", null, null);
 		when(medicalRecordService.updateMedicalRecord(medicalRecord))
-				.thenReturn(medicalRecorddto);
-		when(medicalRecordConverter.toMedicalRecord(medicalRecorddto))
+				.thenReturn(medicalRecordDTO);
+		when(medicalRecordConverter.toMedicalRecord(medicalRecordDTO))
 				.thenReturn(medicalRecord);
 		// act
 		mvc.perform(
 				put("/medicalRecord").contentType(MediaType.APPLICATION_JSON)
 						.accept(MediaType.APPLICATION_JSON)
-						.content(asJsonString(medicalRecorddto)))
+						.content(asJsonString(medicalRecordDTO)))
 				// assert
 				.andDo(print()).andExpect(status().isOk())
-				.andExpect(content().string(asJsonString(medicalRecorddto)));
+				.andExpect(content().string(asJsonString(medicalRecordDTO)));
 	}
 
 	@Test
@@ -177,7 +177,7 @@ public class MedicalRecordControllerTest {
 	@DisplayName("updateMedicalRecord test with invalde name should return status BAD_REQUEST")
 	void updateMedicalRecord_WithInvalidName_BAD_REQUEST() throws Exception {
 		// arrange
-		MedicalRecordDTO medicalRecorddto = new MedicalRecordDTO("", " ",
+		MedicalRecordDTO medicalRecordDTO = new MedicalRecordDTO("", " ",
 				"03/06/1984",
 				new ArrayList<String>(
 						List.of("aznol:350mg", "hydrapermazol:100mg")),
@@ -186,7 +186,7 @@ public class MedicalRecordControllerTest {
 		mvc.perform(
 				put("/medicalRecord").contentType(MediaType.APPLICATION_JSON)
 						.accept(MediaType.APPLICATION_JSON)
-						.content(asJsonString(medicalRecorddto)))
+						.content(asJsonString(medicalRecordDTO)))
 				// assert
 				.andDo(print()).andExpect(status().isBadRequest())
 				.andExpect(content().string(containsString("Invalid name")));
@@ -197,13 +197,13 @@ public class MedicalRecordControllerTest {
 	void updateMedicalRecord_WithInvalidLastName_BAD_REQUEST()
 			throws Exception {
 		// arrange
-		MedicalRecordDTO medicalRecorddto = new MedicalRecordDTO("lola", " ",
+		MedicalRecordDTO medicalRecordDTO = new MedicalRecordDTO("lola", " ",
 				"03/06/1984", null, null);
 		// act
 		mvc.perform(
 				put("/medicalRecord").contentType(MediaType.APPLICATION_JSON)
 						.accept(MediaType.APPLICATION_JSON)
-						.content(asJsonString(medicalRecorddto)))
+						.content(asJsonString(medicalRecordDTO)))
 				// assert
 				.andDo(print()).andExpect(status().isBadRequest())
 				.andExpect(content().string(containsString("Invalid name")));

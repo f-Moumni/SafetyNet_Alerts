@@ -24,7 +24,6 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.safetynet.alerts.DTO.ChildDTO;
 import com.safetynet.alerts.DTO.CoveredPopulationDTO;
 import com.safetynet.alerts.DTO.FireDTO;
@@ -33,6 +32,7 @@ import com.safetynet.alerts.DTO.InhabitantDTO;
 import com.safetynet.alerts.DTO.PersonAlertDTO;
 import com.safetynet.alerts.DTO.PersonInfosDTO;
 import com.safetynet.alerts.service.IAlertsService;
+import com.safetynet.alerts.util.JsonAlertMapper;
 
 @RunWith(SpringRunner.class)
 @WebMvcTest(controllers = AlertsController.class)
@@ -43,7 +43,7 @@ public class AlertsControlllerTest {
 	@MockBean
 	IAlertsService alertsService;
 	@Test
-	@Tag("firestation")
+	@Tag("ALertsfirestation")
 	@DisplayName("getCoveredPopulationByStation test should return all people who are covered by a given station and status OK")
 	void getCoveredPopulationByStatio_returnAllPersonsCouvred_OK()
 			throws Exception {
@@ -59,12 +59,12 @@ public class AlertsControlllerTest {
 		// Act
 		mvc.perform(get("/firestation").contentType(MediaType.APPLICATION_JSON)
 				.param("station", "3"))// assert
-				.andDo(print()).andExpect(status().isOk())
-				.andExpect(content().string(asJsonString(coveredP)));
+				.andDo(print()).andExpect(status().isOk()).andExpect(content()
+						.string(JsonAlertMapper.asJsonString(coveredP)));
 		verify(alertsService).getPopulationCovredByStation(any(Integer.class));
 	}
 	@Test
-	@Tag("firestation")
+	@Tag("Alertsfirestation")
 	@DisplayName("getCoveredPopulationByStation test with invalid station number should return status BAD_REQUEST")
 	void getCoveredPopulationByStatio_withIvalidStationNumber_BAD_REQUEST()
 			throws Exception {
@@ -88,7 +88,8 @@ public class AlertsControlllerTest {
 		mvc.perform(get("/childAlert").contentType(MediaType.APPLICATION_JSON)
 				.param("address", "1509 Culver st"))// assert
 				.andDo(print()).andExpect(status().isOk())
-				.andExpect(content().string(asJsonString(childrensInAddress)));
+				.andExpect(content().string(
+						JsonAlertMapper.asJsonString(childrensInAddress)));
 		verify(alertsService).getChildrenByAddress(anyString());
 	}
 	@Test
@@ -114,8 +115,8 @@ public class AlertsControlllerTest {
 		// Act
 		mvc.perform(get("/phoneAlert").contentType(MediaType.APPLICATION_JSON)
 				.param("station", "3"))// assert
-				.andDo(print()).andExpect(status().isOk())
-				.andExpect(content().string(asJsonString(phoneNumbers)));
+				.andDo(print()).andExpect(status().isOk()).andExpect(content()
+						.string(JsonAlertMapper.asJsonString(phoneNumbers)));
 		verify(alertsService).getPhoneNumberByStation(any(Integer.class));
 	}
 	@Test
@@ -158,8 +159,9 @@ public class AlertsControlllerTest {
 		// Act
 		mvc.perform(get("/fire").contentType(MediaType.APPLICATION_JSON)
 				.param("address", "1509 Culver st"))// assert
-				.andDo(print()).andExpect(status().isOk()).andExpect(
-						content().string(asJsonString(inhabitantsInAddress)));
+				.andDo(print()).andExpect(status().isOk())
+				.andExpect(content().string(
+						JsonAlertMapper.asJsonString(inhabitantsInAddress)));
 		verify(alertsService).getInhabitantByAddress(anyString());
 	}
 
@@ -197,8 +199,8 @@ public class AlertsControlllerTest {
 		// Act
 		mvc.perform(get("/flood").contentType(MediaType.APPLICATION_JSON)
 				.param("station", "3"))// assert
-				.andDo(print()).andExpect(status().isOk())
-				.andExpect(content().string(asJsonString(homesCouvred)));
+				.andDo(print()).andExpect(status().isOk()).andExpect(content()
+						.string(JsonAlertMapper.asJsonString(homesCouvred)));
 		verify(alertsService).getHomesByStation(any(Integer.class));
 	}
 	@Test
@@ -217,8 +219,8 @@ public class AlertsControlllerTest {
 		// Act
 		mvc.perform(get("/personInfo").contentType(MediaType.APPLICATION_JSON)
 				.param("firstName", "john").param("lastName", "Boyd"))// assert
-				.andDo(print()).andExpect(status().isOk())
-				.andExpect(content().string(asJsonString(personInfos)));
+				.andDo(print()).andExpect(status().isOk()).andExpect(content()
+						.string(JsonAlertMapper.asJsonString(personInfos)));
 		verify(alertsService).getPersonInfosByName(anyString(), anyString());
 	}
 	@Test
@@ -266,16 +268,8 @@ public class AlertsControlllerTest {
 		mvc.perform(
 				get("/CommunityEmail").contentType(MediaType.APPLICATION_JSON)
 						.param("city", "Culver"))// assert
-				.andDo(print()).andExpect(status().isOk())
-				.andExpect(content().string(asJsonString(emails)));
-	}
-
-	public static String asJsonString(final Object obj) {
-		try {
-			return new ObjectMapper().writeValueAsString(obj);
-		} catch (Exception e) {
-			throw new RuntimeException(e);
-		}
+				.andDo(print()).andExpect(status().isOk()).andExpect(
+						content().string(JsonAlertMapper.asJsonString(emails)));
 	}
 
 }

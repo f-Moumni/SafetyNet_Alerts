@@ -26,12 +26,12 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.safetynet.alerts.DTO.PersonDTO;
 import com.safetynet.alerts.exceptions.DataNotFoundException;
 import com.safetynet.alerts.exceptions.PersonNotFoundException;
 import com.safetynet.alerts.model.Person;
 import com.safetynet.alerts.service.IPersonService;
+import com.safetynet.alerts.util.JsonAlertMapper;
 import com.safetynet.alerts.util.PersonConverter;
 @RunWith(SpringRunner.class)
 @WebMvcTest(controllers = PersonController.class)
@@ -65,8 +65,8 @@ class PersonControllerTest {
 		// Act
 		mvc.perform(
 				get("/person/persons").contentType(MediaType.APPLICATION_JSON))// assert
-				.andDo(print()).andExpect(status().isOk())
-				.andExpect(content().string(asJsonString(personsDTO)));
+				.andDo(print()).andExpect(status().isOk()).andExpect(content()
+						.string(JsonAlertMapper.asJsonString(personsDTO)));
 	}
 	@Test
 	@Tag("getPersons")
@@ -91,7 +91,8 @@ class PersonControllerTest {
 		mvc.perform(get("/person").contentType(MediaType.APPLICATION_JSON)
 				.param("firstName", "john").param("lastName", "Boyd"))// assert
 				.andDo(print()).andExpect(status().isOk())
-				.andExpect(content().string(asJsonString(personsDTO.get(0))));
+				.andExpect(content().string(
+						JsonAlertMapper.asJsonString(personsDTO.get(0))));
 		verify(personService).findByName(anyString(), anyString());
 	}
 	@Test
@@ -205,8 +206,8 @@ class PersonControllerTest {
 		when(personService.addPerson(person)).thenReturn(persondto);
 		mvc.perform(post("/person").contentType(MediaType.APPLICATION_JSON)
 				.accept(MediaType.APPLICATION_JSON)
-				.content(asJsonString(persondto))).andDo(print())
-				.andExpect(status().isCreated());
+				.content(JsonAlertMapper.asJsonString(persondto)))
+				.andDo(print()).andExpect(status().isCreated());
 		verify(personConverter).toPerson(any(PersonDTO.class));
 	}
 	@Test
@@ -217,8 +218,8 @@ class PersonControllerTest {
 				97451, "841-874-6512", "jaboyd@email.com");
 		mvc.perform(post("/person").contentType(MediaType.APPLICATION_JSON)
 				.accept(MediaType.APPLICATION_JSON)
-				.content(asJsonString(persondto))).andDo(print())
-				.andExpect(status().isBadRequest())
+				.content(JsonAlertMapper.asJsonString(persondto)))
+				.andDo(print()).andExpect(status().isBadRequest())
 				.andExpect(content().string(containsString("Invalid name")));
 	}
 	@Test
@@ -229,8 +230,8 @@ class PersonControllerTest {
 				"Culver", 97451, "841-874-6512", "jaboyd@email.com");
 		mvc.perform(post("/person").contentType(MediaType.APPLICATION_JSON)
 				.accept(MediaType.APPLICATION_JSON)
-				.content(asJsonString(persondto))).andDo(print())
-				.andExpect(status().isBadRequest())
+				.content(JsonAlertMapper.asJsonString(persondto)))
+				.andDo(print()).andExpect(status().isBadRequest())
 				.andExpect(content().string(containsString("Invalid name")));
 	}
 	@Test
@@ -241,8 +242,8 @@ class PersonControllerTest {
 				"Culver", 97451, "841-874-6512", "jaboyd@email.com");
 		mvc.perform(put("/person").contentType(MediaType.APPLICATION_JSON)
 				.accept(MediaType.APPLICATION_JSON)
-				.content(asJsonString(persondto))).andDo(print())
-				.andExpect(status().isBadRequest())
+				.content(JsonAlertMapper.asJsonString(persondto)))
+				.andDo(print()).andExpect(status().isBadRequest())
 				.andExpect(content().string(containsString("Invalid name")));
 	}
 	@Test
@@ -253,8 +254,8 @@ class PersonControllerTest {
 				97451, "841-874-6512", "jaboyd@email.com");
 		mvc.perform(put("/person").contentType(MediaType.APPLICATION_JSON)
 				.accept(MediaType.APPLICATION_JSON)
-				.content(asJsonString(persondto))).andDo(print())
-				.andExpect(status().isBadRequest())
+				.content(JsonAlertMapper.asJsonString(persondto)))
+				.andDo(print()).andExpect(status().isBadRequest())
 				.andExpect(content().string(containsString("Invalid name")));
 	}
 	@Test
@@ -269,16 +270,8 @@ class PersonControllerTest {
 		when(personConverter.toPerson(persondto)).thenReturn(person);
 		mvc.perform(put("/person").contentType(MediaType.APPLICATION_JSON)
 				.accept(MediaType.APPLICATION_JSON)
-				.content(asJsonString(persondto))).andDo(print())
-				.andExpect(status().isOk());
-	}
-
-	public static String asJsonString(final Object obj) {
-		try {
-			return new ObjectMapper().writeValueAsString(obj);
-		} catch (Exception e) {
-			throw new RuntimeException(e);
-		}
+				.content(JsonAlertMapper.asJsonString(persondto)))
+				.andDo(print()).andExpect(status().isOk());
 	}
 
 }

@@ -91,7 +91,7 @@ public class MedicalRecordService implements IMedicalRecordService {
 			LOGGER.error("person {} {} do not have medical records", firstName,
 					lastName);
 			throw new MedicalRecordNotFoundException("person " + firstName + " "
-					+ lastName + " not do not have medical records");
+					+ lastName + " do not have medical records");
 		}
 
 	}
