@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.safetynet.alerts.DTO.FireStationDTO;
@@ -21,17 +22,39 @@ import com.safetynet.alerts.exceptions.DataNotFoundException;
 import com.safetynet.alerts.exceptions.FireStationNotFoundException;
 import com.safetynet.alerts.service.IFireStationService;
 import com.safetynet.alerts.util.FireStationConverter;
-
+/**
+ * FireStationController class, allows to use administrative endpoints for CRUD
+ * operations * @author Fatima
+ * 
+ * @see IFireStationService
+ * @see FireStationConverter
+ */
 @RestController
-
+@ResponseBody
 public class FireStationController {
+	/**
+	 * a SLF4J/LOG4J LOGGER instance
+	 */
 	private final Logger LOGGER = LoggerFactory
 			.getLogger(FireStationController.class);
+
+	/**
+	 * IFireStationService the interface of service class to manage fire
+	 * stations
+	 */
 	@Autowired
 	private IFireStationService fireStationService;
+	/**
+	 * firestation object mapper
+	 */
 	@Autowired
 	private FireStationConverter fireStationConverter;
-
+	/**
+	 * getFireStations get all fire stations in data
+	 * 
+	 * @return list of fire stations
+	 * @throws DataNotFoundException
+	 */
 	@GetMapping("/firestations")
 	public ResponseEntity<List<FireStationDTO>> getFireStations()
 			throws DataNotFoundException {
@@ -42,7 +65,14 @@ public class FireStationController {
 		return new ResponseEntity<>(fireStations, HttpStatus.OK);
 
 	}
-
+	/**
+	 * addFireStation save a given fire station
+	 * 
+	 * @param fireStation
+	 *            fire station to save
+	 * @return the fire station saved
+	 * @throws AlreadyExistsException
+	 */
 	@PostMapping("/firestation")
 	public ResponseEntity<Object> addFireStation(
 			@RequestBody FireStationDTO fireStation)
@@ -65,6 +95,14 @@ public class FireStationController {
 			return new ResponseEntity<>(fireStationSaved, HttpStatus.CREATED);
 		}
 	}
+	/**
+	 * updateFireStation allow to update a given fire station
+	 * 
+	 * @param fireStation
+	 *            fire station to update
+	 * @return fire station updated or error message if not saved
+	 * @throws FireStationNotFoundException
+	 */
 	@PutMapping("/firestation")
 	public ResponseEntity<Object> updateFireStation(
 			@RequestBody FireStationDTO fireStation)
@@ -86,6 +124,14 @@ public class FireStationController {
 				HttpStatus.OK);
 		return new ResponseEntity<>(fStation, HttpStatus.OK);
 	}
+	/**
+	 * deleteFireStation allow to delete fire station at a given address
+	 * 
+	 * @param address
+	 *            the fire stations address
+	 * @return a fire station deleted
+	 * @throws FireStationNotFoundException
+	 */
 	@DeleteMapping("/firestation")
 	public ResponseEntity<Object> deleteFireStation(
 			@RequestParam String address) throws FireStationNotFoundException {

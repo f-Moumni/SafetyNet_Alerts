@@ -22,17 +22,38 @@ import com.safetynet.alerts.exceptions.DataNotFoundException;
 import com.safetynet.alerts.exceptions.MedicalRecordNotFoundException;
 import com.safetynet.alerts.service.IMedicalRecordService;
 import com.safetynet.alerts.util.MedicalRecordConverter;
-
+/**
+ * MedicalRecordController class, allows to use administrative endpoints for
+ * CRUD operations * @author Fatima
+ * 
+ * @see IMedicalRecordService
+ * @see MedicalRecordConverter
+ */
 @RestController
 @RequestMapping("medicalRecord")
 public class MedicalRecordController {
+	/**
+	 * a SLF4J/LOG4J LOGGER instance
+	 */
 	private static final Logger LOGGER = LoggerFactory
 			.getLogger(MedicalRecordController.class);
+	/**
+	 * IMedicalRecordService the interface of service class to manage fire
+	 * stations
+	 */
 	@Autowired
 	private IMedicalRecordService medicalRecordService;
+	/**
+	 * MedicalRecordConverter MedicalRecord object mapper
+	 */
 	@Autowired
 	private MedicalRecordConverter medicalRecordConverter;
-
+	/**
+	 * getMedicalRecords get all medical records in data
+	 * 
+	 * @return list of MedicalRecord object
+	 * @throws DataNotFoundException
+	 */
 	@GetMapping
 	public ResponseEntity<List<MedicalRecordDTO>> getMedicalRecords()
 			throws DataNotFoundException {
@@ -44,7 +65,14 @@ public class MedicalRecordController {
 		return new ResponseEntity<>(medicalRecordList, HttpStatus.OK);
 
 	}
-
+	/**
+	 * addMedicalRecord save a given Medical record
+	 * 
+	 * @param medicalRecord
+	 *            to save
+	 * @return a medical record saved or error message if not saved
+	 * @throws AlreadyExistsException
+	 */
 	@PostMapping
 	public ResponseEntity<Object> addMedicalRecord(
 			@RequestBody MedicalRecordDTO medicalRecord)
@@ -64,6 +92,14 @@ public class MedicalRecordController {
 		return new ResponseEntity<>(medicalRecord, HttpStatus.CREATED);
 
 	}
+	/**
+	 * updateMedicalRecord allow to update a given Medical record
+	 * 
+	 * @param medicalRecord
+	 *            to updated
+	 * @return medicalRecord updated or error if not updated
+	 * @throws MedicalRecordNotFoundException
+	 */
 	@PutMapping
 	public ResponseEntity<Object> updateMedicalRecord(
 			@RequestBody MedicalRecordDTO medicalRecord)
@@ -83,6 +119,15 @@ public class MedicalRecordController {
 			return new ResponseEntity<>(medicalRecord, HttpStatus.OK);
 		}
 	}
+	/**
+	 * deleteMedicalRecord allow to deleted medical record of given firstName
+	 * and lastName
+	 * 
+	 * @param firstName
+	 * @param lastName
+	 * @return
+	 * @throws MedicalRecordNotFoundException
+	 */
 	@DeleteMapping
 	public ResponseEntity<Object> deleteMedicalRecord(
 			@RequestParam String firstName, @RequestParam String lastName)

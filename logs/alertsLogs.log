@@ -1,0 +1,107 @@
+[DEBUG] 20 fÃ©vr. 2022 10:25:15 [main] AlertsApplication - AlertsApplication start
+[INFO ] 20 fÃ©vr. 2022 10:25:16 [main] AlertsApplication - Starting AlertsApplication using Java 16.0.2 on DESKTOP-CL452JV with PID 19284 (C:\Users\utilisateur1\git\SafetyNet_Alerts\target\classes started by utilisateur1 in C:\Users\utilisateur1\git\SafetyNet_Alerts)
+[INFO ] 20 fÃ©vr. 2022 10:25:16 [main] AlertsApplication - No active profile set, falling back to default profiles: default
+[INFO ] 20 fÃ©vr. 2022 10:25:20 [main] AlertsApplication - Started AlertsApplication in 5.037 seconds (JVM running for 6.587)
+[INFO ] 20 fÃ©vr. 2022 10:25:26 [http-nio-8080-exec-2] PersonController - person John Boyd getted with success   HttpStatus :200 OK
+[INFO ] 20 fÃ©vr. 2022 10:25:27 [http-nio-8080-exec-3] PersonController - person John Boyd getted with success   HttpStatus :200 OK
+[ERROR] 20 fÃ©vr. 2022 10:25:33 [http-nio-8080-exec-4] PersonController - Invalid Name  HttpStatus :400 BAD_REQUEST
+[INFO ] 20 févr. 2022 11:18:37 [main] AlertsApplicationTests - Starting AlertsApplicationTests using Java 16.0.2 on DESKTOP-CL452JV with PID 14668 (started by utilisateur1 in C:\Users\utilisateur1\git\SafetyNet_Alerts)
+[INFO ] 20 févr. 2022 11:18:37 [main] AlertsApplicationTests - No active profile set, falling back to default profiles: default
+[INFO ] 20 févr. 2022 11:18:44 [main] AlertsApplicationTests - Started AlertsApplicationTests in 8.196 seconds (JVM running for 14.494)
+[INFO ] 20 févr. 2022 11:18:48 [main] AlertsControlllerTest - Starting AlertsControlllerTest using Java 16.0.2 on DESKTOP-CL452JV with PID 14668 (started by utilisateur1 in C:\Users\utilisateur1\git\SafetyNet_Alerts)
+[INFO ] 20 févr. 2022 11:18:48 [main] AlertsControlllerTest - No active profile set, falling back to default profiles: default
+[INFO ] 20 févr. 2022 11:18:51 [main] AlertsControlllerTest - Started AlertsControlllerTest in 2.801 seconds (JVM running for 20.941)
+[ERROR] 20 févr. 2022 11:18:51 [main] AlertsController - invalid address HttpStatus :400 BAD_REQUEST
+[INFO ] 20 févr. 2022 11:18:51 [main] AlertsController -  Inhabitants By Address getted  HttpStatus :200 OK
+[INFO ] 20 févr. 2022 11:18:52 [main] AlertsController -  Childen By address getted HttpStatus :200 OK
+[INFO ] 20 févr. 2022 11:18:52 [main] AlertsController - Community Emails getted   HttpStatus :200 OK
+[INFO ] 20 févr. 2022 11:18:52 [main] AlertsController - Person Infos By Name getted   HttpStatus :200 OK
+[ERROR] 20 févr. 2022 11:18:52 [main] AlertsController - Invalid name  HttpStatus :400 BAD_REQUEST
+[ERROR] 20 févr. 2022 11:18:52 [main] AlertsController - invalid city  HttpStatus :400 BAD_REQUEST
+[ERROR] 20 févr. 2022 11:18:52 [main] AlertsController - invalid address HttpStatus :400 BAD_REQUEST
+[INFO ] 20 févr. 2022 11:18:52 [main] AlertsController - population covered by station getted   HttpStatus :200 OK
+[ERROR] 20 févr. 2022 11:18:52 [main] AlertsController - invalid Station number HttpStatus :400 BAD_REQUEST
+[ERROR] 20 févr. 2022 11:18:52 [main] AlertsController - Invalid name  HttpStatus :400 BAD_REQUEST
+[INFO ] 20 févr. 2022 11:18:52 [main] AlertsController - phone numbers of population covered by station getted   HttpStatus :200 OK
+[ERROR] 20 févr. 2022 11:18:52 [main] AlertsController - invalid Station number  HttpStatus :400 BAD_REQUEST
+[INFO ] 20 févr. 2022 11:18:52 [main] AlertsController -  floods By Station getted   HttpStatus :200 OK
+[ERROR] 20 févr. 2022 11:18:52 [main] AlertsController - invalid Station number  HttpStatus :400 BAD_REQUEST
+[INFO ] 20 févr. 2022 11:18:52 [main] FireStationControllerTest - Starting FireStationControllerTest using Java 16.0.2 on DESKTOP-CL452JV with PID 14668 (started by utilisateur1 in C:\Users\utilisateur1\git\SafetyNet_Alerts)
+[INFO ] 20 févr. 2022 11:18:52 [main] FireStationControllerTest - No active profile set, falling back to default profiles: default
+[INFO ] 20 févr. 2022 11:18:54 [main] FireStationControllerTest - Started FireStationControllerTest in 2.078 seconds (JVM running for 24.528)
+[ERROR] 20 févr. 2022 11:18:54 [main] FireStationController - Invalid fire station number or address HttpStatus :204 NO_CONTENT
+[INFO ] 20 févr. 2022 11:18:54 [main] FireStationController - fireStation 3 at the address1509 Culver St saved with success   HttpStatus :201 CREATED
+[INFO ] 20 févr. 2022 11:18:54 [main] FireStationController - fireStations list getted with success   HttpStatus :200 OK
+[INFO ] 20 févr. 2022 11:18:55 [main] FireStationController - fireStation 2 at the address125 rue nationale  updated with success   HttpStatus :200 OK
+[ERROR] 20 févr. 2022 11:18:55 [main] FireStationController - Invalid fire station number or address HttpStatus :204 NO_CONTENT
+[INFO ] 20 févr. 2022 11:18:55 [main] FireStationController - fireStation 3 at the address1509 Culver St deleted with success   HttpStatus :200 OK
+[ERROR] 20 févr. 2022 11:18:55 [main] FireStationController - Invalid fire station address HttpStatus :400 BAD_REQUEST
+[ERROR] 20 févr. 2022 11:18:55 [main] FireStationController - Invalid fire station number or address HttpStatus :400 BAD_REQUEST
+[ERROR] 20 févr. 2022 11:18:55 [main] FireStationController - Invalid fire station number or address HttpStatus :400 BAD_REQUEST
+[INFO ] 20 févr. 2022 11:18:55 [main] MedicalRecordControllerTest - Starting MedicalRecordControllerTest using Java 16.0.2 on DESKTOP-CL452JV with PID 14668 (started by utilisateur1 in C:\Users\utilisateur1\git\SafetyNet_Alerts)
+[INFO ] 20 févr. 2022 11:18:55 [main] MedicalRecordControllerTest - No active profile set, falling back to default profiles: default
+[INFO ] 20 févr. 2022 11:18:56 [main] MedicalRecordControllerTest - Started MedicalRecordControllerTest in 1.659 seconds (JVM running for 26.752)
+[INFO ] 20 févr. 2022 11:18:56 [main] MedicalRecordController - MedicalRecord of John Boyd deleted with success   HttpStatus :200 OK
+[ERROR] 20 févr. 2022 11:18:57 [main] MedicalRecordController - Invalid name HttpStatus:204 NO_CONTENT
+[ERROR] 20 févr. 2022 11:18:57 [main] MedicalRecordController - Invalid name HttpStatus :400 BAD_REQUEST
+[ERROR] 20 févr. 2022 11:18:57 [main] MedicalRecordController - Invalid name HttpStatus:204 NO_CONTENT
+[INFO ] 20 févr. 2022 11:18:57 [main] MedicalRecordController - MedicalRecords list getted with success   HttpStatus :200 OK
+[ERROR] 20 févr. 2022 11:18:57 [main] MedicalRecordController - Invalid name HttpStatus :400 BAD_REQUEST
+[INFO ] 20 févr. 2022 11:18:57 [main] MedicalRecordController - MedicalRecord of John Boyd saved with success   HttpStatus :201 CREATED
+[INFO ] 20 févr. 2022 11:18:57 [main] MedicalRecordController - MedicalRecord of John Boyd Updated with success   HttpStatus :200 OK
+[ERROR] 20 févr. 2022 11:18:57 [main] MedicalRecordController - Invalid name HttpStatus :204 NO_CONTENT
+[ERROR] 20 févr. 2022 11:18:57 [main] MedicalRecordController - Invalid name HttpStatus :204 NO_CONTENT
+[INFO ] 20 févr. 2022 11:18:57 [main] PersonControllerTest - Starting PersonControllerTest using Java 16.0.2 on DESKTOP-CL452JV with PID 14668 (started by utilisateur1 in C:\Users\utilisateur1\git\SafetyNet_Alerts)
+[INFO ] 20 févr. 2022 11:18:57 [main] PersonControllerTest - No active profile set, falling back to default profiles: default
+[INFO ] 20 févr. 2022 11:18:59 [main] PersonControllerTest - Started PersonControllerTest in 1.676 seconds (JVM running for 29.036)
+[ERROR] 20 févr. 2022 11:18:59 [main] PersonController - Invalid name  HttpStatus :400 BAD_REQUEST
+[ERROR] 20 févr. 2022 11:18:59 [main] PersonController - Invalid name  HttpStatus :400 BAD_REQUEST
+[ERROR] 20 févr. 2022 11:18:59 [main] PersonController - Invalid name HttpStatus :400 BAD_REQUEST
+[ERROR] 20 févr. 2022 11:18:59 [main] PersonController - Invalid name HttpStatus :400 BAD_REQUEST
+[ERROR] 20 févr. 2022 11:18:59 [main] PersonController - Invalid Name  HttpStatus :400 BAD_REQUEST
+[INFO ] 20 févr. 2022 11:18:59 [main] PersonController - person John Boyd deleted with success   HttpStatus :200 OK
+[INFO ] 20 févr. 2022 11:18:59 [main] PersonController - person John Boyd Updated with success   HttpStatus :200 OK
+[INFO ] 20 févr. 2022 11:18:59 [main] PersonController - person John Boyd saved with success   HttpStatus :201 CREATED
+[ERROR] 20 févr. 2022 11:18:59 [main] PersonController - Invalid name  HttpStatus :400 BAD_REQUEST
+[ERROR] 20 févr. 2022 11:18:59 [main] PersonController - Invalid Name  HttpStatus :400 BAD_REQUEST
+[INFO ] 20 févr. 2022 11:18:59 [main] PersonController - person John Boyd getted with success   HttpStatus :200 OK
+[ERROR] 20 févr. 2022 11:18:59 [main] PersonController - Invalid name  HttpStatus :400 BAD_REQUEST
+[INFO ] 20 févr. 2022 11:18:59 [main] PersonController - persons list getted with success   HttpStatus :200 OK
+[ERROR] 20 févr. 2022 11:19:01 [main] FireStationService - the address :1509 Culver St cannot be changed
+[ERROR] 20 févr. 2022 11:19:01 [main] FireStationService - this FireStation 3 at the address 1509 Culver St is already exsits
+[ERROR] 20 févr. 2022 11:19:01 [main] FireStationService - firestation 8 not found
+[ERROR] 20 févr. 2022 11:19:01 [main] FireStationService - firestation at address  :1509 Culver St not found
+[ERROR] 20 févr. 2022 11:19:01 [main] FireStationService - Firestation Data note found
+[ERROR] 20 févr. 2022 11:19:01 [main] FireStationService - firestation at address  :1509 Culver St not found
+[ERROR] 20 févr. 2022 11:19:01 [main] MedicalRecordService - the name cannot be changed
+[ERROR] 20 févr. 2022 11:19:01 [main] MedicalRecordService - person   do not have medical records
+[ERROR] 20 févr. 2022 11:19:01 [main] MedicalRecordService - person John Boyd do not have medical records
+[ERROR] 20 févr. 2022 11:19:01 [main] MedicalRecordService - John Boyd already has a medical record
+[ERROR] 20 févr. 2022 11:19:01 [main] MedicalRecordService - Medical records Data not found
+[ERROR] 20 févr. 2022 11:19:01 [main] PersonService - there is no person in this city : 
+[ERROR] 20 févr. 2022 11:19:01 [main] PersonService - this person John Boyd already exists
+[ERROR] 20 févr. 2022 11:19:01 [main] PersonService - there is no person with this last name : 
+[ERROR] 20 févr. 2022 11:19:01 [main] PersonService - the name cannot be changed
+[ERROR] 20 févr. 2022 11:19:01 [main] PersonService - person John Boyd not found
+[ERROR] 20 févr. 2022 11:19:01 [main] PersonService - person   not found
+[ERROR] 20 févr. 2022 11:19:01 [main] PersonService - Person data not found
+[ERROR] 20 févr. 2022 11:19:01 [main] PersonService - there is no person at this address : 
+[DEBUG] 20 fÃ©vr. 2022 12:23:59 [main] AlertsApplication - AlertsApplication start
+[INFO ] 20 fÃ©vr. 2022 12:24:01 [main] AlertsApplication - Starting AlertsApplication using Java 16.0.2 on DESKTOP-CL452JV with PID 13728 (C:\Users\utilisateur1\git\SafetyNet_Alerts\target\classes started by utilisateur1 in C:\Users\utilisateur1\git\SafetyNet_Alerts)
+[INFO ] 20 fÃ©vr. 2022 12:24:01 [main] AlertsApplication - No active profile set, falling back to default profiles: default
+[INFO ] 20 fÃ©vr. 2022 12:24:06 [main] AlertsApplication - Started AlertsApplication in 6.422 seconds (JVM running for 8.206)
+[INFO ] 20 fÃ©vr. 2022 12:24:09 [http-nio-8080-exec-1] PersonController - persons list getted with success   HttpStatus :200 OK
+[ERROR] 20 fÃ©vr. 2022 12:24:43 [http-nio-8080-exec-5] PersonController - Invalid Name  HttpStatus :400 BAD_REQUEST
+[ERROR] 20 fÃ©vr. 2022 12:28:51 [http-nio-8080-exec-7] PersonService - person Jonh boyd not found
+[INFO ] 20 fÃ©vr. 2022 12:28:59 [http-nio-8080-exec-8] PersonController - person John Boyd getted with success   HttpStatus :200 OK
+[ERROR] 20 fÃ©vr. 2022 12:32:02 [http-nio-8080-exec-3] PersonService - this person John Boyd already exists
+[ERROR] 20 fÃ©vr. 2022 12:32:32 [http-nio-8080-exec-4] PersonService - this person John Boyd already exists
+[INFO ] 20 fÃ©vr. 2022 12:34:17 [http-nio-8080-exec-7] PersonController - person John Boyd Updated with success   HttpStatus :200 OK
+[INFO ] 20 fÃ©vr. 2022 12:34:24 [http-nio-8080-exec-8] PersonController - person John Boyd Updated with success   HttpStatus :200 OK
+[INFO ] 20 fÃ©vr. 2022 12:35:33 [http-nio-8080-exec-1] PersonController - person John Boyd deleted with success   HttpStatus :200 OK
+[ERROR] 20 fÃ©vr. 2022 12:44:21 [http-nio-8080-exec-4] FireStationService - firestation at address  :222 not found
+[INFO ] 20 fÃ©vr. 2022 13:02:19 [http-nio-8080-exec-6] AlertsController -  Inhabitants By Address getted  HttpStatus :200 OK
+[ERROR] 20 fÃ©vr. 2022 13:02:19 [http-nio-8080-exec-6] FireStationService - firestation at address  :<address not found
+[INFO ] 20 fÃ©vr. 2022 13:02:37 [http-nio-8080-exec-9] AlertsController -  Inhabitants By Address getted  HttpStatus :200 OK
+[ERROR] 20 fÃ©vr. 2022 13:02:37 [http-nio-8080-exec-9] FireStationService - firestation at address  :<address not found
+[ERROR] 20 fÃ©vr. 2022 16:41:23 [http-nio-8080-exec-5] AlertsController - invalid address HttpStatus :400 BAD_REQUEST
