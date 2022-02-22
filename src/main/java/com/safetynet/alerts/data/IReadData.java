@@ -6,6 +6,4 @@ public interface IReadData {
 
 	void readData() throws IOException;
 
-	// List<Class<?>> readData(Class<?> entity) throws IOException;
-
 }
