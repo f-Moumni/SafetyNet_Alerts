@@ -1,0 +1,20 @@
+2022-02-24 12:08:11,204 DEBUG c.s.a.AlertsApplication [main] AlertsApplication start
+2022-02-24 12:08:12,224 INFO o.s.b.StartupInfoLogger [main] Starting AlertsApplication using Java 16.0.2 on DESKTOP-CL452JV with PID 16404 (C:\Users\utilisateur1\git\SafetyNet_Alerts\target\classes started by utilisateur1 in C:\Users\utilisateur1\git\SafetyNet_Alerts)
+2022-02-24 12:08:12,230 INFO o.s.b.SpringApplication [main] No active profile set, falling back to default profiles: default
+2022-02-24 12:08:16,290 INFO c.s.a.d.ReadDataFromJson [main] Load Data SUCCESS
+2022-02-24 12:08:17,361 INFO o.s.b.StartupInfoLogger [main] Started AlertsApplication in 5.988 seconds (JVM running for 7.638)
+2022-02-24 12:08:21,619 INFO c.s.a.c.FireStationController [http-nio-8080-exec-1] fireStations list getted with success   HttpStatus :200 OK
+2022-02-24 12:08:22,670 INFO c.s.a.c.FireStationController [http-nio-8080-exec-3] fireStations list getted with success   HttpStatus :200 OK
+2022-02-24 12:08:25,055 INFO c.s.a.c.AlertsController [http-nio-8080-exec-4]  Childen By address getted HttpStatus :200 OK
+2022-02-24 12:08:27,501 INFO c.s.a.c.FireStationController [http-nio-8080-exec-5] fireStation 4 at the address489 Manchester St deleted with success   HttpStatus :200 OK
+2022-02-24 12:08:28,538 ERROR c.s.a.s.FireStationService [http-nio-8080-exec-6] firestation at address  :489 Manchester St not found
+2022-02-24 12:08:29,594 ERROR c.s.a.s.FireStationService [http-nio-8080-exec-7] firestation at address  :489 Manchester St not found
+2022-02-24 12:32:52.798 [DEBUG] [main] AlertsApplication - AlertsApplication start
+2022-02-24 12:32:53.674 [INFO ] [main] AlertsApplication - Starting AlertsApplication using Java 16.0.2 on DESKTOP-CL452JV with PID 16440 (C:\Users\utilisateur1\git\SafetyNet_Alerts\target\classes started by utilisateur1 in C:\Users\utilisateur1\git\SafetyNet_Alerts)
+2022-02-24 12:32:53.682 [INFO ] [main] AlertsApplication - No active profile set, falling back to default profiles: default
+2022-02-24 12:32:57.603 [INFO ] [main] ReadDataFromJson - Load Data SUCCESS
+2022-02-24 12:32:58.527 [INFO ] [main] AlertsApplication - Started AlertsApplication in 5.558 seconds (JVM running for 7.18)
+2022-02-24 12:33:07.208 [INFO ] [http-nio-8080-exec-1] FireStationController - fireStations list getted with success   HttpStatus :200 OK
+2022-02-24 12:33:08.207 [INFO ] [http-nio-8080-exec-3] FireStationController - fireStations list getted with success   HttpStatus :200 OK
+2022-02-24 12:33:09.119 [INFO ] [http-nio-8080-exec-4] FireStationController - fireStations list getted with success   HttpStatus :200 OK
+2022-02-24 12:33:10.053 [INFO ] [http-nio-8080-exec-5] FireStationController - fireStations list getted with success   HttpStatus :200 OK
