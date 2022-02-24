@@ -40,6 +40,7 @@ class PersonRepositoryTest {
 		// assert
 		assertThat(result).isEqualTo(persons);
 	}
+
 	@Test
 	@Tag("save")
 	@DisplayName("add person test should add person to persons list")

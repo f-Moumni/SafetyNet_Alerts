@@ -26,12 +26,16 @@ import com.safetynet.alerts.repository.IPersonRepository;
 public class ReadDataFromJson implements IReadData {
 	private static final Logger LOGGER = LoggerFactory
 			.getLogger(ReadDataFromJson.class);
-	@Value("${data.jsonFilePath}")
+
 	private String jsonFilePath;
 
-	JsonNode dataNode = null;
-	ObjectMapper mapper = new ObjectMapper();
+	public ReadDataFromJson(
+			@Value("${data.jsonFilePath}") String jsonFilePath) {
+		this.jsonFilePath = jsonFilePath;
+	}
 
+	ObjectMapper mapper = new ObjectMapper();
+	JsonNode dataNode = null;
 	@Autowired
 	private IPersonRepository personRepository;
 	@Autowired
@@ -49,6 +53,7 @@ public class ReadDataFromJson implements IReadData {
 			loadPersons();
 			loadFirestation();
 			loadMedicalRecord();
+			LOGGER.info("Load Data SUCCESS");
 		} catch (FileNotFoundException e) {
 			LOGGER.error("ERROR fetching json file", e);
 		}
@@ -103,6 +108,14 @@ public class ReadDataFromJson implements IReadData {
 			medicalRecordRepository.addMedicalRecord(medicalRecord);
 		}
 
+	}
+	/*
+	 * clearData allow to clear
+	 */
+	public void clearData() throws IOException {
+		personRepository.findAll().clear();
+		fireStationRepository.findAll().clear();
+		medicalRecordRepository.findAll().clear();
 	}
 
 }

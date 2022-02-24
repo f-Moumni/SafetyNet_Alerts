@@ -9,6 +9,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.io.IOException;
+
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -19,14 +23,26 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 import com.safetynet.alerts.DTO.PersonDTO;
+import com.safetynet.alerts.data.ReadDataFromJson;
 import com.safetynet.alerts.util.JsonAlertMapper;
 
-@SpringBootTest
+@SpringBootTest(properties = "data.jsonFilePath=src/test/resources/data.json")
 @AutoConfigureMockMvc
 public class PersonControllerIT {
 	@Autowired
 	private MockMvc mvc;
+	@Autowired
+	private ReadDataFromJson readData;
 
+	@BeforeEach
+	void SetUp() throws IOException {
+
+		readData.readData();
+	}
+	@AfterEach
+	public void cleanup() throws IOException {
+		readData.clearData();
+	}
 	@Test
 	@Tag("getPersons")
 	@DisplayName("getPersons test should return all persons in list and status OK")
@@ -45,9 +61,9 @@ public class PersonControllerIT {
 	void getPersonByName_returnPersonWithName_OK() throws Exception {
 		// act
 		mvc.perform(get("/person").contentType(MediaType.APPLICATION_JSON)
-				.param("firstName", "john").param("lastName", "Boyd"))// assert
+				.param("firstName", "jacob").param("lastName", "Boyd"))// assert
 				.andDo(print()).andExpectAll(status().isOk(),
-						jsonPath("$.firstName").value("John"),
+						jsonPath("$.firstName").value("Jacob"),
 						jsonPath("$.lastName").value("Boyd"),
 						jsonPath("$.address").value("1509 Culver St"));
 	}

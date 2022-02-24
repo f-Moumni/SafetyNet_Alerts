@@ -11,6 +11,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.io.IOException;
+
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -20,15 +24,27 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
+import com.safetynet.alerts.data.ReadDataFromJson;
 import com.safetynet.alerts.model.FireStation;
 import com.safetynet.alerts.util.JsonAlertMapper;
-@SpringBootTest
+@SpringBootTest(properties = "data.jsonFilePath=src/test/resources/data.json")
 @AutoConfigureMockMvc
 class FireStationControllerIT {
 
 	@Autowired
 	private MockMvc mvc;
+	@Autowired
+	private ReadDataFromJson readData;
 
+	@BeforeEach
+	void SetUp() throws IOException {
+
+		readData.readData();
+	}
+	@AfterEach
+	public void cleanup() throws IOException {
+		readData.clearData();
+	}
 	@Test
 	@Tag("getFireStations")
 	@DisplayName("getFireStations test return a list of fireStation and status OK")

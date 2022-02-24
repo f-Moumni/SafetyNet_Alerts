@@ -38,6 +38,7 @@ class FireStationRepositoryTest {
 		assertThat(result).isEqualTo(fireStations);
 
 	}
+
 	@Test
 	@Tag("save")
 	@DisplayName("add fireStation test should add fireStation to fireStations list")
@@ -75,6 +76,7 @@ class FireStationRepositoryTest {
 		assertThat(result).isEqualTo(fireStation);
 
 	}
+
 	@Test
 	@Tag("findbyStation")
 	@DisplayName("find fireStations by Station test should return list of fireStation with the given station")

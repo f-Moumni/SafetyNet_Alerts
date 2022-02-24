@@ -6,6 +6,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.io.IOException;
+
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -15,12 +19,26 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
-@SpringBootTest
+import com.safetynet.alerts.data.ReadDataFromJson;
+
+@SpringBootTest(properties = "data.jsonFilePath=src/test/resources/data.json")
 @AutoConfigureMockMvc
 public class AlertsControlllerIT {
 	@Autowired
 	private MockMvc mvc;
 
+	@Autowired
+	private ReadDataFromJson readData;
+
+	@BeforeEach
+	void SetUp() throws IOException {
+
+		readData.readData();
+	}
+	@AfterEach
+	public void cleanup() throws IOException {
+		readData.clearData();
+	}
 	@Test
 	@Tag("Alertsfirestation")
 	@DisplayName("getCoveredPopulationByStation test should return all people who are covered by a given station and status OK")
@@ -33,8 +51,7 @@ public class AlertsControlllerIT {
 						jsonPath("$.personsCouverd[0].firstName").value("John"),
 						jsonPath("$.personsCouverd[0].lastName").value("Boyd"),
 						jsonPath("$.numberOfAdults").value(10),
-						jsonPath("$.numberOfChildren").value(2));
-
+						jsonPath("$.numberOfChildren").value(3));
 	}
 	@Test
 	@Tag("Alertsfirestation")
@@ -122,7 +139,7 @@ public class AlertsControlllerIT {
 				.andExpectAll(status().isOk(), jsonPath("$[0].age").value(37),
 						jsonPath("$[0].firstName").value("John"),
 						jsonPath("$[0].lastName").value("Boyd"),
-						jsonPath("$[1].age").value(37),
+						jsonPath("$[1].age").value(32),
 						jsonPath("$[1].firstName").value("Jacob"),
 						jsonPath("$[1].lastName").value("Boyd"));
 	}

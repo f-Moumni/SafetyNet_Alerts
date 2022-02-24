@@ -48,6 +48,7 @@ class MedicalRecordRepositoryTest {
 		// assert
 		assertThat(result).isEqualTo(medicalRecords);
 	}
+
 	@Test
 	@Tag("findByName")
 	@DisplayName("find by name test should return medical record for a given name")
