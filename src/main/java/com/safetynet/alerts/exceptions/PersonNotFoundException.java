@@ -1,15 +1,22 @@
 package com.safetynet.alerts.exceptions;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.ResponseStatus;
+/**
+ * PersonNotFoundException an exception that throws when an Person not found
+ * 
+ * @author Fatima
+ *
+ */
 
-@ResponseStatus(HttpStatus.NOT_FOUND)
 public class PersonNotFoundException extends Exception {
 
+	private static final long serialVersionUID = 1L;
+
 	/**
+	 * a class constructor
+	 * 
+	 * @param message
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
 	public PersonNotFoundException(String message) {
 		super(message);
 	}

@@ -18,3 +18,594 @@
 2022-02-24 12:33:08.207 [INFO ] [http-nio-8080-exec-3] FireStationController - fireStations list getted with success   HttpStatus :200 OK
 2022-02-24 12:33:09.119 [INFO ] [http-nio-8080-exec-4] FireStationController - fireStations list getted with success   HttpStatus :200 OK
 2022-02-24 12:33:10.053 [INFO ] [http-nio-8080-exec-5] FireStationController - fireStations list getted with success   HttpStatus :200 OK
+2022-02-24 13:53:57.019 [INFO ] [main] AlertsApplicationTests - Starting AlertsApplicationTests using Java 17.0.1 on DESKTOP-CL452JV with PID 19364 (started by utilisateur1 in C:\Users\utilisateur1\git\SafetyNet_Alerts)
+2022-02-24 13:53:57.032 [INFO ] [main] AlertsApplicationTests - No active profile set, falling back to default profiles: default
+2022-02-24 13:54:01.901 [INFO ] [main] ReadDataFromJson - Load Data SUCCESS
+2022-02-24 13:54:06.262 [INFO ] [main] AlertsApplicationTests - Started AlertsApplicationTests in 10.347 seconds (JVM running for 18.469)
+2022-02-24 13:54:10.174 [INFO ] [main] AlertsControlllerTest - Starting AlertsControlllerTest using Java 17.0.1 on DESKTOP-CL452JV with PID 19364 (started by utilisateur1 in C:\Users\utilisateur1\git\SafetyNet_Alerts)
+2022-02-24 13:54:10.188 [INFO ] [main] AlertsControlllerTest - No active profile set, falling back to default profiles: default
+2022-02-24 13:54:15.362 [INFO ] [main] AlertsControlllerTest - Started AlertsControlllerTest in 5.357 seconds (JVM running for 27.569)
+2022-02-24 13:54:15.846 [ERROR] [main] AlertsController - invalid address HttpStatus :400 BAD_REQUEST
+2022-02-24 13:54:16.326 [INFO ] [main] AlertsController -  Inhabitants By Address getted  HttpStatus :200 OK
+2022-02-24 13:54:17.082 [INFO ] [main] AlertsController -  Childen By address getted HttpStatus :200 OK
+2022-02-24 13:54:17.395 [INFO ] [main] AlertsController - Community Emails getted   HttpStatus :200 OK
+2022-02-24 13:54:17.711 [INFO ] [main] AlertsController - Person Infos By Name getted   HttpStatus :200 OK
+2022-02-24 13:54:18.147 [ERROR] [main] AlertsController - Invalid name  HttpStatus :400 BAD_REQUEST
+2022-02-24 13:54:18.559 [ERROR] [main] AlertsController - invalid city  HttpStatus :400 BAD_REQUEST
+2022-02-24 13:54:18.632 [ERROR] [main] AlertsController - invalid address HttpStatus :400 BAD_REQUEST
+2022-02-24 13:54:18.962 [INFO ] [main] AlertsController - population covered by station getted   HttpStatus :200 OK
+2022-02-24 13:54:19.133 [ERROR] [main] AlertsController - invalid Station number HttpStatus :400 BAD_REQUEST
+2022-02-24 13:54:19.246 [ERROR] [main] AlertsController - Invalid name  HttpStatus :400 BAD_REQUEST
+2022-02-24 13:54:19.398 [INFO ] [main] AlertsController - phone numbers of population covered by station getted   HttpStatus :200 OK
+2022-02-24 13:54:19.528 [ERROR] [main] AlertsController - invalid Station number  HttpStatus :400 BAD_REQUEST
+2022-02-24 13:54:19.730 [INFO ] [main] AlertsController -  floods By Station getted   HttpStatus :200 OK
+2022-02-24 13:54:20.064 [ERROR] [main] AlertsController - invalid Station number  HttpStatus :400 BAD_REQUEST
+2022-02-24 13:54:20.991 [INFO ] [main] FireStationControllerTest - Starting FireStationControllerTest using Java 17.0.1 on DESKTOP-CL452JV with PID 19364 (started by utilisateur1 in C:\Users\utilisateur1\git\SafetyNet_Alerts)
+2022-02-24 13:54:20.992 [INFO ] [main] FireStationControllerTest - No active profile set, falling back to default profiles: default
+2022-02-24 13:54:29.728 [INFO ] [main] FireStationControllerTest - Started FireStationControllerTest in 9.411 seconds (JVM running for 41.935)
+2022-02-24 13:54:30.030 [ERROR] [main] FireStationController - Invalid fire station number or address HttpStatus :204 NO_CONTENT
+2022-02-24 13:54:30.789 [INFO ] [main] FireStationController - fireStation 3 at the address1509 Culver St saved with success   HttpStatus :201 CREATED
+2022-02-24 13:54:30.812 [INFO ] [main] FireStationController - fireStations list getted with success   HttpStatus :200 OK
+2022-02-24 13:54:30.984 [INFO ] [main] FireStationController - fireStation 2 at the address125 rue nationale  updated with success   HttpStatus :200 OK
+2022-02-24 13:54:31.228 [ERROR] [main] FireStationController - Invalid fire station number or address HttpStatus :204 NO_CONTENT
+2022-02-24 13:54:31.360 [INFO ] [main] FireStationController - fireStation 3 at the address1509 Culver St deleted with success   HttpStatus :200 OK
+2022-02-24 13:54:31.397 [ERROR] [main] FireStationController - Invalid fire station address HttpStatus :400 BAD_REQUEST
+2022-02-24 13:54:31.513 [ERROR] [main] FireStationController - Invalid fire station number or address HttpStatus :400 BAD_REQUEST
+2022-02-24 13:54:31.532 [ERROR] [main] FireStationController - Invalid fire station number or address HttpStatus :400 BAD_REQUEST
+2022-02-24 13:54:31.797 [INFO ] [main] MedicalRecordControllerTest - Starting MedicalRecordControllerTest using Java 17.0.1 on DESKTOP-CL452JV with PID 19364 (started by utilisateur1 in C:\Users\utilisateur1\git\SafetyNet_Alerts)
+2022-02-24 13:54:31.799 [INFO ] [main] MedicalRecordControllerTest - No active profile set, falling back to default profiles: default
+2022-02-24 13:54:36.875 [INFO ] [main] MedicalRecordControllerTest - Started MedicalRecordControllerTest in 5.247 seconds (JVM running for 49.081)
+2022-02-24 13:54:36.904 [INFO ] [main] MedicalRecordController - MedicalRecord of John Boyd deleted with success   HttpStatus :200 OK
+2022-02-24 13:54:37.065 [ERROR] [main] MedicalRecordController - Invalid name HttpStatus:204 NO_CONTENT
+2022-02-24 13:54:37.170 [ERROR] [main] MedicalRecordController - Invalid name HttpStatus :400 BAD_REQUEST
+2022-02-24 13:54:37.257 [ERROR] [main] MedicalRecordController - Invalid name HttpStatus:204 NO_CONTENT
+2022-02-24 13:54:37.273 [INFO ] [main] MedicalRecordController - MedicalRecords list getted with success   HttpStatus :200 OK
+2022-02-24 13:54:37.399 [ERROR] [main] MedicalRecordController - Invalid name HttpStatus :400 BAD_REQUEST
+2022-02-24 13:54:37.492 [INFO ] [main] MedicalRecordController - MedicalRecord of John Boyd saved with success   HttpStatus :201 CREATED
+2022-02-24 13:54:37.604 [INFO ] [main] MedicalRecordController - MedicalRecord of John Boyd Updated with success   HttpStatus :200 OK
+2022-02-24 13:54:37.738 [ERROR] [main] MedicalRecordController - Invalid name HttpStatus :204 NO_CONTENT
+2022-02-24 13:54:37.842 [ERROR] [main] MedicalRecordController - Invalid name HttpStatus :204 NO_CONTENT
+2022-02-24 13:54:38.058 [INFO ] [main] PersonControllerTest - Starting PersonControllerTest using Java 17.0.1 on DESKTOP-CL452JV with PID 19364 (started by utilisateur1 in C:\Users\utilisateur1\git\SafetyNet_Alerts)
+2022-02-24 13:54:38.060 [INFO ] [main] PersonControllerTest - No active profile set, falling back to default profiles: default
+2022-02-24 13:54:40.765 [INFO ] [main] PersonControllerTest - Started PersonControllerTest in 2.852 seconds (JVM running for 52.972)
+2022-02-24 13:54:40.855 [ERROR] [main] PersonController - Invalid name  HttpStatus :400 BAD_REQUEST
+2022-02-24 13:54:40.967 [ERROR] [main] PersonController - Invalid name  HttpStatus :400 BAD_REQUEST
+2022-02-24 13:54:40.986 [ERROR] [main] PersonController - Invalid name HttpStatus :400 BAD_REQUEST
+2022-02-24 13:54:41.039 [ERROR] [main] PersonController - Invalid name HttpStatus :400 BAD_REQUEST
+2022-02-24 13:54:41.065 [ERROR] [main] PersonController - Invalid Name  HttpStatus :400 BAD_REQUEST
+2022-02-24 13:54:41.104 [INFO ] [main] PersonController - person John Boyd deleted with success   HttpStatus :200 OK
+2022-02-24 13:54:41.133 [INFO ] [main] PersonController - person John Boyd Updated with success   HttpStatus :200 OK
+2022-02-24 13:54:41.166 [INFO ] [main] PersonController - person John Boyd saved with success   HttpStatus :201 CREATED
+2022-02-24 13:54:41.184 [ERROR] [main] PersonController - Invalid name  HttpStatus :400 BAD_REQUEST
+2022-02-24 13:54:41.206 [ERROR] [main] PersonController - Invalid Name  HttpStatus :400 BAD_REQUEST
+2022-02-24 13:54:41.248 [INFO ] [main] PersonController - person John Boyd getted with success   HttpStatus :200 OK
+2022-02-24 13:54:41.273 [ERROR] [main] PersonController - Invalid name  HttpStatus :400 BAD_REQUEST
+2022-02-24 13:54:41.294 [INFO ] [main] PersonController - persons list getted with success   HttpStatus :200 OK
+2022-02-24 13:54:43.127 [ERROR] [main] FireStationService - the address :1509 Culver St cannot be changed
+2022-02-24 13:54:43.146 [ERROR] [main] FireStationService - this FireStation 3 at the address 1509 Culver St is already exsits
+2022-02-24 13:54:43.194 [ERROR] [main] FireStationService - firestation 8 not found
+2022-02-24 13:54:43.266 [ERROR] [main] FireStationService - firestation at address  :1509 Culver St not found
+2022-02-24 13:54:43.280 [ERROR] [main] FireStationService - Firestation Data note found
+2022-02-24 13:54:43.294 [ERROR] [main] FireStationService - firestation at address  :1509 Culver St not found
+2022-02-24 13:54:43.458 [ERROR] [main] MedicalRecordService - the name cannot be changed
+2022-02-24 13:54:43.470 [ERROR] [main] MedicalRecordService - person   do not have medical records
+2022-02-24 13:54:43.486 [ERROR] [main] MedicalRecordService - person John Boyd do not have medical records
+2022-02-24 13:54:43.505 [ERROR] [main] MedicalRecordService - John Boyd already has a medical record
+2022-02-24 13:54:43.515 [ERROR] [main] MedicalRecordService - Medical records Data not found
+2022-02-24 13:54:43.660 [ERROR] [main] PersonService - there is no person in this city : 
+2022-02-24 13:54:43.668 [ERROR] [main] PersonService - this person John Boyd already exists
+2022-02-24 13:54:43.680 [ERROR] [main] PersonService - there is no person with this last name : 
+2022-02-24 13:54:43.705 [ERROR] [main] PersonService - the name cannot be changed
+2022-02-24 13:54:43.730 [ERROR] [main] PersonService - person John Boyd not found
+2022-02-24 13:54:43.793 [ERROR] [main] PersonService - person   not found
+2022-02-24 13:54:43.825 [ERROR] [main] PersonService - Person data not found
+2022-02-24 13:54:43.832 [ERROR] [main] PersonService - there is no person at this address : 
+2022-02-25 13:14:08.333 [DEBUG] [main] AlertsApplication - AlertsApplication start
+2022-02-25 13:14:09.269 [INFO ] [main] AlertsApplication - Starting AlertsApplication using Java 16.0.2 on DESKTOP-CL452JV with PID 12432 (C:\Users\utilisateur1\git\SafetyNet_Alerts\target\classes started by utilisateur1 in C:\Users\utilisateur1\git\SafetyNet_Alerts)
+2022-02-25 13:14:09.282 [INFO ] [main] AlertsApplication - No active profile set, falling back to default profiles: default
+2022-02-25 13:15:20.349 [DEBUG] [main] AlertsApplication - AlertsApplication start
+2022-02-25 13:15:21.197 [INFO ] [main] AlertsApplication - Starting AlertsApplication using Java 16.0.2 on DESKTOP-CL452JV with PID 2492 (C:\Users\utilisateur1\git\SafetyNet_Alerts\target\classes started by utilisateur1 in C:\Users\utilisateur1\git\SafetyNet_Alerts)
+2022-02-25 13:15:21.204 [INFO ] [main] AlertsApplication - No active profile set, falling back to default profiles: default
+2022-02-25 13:15:54.843 [DEBUG] [main] AlertsApplication - AlertsApplication start
+2022-02-25 13:15:55.794 [INFO ] [main] AlertsApplication - Starting AlertsApplication using Java 16.0.2 on DESKTOP-CL452JV with PID 16940 (C:\Users\utilisateur1\git\SafetyNet_Alerts\target\classes started by utilisateur1 in C:\Users\utilisateur1\git\SafetyNet_Alerts)
+2022-02-25 13:15:55.807 [INFO ] [main] AlertsApplication - No active profile set, falling back to default profiles: default
+2022-02-25 13:16:43.804 [DEBUG] [main] AlertsApplication - AlertsApplication start
+2022-02-25 13:16:44.696 [INFO ] [main] AlertsApplication - Starting AlertsApplication using Java 16.0.2 on DESKTOP-CL452JV with PID 19372 (C:\Users\utilisateur1\git\SafetyNet_Alerts\target\classes started by utilisateur1 in C:\Users\utilisateur1\git\SafetyNet_Alerts)
+2022-02-25 13:16:44.720 [INFO ] [main] AlertsApplication - No active profile set, falling back to default profiles: default
+2022-02-25 13:16:48.327 [INFO ] [main] ReadDataFromJson - Load Data SUCCESS
+2022-02-25 13:16:49.323 [INFO ] [main] AlertsApplication - Started AlertsApplication in 5.351 seconds (JVM running for 6.926)
+2022-02-25 13:16:59.152 [INFO ] [http-nio-8080-exec-1] AlertsController - population covered by station getted   HttpStatus :200 OK
+2022-02-25 15:50:06.686 [INFO ] [main] ReadDataFromJsonIT - Starting ReadDataFromJsonIT using Java 16.0.2 on DESKTOP-CL452JV with PID 12964 (started by utilisateur1 in C:\Users\utilisateur1\git\SafetyNet_Alerts)
+2022-02-25 15:50:06.701 [INFO ] [main] ReadDataFromJsonIT - No active profile set, falling back to default profiles: default
+2022-02-25 15:50:09.920 [INFO ] [main] ReadDataFromJson - SUCCESS Load Data
+2022-02-25 15:50:12.507 [INFO ] [main] ReadDataFromJsonIT - Started ReadDataFromJsonIT in 6.444 seconds (JVM running for 10.355)
+2022-02-25 15:50:41.085 [INFO ] [main] ReadDataFromJsonIT - Starting ReadDataFromJsonIT using Java 16.0.2 on DESKTOP-CL452JV with PID 1212 (started by utilisateur1 in C:\Users\utilisateur1\git\SafetyNet_Alerts)
+2022-02-25 15:50:41.102 [INFO ] [main] ReadDataFromJsonIT - No active profile set, falling back to default profiles: default
+2022-02-25 15:50:43.878 [INFO ] [main] ReadDataFromJson - SUCCESS Load Data
+2022-02-25 15:50:46.431 [INFO ] [main] ReadDataFromJsonIT - Started ReadDataFromJsonIT in 5.935 seconds (JVM running for 8.774)
+2022-02-25 15:51:46.482 [INFO ] [main] ReadDataFromJsonIT - Starting ReadDataFromJsonIT using Java 16.0.2 on DESKTOP-CL452JV with PID 16816 (started by utilisateur1 in C:\Users\utilisateur1\git\SafetyNet_Alerts)
+2022-02-25 15:51:46.488 [INFO ] [main] ReadDataFromJsonIT - No active profile set, falling back to default profiles: default
+2022-02-25 15:51:51.737 [INFO ] [main] ReadDataFromJson - SUCCESS Load Data
+2022-02-25 15:51:54.635 [INFO ] [main] ReadDataFromJsonIT - Started ReadDataFromJsonIT in 8.717 seconds (JVM running for 12.002)
+2022-02-25 15:52:42.956 [INFO ] [main] ReadDataFromJsonIT - Starting ReadDataFromJsonIT using Java 16.0.2 on DESKTOP-CL452JV with PID 14988 (started by utilisateur1 in C:\Users\utilisateur1\git\SafetyNet_Alerts)
+2022-02-25 15:52:42.963 [INFO ] [main] ReadDataFromJsonIT - No active profile set, falling back to default profiles: default
+2022-02-25 15:52:48.114 [INFO ] [main] ReadDataFromJson - SUCCESS Load Data
+2022-02-25 15:52:51.148 [INFO ] [main] ReadDataFromJsonIT - Started ReadDataFromJsonIT in 8.762 seconds (JVM running for 11.972)
+2022-02-25 15:56:23.130 [DEBUG] [main] ReadDataFromJson - at get readData methode 
+2022-02-25 15:56:23.140 [DEBUG] [main] ReadDataFromJson - reading json file 
+2022-02-25 15:56:23.174 [DEBUG] [main] ReadDataFromJson - loading person data 
+2022-02-25 15:57:01.124 [DEBUG] [main] ReadDataFromJson - at get readData methode 
+2022-02-25 15:57:01.130 [DEBUG] [main] ReadDataFromJson - reading json file 
+2022-02-25 15:57:01.153 [DEBUG] [main] ReadDataFromJson - loading person data 
+2022-02-25 16:15:41.736 [INFO ] [main] ReadDataFromJsonIT - Starting ReadDataFromJsonIT using Java 16.0.2 on DESKTOP-CL452JV with PID 11168 (started by utilisateur1 in C:\Users\utilisateur1\git\SafetyNet_Alerts)
+2022-02-25 16:15:41.754 [INFO ] [main] ReadDataFromJsonIT - No active profile set, falling back to default profiles: default
+2022-02-25 16:15:47.034 [INFO ] [main] ReadDataFromJson - SUCCESS Load Data
+2022-02-25 16:15:49.682 [INFO ] [main] ReadDataFromJsonIT - Started ReadDataFromJsonIT in 8.595 seconds (JVM running for 11.502)
+2022-02-25 16:16:25.289 [INFO ] [main] ReadDataFromJsonIT - Starting ReadDataFromJsonIT using Java 16.0.2 on DESKTOP-CL452JV with PID 12560 (started by utilisateur1 in C:\Users\utilisateur1\git\SafetyNet_Alerts)
+2022-02-25 16:16:25.312 [INFO ] [main] ReadDataFromJsonIT - No active profile set, falling back to default profiles: default
+2022-02-25 16:16:31.225 [INFO ] [main] ReadDataFromJson - SUCCESS Load Data
+2022-02-25 16:16:46.745 [INFO ] [main] ReadDataFromJsonIT - Starting ReadDataFromJsonIT using Java 16.0.2 on DESKTOP-CL452JV with PID 18396 (started by utilisateur1 in C:\Users\utilisateur1\git\SafetyNet_Alerts)
+2022-02-25 16:16:46.760 [INFO ] [main] ReadDataFromJsonIT - No active profile set, falling back to default profiles: default
+2022-02-25 16:16:51.686 [INFO ] [main] ReadDataFromJson - SUCCESS Load Data
+2022-02-25 16:16:54.464 [INFO ] [main] ReadDataFromJsonIT - Started ReadDataFromJsonIT in 8.307 seconds (JVM running for 11.483)
+2022-02-25 16:16:54.570 [INFO ] [main] ReadDataFromJson - SUCCESS Load Data
+2022-02-25 16:17:52.961 [INFO ] [main] ReadDataFromJsonIT - Starting ReadDataFromJsonIT using Java 16.0.2 on DESKTOP-CL452JV with PID 18804 (started by utilisateur1 in C:\Users\utilisateur1\git\SafetyNet_Alerts)
+2022-02-25 16:17:52.995 [INFO ] [main] ReadDataFromJsonIT - No active profile set, falling back to default profiles: default
+2022-02-25 16:17:58.282 [INFO ] [main] ReadDataFromJson - SUCCESS Load Data
+2022-02-25 16:18:00.989 [INFO ] [main] ReadDataFromJsonIT - Started ReadDataFromJsonIT in 8.717 seconds (JVM running for 11.592)
+2022-02-25 16:18:01.097 [INFO ] [main] ReadDataFromJson - SUCCESS Load Data
+2022-02-25 16:24:50.635 [DEBUG] [main] ReadDataFromJson - at get readData methode 
+2022-02-25 16:24:50.654 [DEBUG] [main] ReadDataFromJson - reading json file 
+2022-02-25 16:24:50.759 [DEBUG] [main] ReadDataFromJson - loading person data 
+2022-02-25 16:24:51.038 [DEBUG] [main] ReadDataFromJson - loading Fire station data 
+2022-02-25 16:24:51.043 [DEBUG] [main] ReadDataFromJson - loading Medical record data 
+2022-02-25 16:24:51.064 [INFO ] [main] ReadDataFromJson - SUCCESS Load Data
+2022-02-25 16:26:23.598 [DEBUG] [main] ReadDataFromJson - at get readData methode 
+2022-02-25 16:26:23.616 [DEBUG] [main] ReadDataFromJson - reading json file 
+2022-02-25 16:26:23.703 [DEBUG] [main] ReadDataFromJson - loading person data 
+2022-02-25 16:26:24.002 [DEBUG] [main] ReadDataFromJson - loading Fire station data 
+2022-02-25 16:26:24.007 [DEBUG] [main] ReadDataFromJson - loading Medical record data 
+2022-02-25 16:26:24.060 [INFO ] [main] ReadDataFromJson - SUCCESS Load Data
+2022-02-25 16:28:24.969 [DEBUG] [main] ReadDataFromJson - at get readData methode 
+2022-02-25 16:28:24.989 [DEBUG] [main] ReadDataFromJson - reading json file 
+2022-02-25 16:28:25.083 [DEBUG] [main] ReadDataFromJson - loading person data 
+2022-02-25 16:28:25.352 [DEBUG] [main] ReadDataFromJson - loading Fire station data 
+2022-02-25 16:28:25.357 [DEBUG] [main] ReadDataFromJson - loading Medical record data 
+2022-02-25 16:28:25.377 [INFO ] [main] ReadDataFromJson - SUCCESS Load Data
+2022-02-25 16:31:32.456 [DEBUG] [main] ReadDataFromJson - at get readData methode 
+2022-02-25 16:31:32.475 [DEBUG] [main] ReadDataFromJson - reading json file 
+2022-02-25 16:31:32.558 [DEBUG] [main] ReadDataFromJson - loading person data 
+2022-02-25 16:31:32.848 [DEBUG] [main] ReadDataFromJson - loading Fire station data 
+2022-02-25 16:31:32.853 [DEBUG] [main] ReadDataFromJson - loading Medical record data 
+2022-02-25 16:31:32.875 [INFO ] [main] ReadDataFromJson - SUCCESS Load Data
+2022-02-25 16:32:11.469 [DEBUG] [main] ReadDataFromJson - at get readData methode 
+2022-02-25 16:32:11.477 [DEBUG] [main] ReadDataFromJson - reading json file 
+2022-02-25 16:32:11.500 [DEBUG] [main] ReadDataFromJson - loading person data 
+2022-02-25 16:32:11.590 [DEBUG] [main] ReadDataFromJson - loading Fire station data 
+2022-02-25 16:32:11.594 [DEBUG] [main] ReadDataFromJson - loading Medical record data 
+2022-02-25 16:32:11.608 [INFO ] [main] ReadDataFromJson - SUCCESS Load Data
+2022-02-25 16:32:55.697 [DEBUG] [main] ReadDataFromJson - at get readData methode 
+2022-02-25 16:32:55.707 [DEBUG] [main] ReadDataFromJson - reading json file 
+2022-02-25 16:32:55.744 [DEBUG] [main] ReadDataFromJson - loading person data 
+2022-02-25 16:32:55.860 [DEBUG] [main] ReadDataFromJson - loading Fire station data 
+2022-02-25 16:32:55.862 [DEBUG] [main] ReadDataFromJson - loading Medical record data 
+2022-02-25 16:32:55.876 [INFO ] [main] ReadDataFromJson - SUCCESS Load Data
+2022-02-25 16:34:24.813 [DEBUG] [main] ReadDataFromJson - at get readData methode 
+2022-02-25 16:34:24.840 [DEBUG] [main] ReadDataFromJson - reading json file 
+2022-02-25 16:34:24.883 [DEBUG] [main] ReadDataFromJson - loading person data 
+2022-02-25 16:34:25.005 [DEBUG] [main] ReadDataFromJson - loading Fire station data 
+2022-02-25 16:34:25.007 [DEBUG] [main] ReadDataFromJson - loading Medical record data 
+2022-02-25 16:34:25.018 [INFO ] [main] ReadDataFromJson - SUCCESS Load Data
+2022-02-25 16:34:57.542 [DEBUG] [main] ReadDataFromJson - at get readData methode 
+2022-02-25 16:34:58.245 [DEBUG] [main] ReadDataFromJson - reading json file 
+2022-02-25 16:34:59.466 [DEBUG] [main] ReadDataFromJson - loading person data 
+2022-02-25 16:35:04.428 [DEBUG] [main] ReadDataFromJson - loading Fire station data 
+2022-02-25 16:35:04.435 [DEBUG] [main] ReadDataFromJson - loading Medical record data 
+2022-02-25 16:35:04.506 [INFO ] [main] ReadDataFromJson - SUCCESS Load Data
+2022-02-25 16:36:14.268 [DEBUG] [main] ReadDataFromJson - at get readData methode 
+2022-02-25 16:36:16.486 [DEBUG] [main] ReadDataFromJson - reading json file 
+2022-02-25 16:36:21.135 [DEBUG] [main] ReadDataFromJson - loading person data 
+2022-02-25 16:36:26.813 [DEBUG] [main] ReadDataFromJson - loading Fire station data 
+2022-02-25 16:36:27.788 [DEBUG] [main] ReadDataFromJson - loading Medical record data 
+2022-02-25 16:37:08.323 [DEBUG] [main] ReadDataFromJson - at get readData methode 
+2022-02-25 16:37:10.553 [DEBUG] [main] ReadDataFromJson - reading json file 
+2022-02-25 16:37:22.821 [DEBUG] [main] ReadDataFromJson - loading person data 
+2022-02-25 16:38:16.999 [DEBUG] [main] ReadDataFromJson - at get readData methode 
+2022-02-25 16:38:17.006 [DEBUG] [main] ReadDataFromJson - reading json file 
+2022-02-25 16:38:17.035 [DEBUG] [main] ReadDataFromJson - loading person data 
+2022-02-25 16:38:17.132 [DEBUG] [main] ReadDataFromJson - loading Fire station data 
+2022-02-25 16:38:17.134 [DEBUG] [main] ReadDataFromJson - loading Medical record data 
+2022-02-25 16:38:17.146 [INFO ] [main] ReadDataFromJson - SUCCESS Load Data
+2022-02-25 16:39:46.323 [DEBUG] [main] ReadDataFromJson - at get readData methode 
+2022-02-25 16:39:46.333 [DEBUG] [main] ReadDataFromJson - reading json file 
+2022-02-25 16:39:46.369 [DEBUG] [main] ReadDataFromJson - loading person data 
+2022-02-25 16:39:46.471 [DEBUG] [main] ReadDataFromJson - loading Fire station data 
+2022-02-25 16:39:46.474 [DEBUG] [main] ReadDataFromJson - loading Medical record data 
+2022-02-25 16:39:46.494 [INFO ] [main] ReadDataFromJson - SUCCESS Load Data
+2022-02-25 16:40:24.338 [DEBUG] [main] ReadDataFromJson - at get readData methode 
+2022-02-25 16:40:24.348 [DEBUG] [main] ReadDataFromJson - reading json file 
+2022-02-25 16:40:24.381 [DEBUG] [main] ReadDataFromJson - loading person data 
+2022-02-25 16:40:24.469 [DEBUG] [main] ReadDataFromJson - loading Fire station data 
+2022-02-25 16:40:24.472 [DEBUG] [main] ReadDataFromJson - loading Medical record data 
+2022-02-25 16:40:24.492 [INFO ] [main] ReadDataFromJson - SUCCESS Load Data
+2022-02-25 16:41:29.412 [DEBUG] [main] ReadDataFromJson - at get readData methode 
+2022-02-25 16:41:29.423 [DEBUG] [main] ReadDataFromJson - reading json file 
+2022-02-25 16:41:29.463 [DEBUG] [main] ReadDataFromJson - loading person data 
+2022-02-25 16:41:29.578 [DEBUG] [main] ReadDataFromJson - loading Fire station data 
+2022-02-25 16:41:29.580 [DEBUG] [main] ReadDataFromJson - loading Medical record data 
+2022-02-25 16:41:29.595 [INFO ] [main] ReadDataFromJson - SUCCESS Load Data
+2022-02-25 16:51:19.667 [DEBUG] [main] ReadDataFromJson - at get readData methode 
+2022-02-25 16:51:19.681 [DEBUG] [main] ReadDataFromJson - reading json file 
+2022-02-25 16:51:19.710 [DEBUG] [main] ReadDataFromJson - loading person data 
+2022-02-25 16:51:19.813 [DEBUG] [main] ReadDataFromJson - loading Fire station data 
+2022-02-25 16:51:19.818 [DEBUG] [main] ReadDataFromJson - loading Medical record data 
+2022-02-25 16:51:19.837 [INFO ] [main] ReadDataFromJson - SUCCESS Load Data
+2022-02-25 16:52:44.025 [DEBUG] [main] ReadDataFromJson - at get readData methode 
+2022-02-25 16:52:44.035 [DEBUG] [main] ReadDataFromJson - reading json file 
+2022-02-25 16:52:44.068 [DEBUG] [main] ReadDataFromJson - loading person data 
+2022-02-25 16:52:44.169 [DEBUG] [main] ReadDataFromJson - loading Fire station data 
+2022-02-25 16:52:44.173 [DEBUG] [main] ReadDataFromJson - loading Medical record data 
+2022-02-25 16:52:44.191 [INFO ] [main] ReadDataFromJson - SUCCESS Load Data
+2022-02-25 16:53:15.930 [INFO ] [main] ReadDataFromJsonIT - Starting ReadDataFromJsonIT using Java 16.0.2 on DESKTOP-CL452JV with PID 14608 (started by utilisateur1 in C:\Users\utilisateur1\git\SafetyNet_Alerts)
+2022-02-25 16:53:15.942 [INFO ] [main] ReadDataFromJsonIT - No active profile set, falling back to default profiles: default
+2022-02-25 16:53:19.512 [INFO ] [main] ReadDataFromJson - SUCCESS Load Data
+2022-02-25 16:53:22.266 [INFO ] [main] ReadDataFromJsonIT - Started ReadDataFromJsonIT in 6.859 seconds (JVM running for 9.928)
+2022-02-25 16:53:24.281 [INFO ] [main] ReadDataFromJson - SUCCESS Load Data
+2022-02-25 23:50:49.027 [DEBUG] [main] AlertsApplication - AlertsApplication start
+2022-02-25 23:50:50.129 [INFO ] [main] AlertsApplication - Starting AlertsApplication using Java 16.0.2 on DESKTOP-CL452JV with PID 16252 (C:\Users\utilisateur1\git\SafetyNet_Alerts\target\classes started by utilisateur1 in C:\Users\utilisateur1\git\SafetyNet_Alerts)
+2022-02-25 23:50:50.136 [INFO ] [main] AlertsApplication - No active profile set, falling back to default profiles: default
+2022-02-25 23:50:54.210 [INFO ] [main] ReadDataFromJson - SUCCESS Load Data
+2022-02-25 23:50:55.403 [INFO ] [main] AlertsApplication - Started AlertsApplication in 6.118 seconds (JVM running for 8.03)
+2022-02-25 23:51:05.263 [INFO ] [http-nio-8080-exec-1] AlertsController - population covered by station getted   HttpStatus :200 OK
+2022-02-25 23:51:10.524 [INFO ] [http-nio-8080-exec-3] AlertsController -  Childen By address getted HttpStatus :200 OK
+2022-02-25 23:51:32.780 [INFO ] [http-nio-8080-exec-4] AlertsController -  Childen By address getted HttpStatus :200 OK
+2022-02-25 23:51:50.461 [INFO ] [http-nio-8080-exec-5] AlertsController - phone numbers of population covered by station getted   HttpStatus :200 OK
+2022-02-25 23:51:55.390 [INFO ] [http-nio-8080-exec-6] AlertsController -  Inhabitants By Address getted  HttpStatus :200 OK
+2022-02-25 23:52:10.798 [INFO ] [http-nio-8080-exec-7] AlertsController -  floods By Station getted   HttpStatus :200 OK
+2022-02-25 23:52:44.890 [INFO ] [http-nio-8080-exec-8] AlertsController -  Childen By address getted HttpStatus :200 OK
+2022-02-25 23:52:53.698 [INFO ] [http-nio-8080-exec-9] AlertsController - phone numbers of population covered by station getted   HttpStatus :200 OK
+2022-02-25 23:52:56.878 [INFO ] [http-nio-8080-exec-10] AlertsController -  Inhabitants By Address getted  HttpStatus :200 OK
+2022-02-25 23:53:00.898 [INFO ] [http-nio-8080-exec-2] AlertsController -  floods By Station getted   HttpStatus :200 OK
+2022-02-25 23:53:04.885 [INFO ] [http-nio-8080-exec-1] AlertsController - Person Infos By Name getted   HttpStatus :200 OK
+2022-02-25 23:53:04.887 [ERROR] [http-nio-8080-exec-1] PersonService - person jacob boyd not found
+2022-02-25 23:53:09.734 [INFO ] [http-nio-8080-exec-3] AlertsController - Person Infos By Name getted   HttpStatus :200 OK
+2022-02-25 23:53:09.735 [ERROR] [http-nio-8080-exec-3] PersonService - person jacob boyd not found
+2022-02-25 23:53:35.538 [INFO ] [http-nio-8080-exec-4] AlertsController - Community Emails getted   HttpStatus :200 OK
+2022-02-25 23:53:46.051 [ERROR] [http-nio-8080-exec-5] PersonService - person jacob boyd not found
+2022-02-25 23:55:58.640 [DEBUG] [main] AlertsApplication - AlertsApplication start
+2022-02-25 23:55:59.762 [INFO ] [main] AlertsApplication - Starting AlertsApplication using Java 16.0.2 on DESKTOP-CL452JV with PID 18716 (C:\Users\utilisateur1\git\SafetyNet_Alerts\target\classes started by utilisateur1 in C:\Users\utilisateur1\git\SafetyNet_Alerts)
+2022-02-25 23:55:59.771 [INFO ] [main] AlertsApplication - No active profile set, falling back to default profiles: default
+2022-02-25 23:56:04.560 [INFO ] [main] ReadDataFromJson - SUCCESS Load Data
+2022-02-25 23:56:05.900 [INFO ] [main] AlertsApplication - Started AlertsApplication in 7.058 seconds (JVM running for 8.868)
+2022-02-25 23:56:15.636 [INFO ] [http-nio-8080-exec-2] PersonController - person Jacob Boyd getted with success   HttpStatus :200 OK
+2022-02-25 23:56:36.940 [INFO ] [http-nio-8080-exec-3] AlertsController -  Childen By address getted HttpStatus :200 OK
+2022-02-25 23:56:58.378 [INFO ] [http-nio-8080-exec-4] PersonController - persons list getted with success   HttpStatus :200 OK
+2022-02-25 23:57:18.244 [INFO ] [http-nio-8080-exec-5] AlertsController -  Childen By address getted HttpStatus :200 OK
+2022-02-25 23:57:24.936 [INFO ] [http-nio-8080-exec-6] AlertsController -  Childen By address getted HttpStatus :200 OK
+2022-02-26 03:30:40.046 [INFO ] [main] AlertsApplicationTests - Starting AlertsApplicationTests using Java 16.0.2 on DESKTOP-CL452JV with PID 5660 (started by utilisateur1 in C:\Users\utilisateur1\git\SafetyNet_Alerts)
+2022-02-26 03:30:40.065 [INFO ] [main] AlertsApplicationTests - No active profile set, falling back to default profiles: default
+2022-02-26 03:30:44.530 [INFO ] [main] ReadDataFromJson - SUCCESS Load Data
+2022-02-26 03:30:47.762 [INFO ] [main] AlertsApplicationTests - Started AlertsApplicationTests in 8.552 seconds (JVM running for 14.458)
+2022-02-26 03:30:50.242 [INFO ] [main] FireStationControllerTest - Starting FireStationControllerTest using Java 16.0.2 on DESKTOP-CL452JV with PID 5660 (started by utilisateur1 in C:\Users\utilisateur1\git\SafetyNet_Alerts)
+2022-02-26 03:30:50.246 [INFO ] [main] FireStationControllerTest - No active profile set, falling back to default profiles: default
+2022-02-26 03:30:53.153 [INFO ] [main] FireStationControllerTest - Started FireStationControllerTest in 3.005 seconds (JVM running for 19.849)
+2022-02-26 03:30:53.546 [ERROR] [main] FireStationController - Invalid fire station number or address HttpStatus :204 NO_CONTENT
+2022-02-26 03:30:53.907 [INFO ] [main] FireStationController - fireStation 3 at the address1509 Culver St saved with success   HttpStatus :201 CREATED
+2022-02-26 03:30:54.010 [INFO ] [main] FireStationController - fireStations list getted with success   HttpStatus :200 OK
+2022-02-26 03:30:54.084 [INFO ] [main] FireStationController - fireStation 2 at the address125 rue nationale  updated with success   HttpStatus :200 OK
+2022-02-26 03:30:54.116 [ERROR] [main] FireStationController - Invalid fire station number or address HttpStatus :204 NO_CONTENT
+2022-02-26 03:30:54.170 [INFO ] [main] FireStationController - fireStation 3 at the address1509 Culver St deleted with success   HttpStatus :200 OK
+2022-02-26 03:30:54.213 [ERROR] [main] FireStationController - Invalid fire station address HttpStatus :400 BAD_REQUEST
+2022-02-26 03:30:54.246 [ERROR] [main] FireStationController - Invalid fire station number or address HttpStatus :400 BAD_REQUEST
+2022-02-26 03:30:54.280 [ERROR] [main] FireStationController - Invalid fire station number or address HttpStatus :400 BAD_REQUEST
+2022-02-26 03:30:54.464 [INFO ] [main] PersonControllerTest - Starting PersonControllerTest using Java 16.0.2 on DESKTOP-CL452JV with PID 5660 (started by utilisateur1 in C:\Users\utilisateur1\git\SafetyNet_Alerts)
+2022-02-26 03:30:54.467 [INFO ] [main] PersonControllerTest - No active profile set, falling back to default profiles: default
+2022-02-26 03:30:56.063 [INFO ] [main] PersonControllerTest - Started PersonControllerTest in 1.713 seconds (JVM running for 22.758)
+2022-02-26 03:30:56.132 [ERROR] [main] PersonController - Invalid name  HttpStatus :400 BAD_REQUEST
+2022-02-26 03:30:56.214 [ERROR] [main] PersonController - Invalid name  HttpStatus :400 BAD_REQUEST
+2022-02-26 03:30:56.238 [ERROR] [main] PersonController - Invalid name HttpStatus :400 BAD_REQUEST
+2022-02-26 03:30:56.293 [ERROR] [main] PersonController - Invalid name HttpStatus :400 BAD_REQUEST
+2022-02-26 03:30:56.318 [ERROR] [main] PersonController - Invalid Name  HttpStatus :400 BAD_REQUEST
+2022-02-26 03:30:56.349 [INFO ] [main] PersonController - person John Boyd deleted with success   HttpStatus :200 OK
+2022-02-26 03:30:56.383 [INFO ] [main] PersonController - person John Boyd Updated with success   HttpStatus :200 OK
+2022-02-26 03:30:56.413 [INFO ] [main] PersonController - person John Boyd saved with success   HttpStatus :201 CREATED
+2022-02-26 03:30:56.438 [ERROR] [main] PersonController - Invalid name  HttpStatus :400 BAD_REQUEST
+2022-02-26 03:30:56.462 [ERROR] [main] PersonController - Invalid Name  HttpStatus :400 BAD_REQUEST
+2022-02-26 03:30:56.506 [INFO ] [main] PersonController - person John Boyd getted with success   HttpStatus :200 OK
+2022-02-26 03:30:56.539 [ERROR] [main] PersonController - Invalid name  HttpStatus :400 BAD_REQUEST
+2022-02-26 03:30:56.563 [INFO ] [main] PersonController - persons list getted with success   HttpStatus :200 OK
+2022-02-26 03:30:56.744 [INFO ] [main] MedicalRecordControllerTest - Starting MedicalRecordControllerTest using Java 16.0.2 on DESKTOP-CL452JV with PID 5660 (started by utilisateur1 in C:\Users\utilisateur1\git\SafetyNet_Alerts)
+2022-02-26 03:30:56.748 [INFO ] [main] MedicalRecordControllerTest - No active profile set, falling back to default profiles: default
+2022-02-26 03:30:58.131 [INFO ] [main] MedicalRecordControllerTest - Started MedicalRecordControllerTest in 1.473 seconds (JVM running for 24.827)
+2022-02-26 03:30:58.149 [INFO ] [main] MedicalRecordController - MedicalRecord of John Boyd deleted with success   HttpStatus :200 OK
+2022-02-26 03:30:58.242 [ERROR] [main] MedicalRecordController - Invalid name HttpStatus:204 NO_CONTENT
+2022-02-26 03:30:58.299 [ERROR] [main] MedicalRecordController - Invalid name HttpStatus :400 BAD_REQUEST
+2022-02-26 03:30:58.329 [ERROR] [main] MedicalRecordController - Invalid name HttpStatus:204 NO_CONTENT
+2022-02-26 03:30:58.355 [INFO ] [main] MedicalRecordController - MedicalRecords list getted with success   HttpStatus :200 OK
+2022-02-26 03:30:58.381 [ERROR] [main] MedicalRecordController - Invalid name HttpStatus :400 BAD_REQUEST
+2022-02-26 03:30:58.417 [INFO ] [main] MedicalRecordController - MedicalRecord of John Boyd saved with success   HttpStatus :201 CREATED
+2022-02-26 03:30:58.449 [INFO ] [main] MedicalRecordController - MedicalRecord of John Boyd Updated with success   HttpStatus :200 OK
+2022-02-26 03:30:58.476 [ERROR] [main] MedicalRecordController - Invalid name HttpStatus :204 NO_CONTENT
+2022-02-26 03:30:58.515 [ERROR] [main] MedicalRecordController - Invalid name HttpStatus :204 NO_CONTENT
+2022-02-26 03:30:58.616 [INFO ] [main] AlertsControlllerTest - Starting AlertsControlllerTest using Java 16.0.2 on DESKTOP-CL452JV with PID 5660 (started by utilisateur1 in C:\Users\utilisateur1\git\SafetyNet_Alerts)
+2022-02-26 03:30:58.618 [INFO ] [main] AlertsControlllerTest - No active profile set, falling back to default profiles: default
+2022-02-26 03:30:59.779 [INFO ] [main] AlertsControlllerTest - Started AlertsControlllerTest in 1.224 seconds (JVM running for 26.474)
+2022-02-26 03:30:59.794 [ERROR] [main] AlertsController - invalid address HttpStatus :400 BAD_REQUEST
+2022-02-26 03:30:59.812 [INFO ] [main] AlertsController -  Inhabitants By Address getted  HttpStatus :200 OK
+2022-02-26 03:30:59.850 [INFO ] [main] AlertsController -  Childen By address getted HttpStatus :200 OK
+2022-02-26 03:30:59.873 [INFO ] [main] AlertsController - Community Emails getted   HttpStatus :200 OK
+2022-02-26 03:30:59.893 [INFO ] [main] AlertsController - Person Infos By Name getted   HttpStatus :200 OK
+2022-02-26 03:30:59.926 [ERROR] [main] AlertsController - Invalid name  HttpStatus :400 BAD_REQUEST
+2022-02-26 03:30:59.948 [ERROR] [main] AlertsController - invalid city  HttpStatus :400 BAD_REQUEST
+2022-02-26 03:30:59.972 [ERROR] [main] AlertsController - invalid address HttpStatus :400 BAD_REQUEST
+2022-02-26 03:30:59.991 [INFO ] [main] AlertsController - population covered by station getted   HttpStatus :200 OK
+2022-02-26 03:31:00.020 [ERROR] [main] AlertsController - invalid Station number HttpStatus :400 BAD_REQUEST
+2022-02-26 03:31:00.035 [ERROR] [main] AlertsController - Invalid name  HttpStatus :400 BAD_REQUEST
+2022-02-26 03:31:00.065 [INFO ] [main] AlertsController - phone numbers of population covered by station getted   HttpStatus :200 OK
+2022-02-26 03:31:00.119 [ERROR] [main] AlertsController - invalid Station number  HttpStatus :400 BAD_REQUEST
+2022-02-26 03:31:00.158 [INFO ] [main] AlertsController -  floods By Station getted   HttpStatus :200 OK
+2022-02-26 03:31:00.190 [ERROR] [main] AlertsController - invalid Station number  HttpStatus :400 BAD_REQUEST
+2022-02-26 03:31:00.291 [INFO ] [main] FireStationControllerIT - Starting FireStationControllerIT using Java 16.0.2 on DESKTOP-CL452JV with PID 5660 (started by utilisateur1 in C:\Users\utilisateur1\git\SafetyNet_Alerts)
+2022-02-26 03:31:00.293 [INFO ] [main] FireStationControllerIT - No active profile set, falling back to default profiles: default
+2022-02-26 03:31:01.142 [INFO ] [main] ReadDataFromJson - SUCCESS Load Data
+2022-02-26 03:31:02.372 [INFO ] [main] FireStationControllerIT - Started FireStationControllerIT in 2.132 seconds (JVM running for 29.068)
+2022-02-26 03:31:02.394 [INFO ] [main] ReadDataFromJson - SUCCESS Load Data
+2022-02-26 03:31:02.420 [INFO ] [main] FireStationService - updating fire station FireStation [address=834 Binoc Ave, station=2]
+2022-02-26 03:31:02.424 [INFO ] [main] FireStationController - fireStation 2 at the address834 Binoc Ave updated with success   HttpStatus :200 OK
+2022-02-26 03:31:02.465 [INFO ] [main] ReadDataFromJson - SUCCESS Load Data
+2022-02-26 03:31:02.473 [INFO ] [main] FireStationService - updating fire station FireStation [address=1509 national St, station=2]
+2022-02-26 03:31:02.473 [ERROR] [main] FireStationService - the address :1509 national St cannot be changed
+2022-02-26 03:31:02.517 [INFO ] [main] ReadDataFromJson - SUCCESS Load Data
+2022-02-26 03:31:02.521 [INFO ] [main] FireStationService - saving of fireStation FireStation [address=1509 Culver St, station=3]
+2022-02-26 03:31:02.522 [ERROR] [main] FireStationService - this FireStation 3 at the address 1509 Culver St is already exsits
+2022-02-26 03:31:02.540 [INFO ] [main] ReadDataFromJson - SUCCESS Load Data
+2022-02-26 03:31:02.547 [INFO ] [main] FireStationService - deleting fire station at address 1509 national St
+2022-02-26 03:31:02.547 [ERROR] [main] FireStationService - firestation at address  :1509 national St not found
+2022-02-26 03:31:02.565 [INFO ] [main] ReadDataFromJson - SUCCESS Load Data
+2022-02-26 03:31:02.568 [INFO ] [main] FireStationService - deleting fire station at address 489 Manchester St
+2022-02-26 03:31:02.569 [INFO ] [main] FireStationController - fireStation 4 at the address489 Manchester St deleted with success   HttpStatus :200 OK
+2022-02-26 03:31:02.589 [INFO ] [main] ReadDataFromJson - SUCCESS Load Data
+2022-02-26 03:31:02.596 [INFO ] [main] FireStationService - saving of fireStation FireStation [address=1509 National St, station=3]
+2022-02-26 03:31:02.598 [INFO ] [main] FireStationController - fireStation 3 at the address1509 National St saved with success   HttpStatus :201 CREATED
+2022-02-26 03:31:02.632 [INFO ] [main] ReadDataFromJson - SUCCESS Load Data
+2022-02-26 03:31:02.636 [INFO ] [main] FireStationService -  getting all fire stations 
+2022-02-26 03:31:02.639 [INFO ] [main] FireStationController - fireStations list getted with success   HttpStatus :200 OK
+2022-02-26 03:31:02.953 [INFO ] [main] ReadDataFromJson - SUCCESS Load Data
+2022-02-26 03:31:02.964 [INFO ] [main] MedicalRecordService - saving of medicalRecord MedicalRecord [firstName=John, lastName=Boyd, birthdate=03/06/1984, medications=[aznol:350mg, hydrapermazol:100mg], allergies=[nillacilan]]
+2022-02-26 03:31:02.967 [ERROR] [main] MedicalRecordService - John Boyd already has a medical record
+2022-02-26 03:31:03.022 [INFO ] [main] ReadDataFromJson - SUCCESS Load Data
+2022-02-26 03:31:03.028 [INFO ] [main] MedicalRecordService - saving of medicalRecord MedicalRecord [firstName=Eric, lastName=Boyd, birthdate=03/06/1984, medications=[aznol:350mg, hydrapermazol:100mg], allergies=[nillacilan]]
+2022-02-26 03:31:03.029 [INFO ] [main] MedicalRecordController - MedicalRecord of Eric Boyd saved with success   HttpStatus :201 CREATED
+2022-02-26 03:31:03.056 [INFO ] [main] ReadDataFromJson - SUCCESS Load Data
+2022-02-26 03:31:03.085 [INFO ] [main] MedicalRecordService - updating medicalRecord MedicalRecord [firstName=lola, lastName=Boyd, birthdate=03/06/1984, medications=null, allergies=null]
+2022-02-26 03:31:03.097 [ERROR] [main] MedicalRecordService - the name cannot be changed
+2022-02-26 03:31:03.118 [INFO ] [main] ReadDataFromJson - SUCCESS Load Data
+2022-02-26 03:31:03.122 [INFO ] [main] MedicalRecordService - deleting medicalRecord of Eric Cadigan
+2022-02-26 03:31:03.125 [INFO ] [main] MedicalRecordService - find medicalRecord of Eric Cadigan
+2022-02-26 03:31:03.127 [INFO ] [main] MedicalRecordController - MedicalRecord of Eric Cadigan deleted with success   HttpStatus :200 OK
+2022-02-26 03:31:03.171 [INFO ] [main] ReadDataFromJson - SUCCESS Load Data
+2022-02-26 03:31:03.177 [INFO ] [main] MedicalRecordService - updating medicalRecord MedicalRecord [firstName=Jacob, lastName=Boyd, birthdate=03/06/1984, medications=null, allergies=null]
+2022-02-26 03:31:03.178 [INFO ] [main] MedicalRecordController - MedicalRecord of Jacob Boyd Updated with success   HttpStatus :200 OK
+2022-02-26 03:31:03.198 [INFO ] [main] ReadDataFromJson - SUCCESS Load Data
+2022-02-26 03:31:03.200 [INFO ] [main] MedicalRecordService -  getting all Medical Records 
+2022-02-26 03:31:03.202 [INFO ] [main] MedicalRecordController - MedicalRecords list getted with success   HttpStatus :200 OK
+2022-02-26 03:31:03.227 [INFO ] [main] ReadDataFromJson - SUCCESS Load Data
+2022-02-26 03:31:03.237 [INFO ] [main] MedicalRecordService - deleting medicalRecord of lola Cadigan
+2022-02-26 03:31:03.239 [INFO ] [main] MedicalRecordService - find medicalRecord of lola Cadigan
+2022-02-26 03:31:03.241 [ERROR] [main] MedicalRecordService - person lola Cadigan do not have medical records
+2022-02-26 03:31:03.342 [INFO ] [main] ReadDataFromJson - SUCCESS Load Data
+2022-02-26 03:31:03.350 [INFO ] [main] AlertsController -  Inhabitants By Address getted  HttpStatus :200 OK
+2022-02-26 03:31:03.353 [INFO ] [main] AlertService - get Inhabitant for Address 1509 Culver st
+2022-02-26 03:31:03.355 [INFO ] [main] PersonService -  find person at address1509 Culver st  
+2022-02-26 03:31:03.358 [INFO ] [main] FireStationService - find by address 1509 Culver st
+2022-02-26 03:31:03.359 [INFO ] [main] MedicalRecordService - find medicalRecord of John Boyd
+2022-02-26 03:31:03.369 [INFO ] [main] MedicalRecordService - find medicalRecord of Jacob Boyd
+2022-02-26 03:31:03.372 [INFO ] [main] MedicalRecordService - find medicalRecord of Tenley Boyd
+2022-02-26 03:31:03.392 [INFO ] [main] MedicalRecordService - find medicalRecord of Roger Boyd
+2022-02-26 03:31:03.393 [INFO ] [main] MedicalRecordService - find medicalRecord of Felicia Boyd
+2022-02-26 03:31:03.419 [INFO ] [main] ReadDataFromJson - SUCCESS Load Data
+2022-02-26 03:31:03.422 [INFO ] [main] AlertService -  get Children for Address 1509 Culver st 
+2022-02-26 03:31:03.424 [INFO ] [main] PersonService -  find person at address1509 Culver st  
+2022-02-26 03:31:03.425 [INFO ] [main] MedicalRecordService - find medicalRecord of John Boyd
+2022-02-26 03:31:03.429 [INFO ] [main] MedicalRecordService - find medicalRecord of Jacob Boyd
+2022-02-26 03:31:03.429 [INFO ] [main] MedicalRecordService - find medicalRecord of Tenley Boyd
+2022-02-26 03:31:03.432 [INFO ] [main] MedicalRecordService - find medicalRecord of Roger Boyd
+2022-02-26 03:31:03.434 [INFO ] [main] MedicalRecordService - find medicalRecord of Felicia Boyd
+2022-02-26 03:31:03.434 [INFO ] [main] AlertsController -  Childen By address getted HttpStatus :200 OK
+2022-02-26 03:31:03.453 [INFO ] [main] ReadDataFromJson - SUCCESS Load Data
+2022-02-26 03:31:03.464 [INFO ] [main] AlertsController - population covered by station getted   HttpStatus :200 OK
+2022-02-26 03:31:03.464 [INFO ] [main] AlertService - get population couvred for station 5 
+2022-02-26 03:31:03.464 [INFO ] [main] FireStationService - find by station 5
+2022-02-26 03:31:03.467 [INFO ] [main] PersonService -  find person at address951 LoneTow Rd  
+2022-02-26 03:31:03.487 [INFO ] [main] ReadDataFromJson - SUCCESS Load Data
+2022-02-26 03:31:03.492 [INFO ] [main] AlertsController - Community Emails getted   HttpStatus :200 OK
+2022-02-26 03:31:03.495 [INFO ] [main] AlertService -  get Community Email for Culver city 
+2022-02-26 03:31:03.498 [INFO ] [main] PersonService -  find person living in city Culver  
+2022-02-26 03:31:03.521 [INFO ] [main] ReadDataFromJson - SUCCESS Load Data
+2022-02-26 03:31:03.524 [INFO ] [main] AlertsController - Person Infos By Name getted   HttpStatus :200 OK
+2022-02-26 03:31:03.525 [INFO ] [main] AlertService - get Person Infos By Name for john Boyd 
+2022-02-26 03:31:03.526 [INFO ] [main] PersonService -  find persons with lastNameBoyd  
+2022-02-26 03:31:03.527 [INFO ] [main] PersonService -  getting person john Boyd 
+2022-02-26 03:31:03.529 [INFO ] [main] MedicalRecordService - find medicalRecord of John Boyd
+2022-02-26 03:31:03.529 [INFO ] [main] MedicalRecordService - find medicalRecord of Jacob Boyd
+2022-02-26 03:31:03.531 [INFO ] [main] MedicalRecordService - find medicalRecord of Tenley Boyd
+2022-02-26 03:31:03.532 [INFO ] [main] MedicalRecordService - find medicalRecord of Roger Boyd
+2022-02-26 03:31:03.533 [INFO ] [main] MedicalRecordService - find medicalRecord of Felicia Boyd
+2022-02-26 03:31:03.534 [INFO ] [main] MedicalRecordService - find medicalRecord of Allison Boyd
+2022-02-26 03:31:03.594 [INFO ] [main] ReadDataFromJson - SUCCESS Load Data
+2022-02-26 03:31:03.599 [INFO ] [main] AlertsController - population covered by station getted   HttpStatus :200 OK
+2022-02-26 03:31:03.601 [INFO ] [main] AlertService - get population couvred for station 3 
+2022-02-26 03:31:03.602 [INFO ] [main] FireStationService - find by station 3
+2022-02-26 03:31:03.602 [INFO ] [main] PersonService -  find person at address1509 Culver St  
+2022-02-26 03:31:03.602 [INFO ] [main] PersonService -  find person at address834 Binoc Ave  
+2022-02-26 03:31:03.603 [INFO ] [main] PersonService -  find person at address748 Townings Dr  
+2022-02-26 03:31:03.603 [INFO ] [main] PersonService -  find person at address112 Steppes Pl  
+2022-02-26 03:31:03.605 [INFO ] [main] PersonService -  find person at address748 Townings Dr  
+2022-02-26 03:31:03.605 [INFO ] [main] MedicalRecordService - find medicalRecord of John Boyd
+2022-02-26 03:31:03.606 [INFO ] [main] MedicalRecordService - find medicalRecord of Jacob Boyd
+2022-02-26 03:31:03.606 [INFO ] [main] MedicalRecordService - find medicalRecord of Tenley Boyd
+2022-02-26 03:31:03.607 [INFO ] [main] MedicalRecordService - find medicalRecord of Roger Boyd
+2022-02-26 03:31:03.609 [INFO ] [main] MedicalRecordService - find medicalRecord of Felicia Boyd
+2022-02-26 03:31:03.611 [INFO ] [main] MedicalRecordService - find medicalRecord of Tessa Carman
+2022-02-26 03:31:03.611 [INFO ] [main] MedicalRecordService - find medicalRecord of Foster Shepard
+2022-02-26 03:31:03.613 [INFO ] [main] MedicalRecordService - find medicalRecord of Clive Ferguson
+2022-02-26 03:31:03.614 [INFO ] [main] MedicalRecordService - find medicalRecord of Tony Cooper
+2022-02-26 03:31:03.615 [INFO ] [main] MedicalRecordService - find medicalRecord of Ron Peters
+2022-02-26 03:31:03.616 [INFO ] [main] MedicalRecordService - find medicalRecord of Allison Boyd
+2022-02-26 03:31:03.617 [INFO ] [main] MedicalRecordService - find medicalRecord of Foster Shepard
+2022-02-26 03:31:03.620 [INFO ] [main] MedicalRecordService - find medicalRecord of Clive Ferguson
+2022-02-26 03:31:03.657 [INFO ] [main] ReadDataFromJson - SUCCESS Load Data
+2022-02-26 03:31:03.660 [INFO ] [main] AlertsController - phone numbers of population covered by station getted   HttpStatus :200 OK
+2022-02-26 03:31:03.661 [INFO ] [main] AlertService - get Phone Number for station 3 
+2022-02-26 03:31:03.661 [INFO ] [main] AlertService - get population couvred for station 3 
+2022-02-26 03:31:03.661 [INFO ] [main] FireStationService - find by station 3
+2022-02-26 03:31:03.661 [INFO ] [main] PersonService -  find person at address1509 Culver St  
+2022-02-26 03:31:03.662 [INFO ] [main] PersonService -  find person at address834 Binoc Ave  
+2022-02-26 03:31:03.662 [INFO ] [main] PersonService -  find person at address748 Townings Dr  
+2022-02-26 03:31:03.663 [INFO ] [main] PersonService -  find person at address112 Steppes Pl  
+2022-02-26 03:31:03.663 [INFO ] [main] PersonService -  find person at address748 Townings Dr  
+2022-02-26 03:31:03.664 [INFO ] [main] MedicalRecordService - find medicalRecord of John Boyd
+2022-02-26 03:31:03.667 [INFO ] [main] MedicalRecordService - find medicalRecord of Jacob Boyd
+2022-02-26 03:31:03.668 [INFO ] [main] MedicalRecordService - find medicalRecord of Tenley Boyd
+2022-02-26 03:31:03.671 [INFO ] [main] MedicalRecordService - find medicalRecord of Roger Boyd
+2022-02-26 03:31:03.675 [INFO ] [main] MedicalRecordService - find medicalRecord of Felicia Boyd
+2022-02-26 03:31:03.678 [INFO ] [main] MedicalRecordService - find medicalRecord of Tessa Carman
+2022-02-26 03:31:03.681 [INFO ] [main] MedicalRecordService - find medicalRecord of Foster Shepard
+2022-02-26 03:31:03.684 [INFO ] [main] MedicalRecordService - find medicalRecord of Clive Ferguson
+2022-02-26 03:31:03.685 [INFO ] [main] MedicalRecordService - find medicalRecord of Tony Cooper
+2022-02-26 03:31:03.685 [INFO ] [main] MedicalRecordService - find medicalRecord of Ron Peters
+2022-02-26 03:31:03.686 [INFO ] [main] MedicalRecordService - find medicalRecord of Allison Boyd
+2022-02-26 03:31:03.686 [INFO ] [main] MedicalRecordService - find medicalRecord of Foster Shepard
+2022-02-26 03:31:03.687 [INFO ] [main] MedicalRecordService - find medicalRecord of Clive Ferguson
+2022-02-26 03:31:03.707 [INFO ] [main] ReadDataFromJson - SUCCESS Load Data
+2022-02-26 03:31:03.712 [INFO ] [main] AlertsController -  floods By Station getted   HttpStatus :200 OK
+2022-02-26 03:31:03.715 [INFO ] [main] AlertService - get Homes for Station 3 
+2022-02-26 03:31:03.715 [INFO ] [main] FireStationService - find by station 3
+2022-02-26 03:31:03.716 [INFO ] [main] AlertService - get Inhabitant for Address 1509 Culver St
+2022-02-26 03:31:03.716 [INFO ] [main] PersonService -  find person at address1509 Culver St  
+2022-02-26 03:31:03.718 [INFO ] [main] FireStationService - find by address 1509 Culver St
+2022-02-26 03:31:03.718 [INFO ] [main] MedicalRecordService - find medicalRecord of John Boyd
+2022-02-26 03:31:03.719 [INFO ] [main] MedicalRecordService - find medicalRecord of Jacob Boyd
+2022-02-26 03:31:03.719 [INFO ] [main] MedicalRecordService - find medicalRecord of Tenley Boyd
+2022-02-26 03:31:03.720 [INFO ] [main] MedicalRecordService - find medicalRecord of Roger Boyd
+2022-02-26 03:31:03.720 [INFO ] [main] MedicalRecordService - find medicalRecord of Felicia Boyd
+2022-02-26 03:31:03.720 [INFO ] [main] AlertService - get Inhabitant for Address 834 Binoc Ave
+2022-02-26 03:31:03.721 [INFO ] [main] PersonService -  find person at address834 Binoc Ave  
+2022-02-26 03:31:03.721 [INFO ] [main] FireStationService - find by address 834 Binoc Ave
+2022-02-26 03:31:03.721 [INFO ] [main] MedicalRecordService - find medicalRecord of Tessa Carman
+2022-02-26 03:31:03.721 [INFO ] [main] AlertService - get Inhabitant for Address 748 Townings Dr
+2022-02-26 03:31:03.722 [INFO ] [main] PersonService -  find person at address748 Townings Dr  
+2022-02-26 03:31:03.722 [INFO ] [main] FireStationService - find by address 748 Townings Dr
+2022-02-26 03:31:03.723 [INFO ] [main] MedicalRecordService - find medicalRecord of Foster Shepard
+2022-02-26 03:31:03.723 [INFO ] [main] MedicalRecordService - find medicalRecord of Clive Ferguson
+2022-02-26 03:31:03.726 [INFO ] [main] AlertService - get Inhabitant for Address 112 Steppes Pl
+2022-02-26 03:31:03.731 [INFO ] [main] PersonService -  find person at address112 Steppes Pl  
+2022-02-26 03:31:03.735 [INFO ] [main] FireStationService - find by address 112 Steppes Pl
+2022-02-26 03:31:03.737 [INFO ] [main] MedicalRecordService - find medicalRecord of Tony Cooper
+2022-02-26 03:31:03.754 [INFO ] [main] MedicalRecordService - find medicalRecord of Ron Peters
+2022-02-26 03:31:03.756 [INFO ] [main] MedicalRecordService - find medicalRecord of Allison Boyd
+2022-02-26 03:31:03.757 [INFO ] [main] AlertService - get Inhabitant for Address 748 Townings Dr
+2022-02-26 03:31:03.759 [INFO ] [main] PersonService -  find person at address748 Townings Dr  
+2022-02-26 03:31:03.762 [INFO ] [main] FireStationService - find by address 748 Townings Dr
+2022-02-26 03:31:03.768 [INFO ] [main] MedicalRecordService - find medicalRecord of Foster Shepard
+2022-02-26 03:31:03.769 [INFO ] [main] MedicalRecordService - find medicalRecord of Clive Ferguson
+2022-02-26 03:31:03.789 [INFO ] [main] ReadDataFromJson - SUCCESS Load Data
+2022-02-26 03:31:03.795 [INFO ] [main] AlertService -  get Children for Address 951 LoneTow Rd 
+2022-02-26 03:31:03.797 [INFO ] [main] PersonService -  find person at address951 LoneTow Rd  
+2022-02-26 03:31:03.800 [INFO ] [main] AlertsController -  Childen By address getted HttpStatus :200 OK
+2022-02-26 03:31:03.829 [INFO ] [main] ReadDataFromJson - SUCCESS Load Data
+2022-02-26 03:31:03.857 [INFO ] [main] PersonService -  deleting person robert Boyd 
+2022-02-26 03:31:03.859 [ERROR] [main] PersonService - person robert Boyd not found
+2022-02-26 03:31:03.883 [INFO ] [main] ReadDataFromJson - SUCCESS Load Data
+2022-02-26 03:31:03.886 [INFO ] [main] PersonService -  getting person lola red 
+2022-02-26 03:31:03.886 [ERROR] [main] PersonService - person lola red not found
+2022-02-26 03:31:03.913 [INFO ] [main] ReadDataFromJson - SUCCESS Load Data
+2022-02-26 03:31:03.920 [INFO ] [main] PersonService -  deleting person Jacob Boyd 
+2022-02-26 03:31:03.921 [INFO ] [main] PersonController - person Jacob Boyd deleted with success   HttpStatus :200 OK
+2022-02-26 03:31:03.937 [INFO ] [main] ReadDataFromJson - SUCCESS Load Data
+2022-02-26 03:31:03.944 [INFO ] [main] PersonService -  updating person PersonDTO [firstName=Roger, lastName=Boyd, address=1509 Culver st, city=Culver, zip=97451, phone=841-874-6512]  
+2022-02-26 03:31:03.945 [INFO ] [main] PersonController - person Roger Boyd Updated with success   HttpStatus :200 OK
+2022-02-26 03:31:03.967 [INFO ] [main] ReadDataFromJson - SUCCESS Load Data
+2022-02-26 03:31:03.979 [INFO ] [main] PersonService -  saving person PersonDTO [firstName=thomas, lastName=Boyd, address=1509 Culver st, city=Culver, zip=97451, phone=841-874-6512]  
+2022-02-26 03:31:03.982 [INFO ] [main] PersonController - person thomas Boyd saved with success   HttpStatus :201 CREATED
+2022-02-26 03:31:04.001 [INFO ] [main] ReadDataFromJson - SUCCESS Load Data
+2022-02-26 03:31:04.007 [INFO ] [main] PersonService -  saving person PersonDTO [firstName=John, lastName=Boyd, address=1509 Culver st, city=Culver, zip=97451, phone=841-874-6512]  
+2022-02-26 03:31:04.010 [ERROR] [main] PersonService - this person John Boyd already exists
+2022-02-26 03:31:04.035 [INFO ] [main] ReadDataFromJson - SUCCESS Load Data
+2022-02-26 03:31:04.043 [INFO ] [main] PersonService -  getting person jacob Boyd 
+2022-02-26 03:31:04.046 [INFO ] [main] PersonController - person Jacob Boyd getted with success   HttpStatus :200 OK
+2022-02-26 03:31:04.067 [INFO ] [main] ReadDataFromJson - SUCCESS Load Data
+2022-02-26 03:31:04.073 [INFO ] [main] PersonService -  updating person PersonDTO [firstName=lola, lastName=Boyd, address=1509 Culver st, city=Culver, zip=97451, phone=841-874-6512]  
+2022-02-26 03:31:04.073 [ERROR] [main] PersonService - the name cannot be changed
+2022-02-26 03:31:04.097 [INFO ] [main] ReadDataFromJson - SUCCESS Load Data
+2022-02-26 03:31:04.099 [INFO ] [main] PersonService -  getting all persons 
+2022-02-26 03:31:04.100 [INFO ] [main] PersonController - persons list getted with success   HttpStatus :200 OK
+2022-02-26 03:31:04.713 [INFO ] [main] AlertService -  get Children for Address 1509 Culver St 
+2022-02-26 03:31:04.760 [INFO ] [main] AlertService -  get Children for Address 1509 Culver St 
+2022-02-26 03:31:04.776 [INFO ] [main] AlertService - get Person Infos By Name for john Boyd 
+2022-02-26 03:31:04.790 [INFO ] [main] AlertService -  get Community Email for Culver city 
+2022-02-26 03:31:04.803 [INFO ] [main] AlertService - get Phone Number for station 3 
+2022-02-26 03:31:04.804 [INFO ] [main] AlertService - get population couvred for station 3 
+2022-02-26 03:31:04.823 [INFO ] [main] AlertService - get population couvred for station 3 
+2022-02-26 03:31:04.839 [INFO ] [main] AlertService - get Inhabitant for Address 1509 Culver St
+2022-02-26 03:31:04.855 [INFO ] [main] AlertService - get Homes for Station 3 
+2022-02-26 03:31:04.856 [INFO ] [main] AlertService - get Inhabitant for Address 1509 Culver St
+2022-02-26 03:31:04.982 [INFO ] [main] PersonService -  find person living in city   
+2022-02-26 03:31:04.983 [ERROR] [main] PersonService - there is no person in this city : 
+2022-02-26 03:31:04.989 [INFO ] [main] PersonService -  saving person PersonDTO [firstName=John, lastName=Boyd, address=1509 Culver st, city=Culver, zip=97451, phone=841-874-6512]  
+2022-02-26 03:31:04.990 [ERROR] [main] PersonService - this person John Boyd already exists
+2022-02-26 03:31:04.996 [INFO ] [main] PersonService -  find persons with lastName  
+2022-02-26 03:31:04.996 [ERROR] [main] PersonService - there is no person with this last name : 
+2022-02-26 03:31:05.003 [INFO ] [main] PersonService -  saving person PersonDTO [firstName=sofi, lastName=Boyd, address=1509 Culver st, city=Culver, zip=97451, phone=841-874-2222]  
+2022-02-26 03:31:05.013 [INFO ] [main] PersonService -  updating person PersonDTO [firstName=sofi, lastName=Boyd, address=1509 Culver st, city=Culver, zip=97451, phone=841-874-8888]  
+2022-02-26 03:31:05.014 [ERROR] [main] PersonService - the name cannot be changed
+2022-02-26 03:31:05.029 [INFO ] [main] PersonService -  find person living in city Culver  
+2022-02-26 03:31:05.056 [INFO ] [main] PersonService -  updating person PersonDTO [firstName=John, lastName=Boyd, address=1509 Culver st, city=Culver, zip=97451, phone=841-874-8888]  
+2022-02-26 03:31:05.062 [INFO ] [main] PersonService -  deleting person John Boyd 
+2022-02-26 03:31:05.063 [ERROR] [main] PersonService - person John Boyd not found
+2022-02-26 03:31:05.069 [INFO ] [main] PersonService -  find person at address1509 Culver st  
+2022-02-26 03:31:05.077 [INFO ] [main] PersonService -  getting person John Boyd 
+2022-02-26 03:31:05.085 [INFO ] [main] PersonService -  deleting person John Boyd 
+2022-02-26 03:31:05.095 [INFO ] [main] PersonService -  getting all persons 
+2022-02-26 03:31:05.103 [INFO ] [main] PersonService -  getting person   
+2022-02-26 03:31:05.103 [ERROR] [main] PersonService - person   not found
+2022-02-26 03:31:05.110 [INFO ] [main] PersonService -  find persons with lastNameBoyd  
+2022-02-26 03:31:05.116 [INFO ] [main] PersonService -  getting all persons 
+2022-02-26 03:31:05.119 [ERROR] [main] PersonService - Person data not found
+2022-02-26 03:31:05.127 [INFO ] [main] PersonService -  find person at address  
+2022-02-26 03:31:05.129 [ERROR] [main] PersonService - there is no person at this address : 
+2022-02-26 03:31:05.203 [INFO ] [main] FireStationService - updating fire station FireStation [address=1509 Culver St, station=2]
+2022-02-26 03:31:05.204 [ERROR] [main] FireStationService - the address :1509 Culver St cannot be changed
+2022-02-26 03:31:05.209 [INFO ] [main] FireStationService - find by station 3
+2022-02-26 03:31:05.218 [INFO ] [main] FireStationService - saving of fireStation FireStation [address=1509 Culver St, station=3]
+2022-02-26 03:31:05.220 [ERROR] [main] FireStationService - this FireStation 3 at the address 1509 Culver St is already exsits
+2022-02-26 03:31:05.226 [INFO ] [main] FireStationService - updating fire station FireStation [address=1509 Culver St, station=2]
+2022-02-26 03:31:05.236 [INFO ] [main] FireStationService - saving of fireStation FireStation [address=748 Townings Dr, station=3]
+2022-02-26 03:31:05.241 [INFO ] [main] FireStationService - find by address 1509 Culver St
+2022-02-26 03:31:05.248 [INFO ] [main] FireStationService -  getting all fire stations 
+2022-02-26 03:31:05.253 [INFO ] [main] FireStationService - find by station 8
+2022-02-26 03:31:05.260 [ERROR] [main] FireStationService - firestation 8 not found
+2022-02-26 03:31:05.266 [INFO ] [main] FireStationService - find by address 1509 Culver St
+2022-02-26 03:31:05.268 [ERROR] [main] FireStationService - firestation at address  :1509 Culver St not found
+2022-02-26 03:31:05.274 [INFO ] [main] FireStationService -  getting all fire stations 
+2022-02-26 03:31:05.275 [ERROR] [main] FireStationService - Firestation Data note found
+2022-02-26 03:31:05.280 [INFO ] [main] FireStationService - deleting fire station at address 1509 Culver St
+2022-02-26 03:31:05.286 [INFO ] [main] FireStationService - deleting fire station at address 1509 Culver St
+2022-02-26 03:31:05.287 [ERROR] [main] FireStationService - firestation at address  :1509 Culver St not found
+2022-02-26 03:31:05.365 [INFO ] [main] MedicalRecordService - updating medicalRecord MedicalRecord [firstName=John, lastName=Boyd, birthdate=03/06/1984, medications=[aznol:350mg, hydrapermazol:100mg, noznazol:250mg], allergies=[nillacilan, nillac]]
+2022-02-26 03:31:05.371 [INFO ] [main] MedicalRecordService - deleting medicalRecord of John Boyd
+2022-02-26 03:31:05.371 [INFO ] [main] MedicalRecordService - find medicalRecord of John Boyd
+2022-02-26 03:31:05.378 [INFO ] [main] MedicalRecordService - updating medicalRecord MedicalRecord [firstName=John, lastName=Boyd, birthdate=03/06/1984, medications=[aznol:350mg, hydrapermazol:100mg, noznazol:250mg], allergies=[nillacilan, nillac]]
+2022-02-26 03:31:05.378 [ERROR] [main] MedicalRecordService - the name cannot be changed
+2022-02-26 03:31:05.384 [INFO ] [main] MedicalRecordService - saving of medicalRecord MedicalRecord [firstName=John, lastName=Boyd, birthdate=03/06/1984, medications=[aznol:350mg, hydrapermazol:100mg], allergies=[nillacilan]]
+2022-02-26 03:31:05.390 [INFO ] [main] MedicalRecordService - find medicalRecord of  
+2022-02-26 03:31:05.393 [ERROR] [main] MedicalRecordService - person   do not have medical records
+2022-02-26 03:31:05.399 [INFO ] [main] MedicalRecordService - deleting medicalRecord of John Boyd
+2022-02-26 03:31:05.399 [INFO ] [main] MedicalRecordService - find medicalRecord of John Boyd
+2022-02-26 03:31:05.401 [ERROR] [main] MedicalRecordService - person John Boyd do not have medical records
+2022-02-26 03:31:05.404 [INFO ] [main] MedicalRecordService - find medicalRecord of John Boyd
+2022-02-26 03:31:05.410 [INFO ] [main] MedicalRecordService - saving of medicalRecord MedicalRecord [firstName=John, lastName=Boyd, birthdate=03/06/1984, medications=[aznol:350mg, hydrapermazol:100mg], allergies=[nillacilan]]
+2022-02-26 03:31:05.411 [ERROR] [main] MedicalRecordService - John Boyd already has a medical record
+2022-02-26 03:31:05.419 [INFO ] [main] MedicalRecordService -  getting all Medical Records 
+2022-02-26 03:31:05.420 [ERROR] [main] MedicalRecordService - Medical records Data not found
+2022-02-26 03:31:05.425 [INFO ] [main] MedicalRecordService -  getting all Medical Records 

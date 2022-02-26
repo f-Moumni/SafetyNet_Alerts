@@ -1,20 +1,22 @@
 package com.safetynet.alerts.exceptions;
-
+/**
+ * AlreadyExistsException an exception that throws when an object already exists
+ * in the data
+ * 
+ * @author Fatima
+ *
+ */
 public class AlreadyExistsException extends Exception {
 
+	private static final long serialVersionUID = 1L;
 	/**
+	 * a class constructor
+	 * 
+	 * @param message
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
-
-	public AlreadyExistsException(String message, Throwable cause) {
-		super(message, cause);
-		// TODO Auto-generated constructor stub
-	}
-
 	public AlreadyExistsException(String message) {
 		super(message);
-		// TODO Auto-generated constructor stub
 	}
 
 }

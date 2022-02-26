@@ -24,7 +24,9 @@ import com.safetynet.alerts.service.IMedicalRecordService;
 import com.safetynet.alerts.util.MedicalRecordConverter;
 /**
  * MedicalRecordController class, allows to use administrative endpoints for
- * CRUD operations * @author Fatima
+ * CRUD operations
+ * 
+ * @author Fatima
  * 
  * @see IMedicalRecordService
  * @see MedicalRecordConverter
@@ -49,7 +51,7 @@ public class MedicalRecordController {
 	@Autowired
 	private MedicalRecordConverter medicalRecordConverter;
 	/**
-	 * getMedicalRecords get all medical records in data
+	 * getMedicalRecords Get request, get all medical records in data
 	 * 
 	 * @return list of MedicalRecord object
 	 * @throws DataNotFoundException
@@ -57,7 +59,7 @@ public class MedicalRecordController {
 	@GetMapping
 	public ResponseEntity<List<MedicalRecordDTO>> getMedicalRecords()
 			throws DataNotFoundException {
-		LOGGER.debug("at getMedicalRecords methode ");
+		LOGGER.debug("Get Mapping getMedicalRecords ");
 		List<MedicalRecordDTO> medicalRecordList = medicalRecordService
 				.findAll();
 		LOGGER.info("MedicalRecords list getted with success   HttpStatus :{}",
@@ -66,7 +68,7 @@ public class MedicalRecordController {
 
 	}
 	/**
-	 * addMedicalRecord save a given Medical record
+	 * addMedicalRecord post request, save a given Medical record
 	 * 
 	 * @param medicalRecord
 	 *            to save
@@ -77,7 +79,7 @@ public class MedicalRecordController {
 	public ResponseEntity<Object> addMedicalRecord(
 			@RequestBody MedicalRecordDTO medicalRecord)
 			throws AlreadyExistsException {
-		LOGGER.debug("at addMedicalRecord methode ");
+		LOGGER.debug("Post Mapping add MedicalRecord {} ", medicalRecord);
 		if (medicalRecord.getFirstName().isBlank()
 				|| medicalRecord.getLastName().isBlank()) {
 			LOGGER.error("Invalid name HttpStatus:{}", HttpStatus.NO_CONTENT);
@@ -93,7 +95,7 @@ public class MedicalRecordController {
 
 	}
 	/**
-	 * updateMedicalRecord allow to update a given Medical record
+	 * updateMedicalRecord Put request, update a given Medical record
 	 * 
 	 * @param medicalRecord
 	 *            to updated
@@ -104,7 +106,7 @@ public class MedicalRecordController {
 	public ResponseEntity<Object> updateMedicalRecord(
 			@RequestBody MedicalRecordDTO medicalRecord)
 			throws MedicalRecordNotFoundException {
-		LOGGER.debug("at updateMedicalRecord methode ");
+		LOGGER.debug("Put mapping update MedicalRecord {} ", medicalRecord);
 		if (medicalRecord.getFirstName().isBlank()
 				|| medicalRecord.getLastName().isBlank()) {
 			LOGGER.error("Invalid name HttpStatus :{}", HttpStatus.NO_CONTENT);
@@ -120,19 +122,19 @@ public class MedicalRecordController {
 		}
 	}
 	/**
-	 * deleteMedicalRecord allow to deleted medical record of given firstName
-	 * and lastName
+	 * deleteMedicalRecord DELETE request, deleted medical record of given
+	 * firstName and lastName
 	 * 
 	 * @param firstName
 	 * @param lastName
-	 * @return
+	 * @return medicalRecord deleted or error if not
 	 * @throws MedicalRecordNotFoundException
 	 */
 	@DeleteMapping
 	public ResponseEntity<Object> deleteMedicalRecord(
 			@RequestParam String firstName, @RequestParam String lastName)
 			throws MedicalRecordNotFoundException {
-		LOGGER.debug("at deleteMedicalRecord methode ");
+		LOGGER.debug("DeleteMapping deleteMedicalRecord methode ");
 		if (firstName.isBlank() || lastName.isBlank()) {
 			LOGGER.error("Invalid name HttpStatus :{}", HttpStatus.BAD_REQUEST);
 			return ResponseEntity.badRequest().body("Invalid name");

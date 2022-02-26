@@ -50,7 +50,7 @@ public class FireStationController {
 	@Autowired
 	private FireStationConverter fireStationConverter;
 	/**
-	 * getFireStations get all fire stations in data
+	 * getFireStations the endpoint to get all fire stations in data
 	 * 
 	 * @return list of fire stations
 	 * @throws DataNotFoundException

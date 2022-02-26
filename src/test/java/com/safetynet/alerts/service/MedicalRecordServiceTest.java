@@ -9,7 +9,6 @@ import static org.mockito.Mockito.when;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -75,10 +74,6 @@ class MedicalRecordServiceTest {
 						List.of("ibupurin:200mg", "hydrapermazol:400mg")),
 				new ArrayList<String>(List.of("nillacilan"))));
 	}
-	@BeforeEach
-	void setUp() throws Exception {
-	}
-
 	@Test
 	@Tag("findAll")
 	@DisplayName("find all test should return a list of medicalRecord")

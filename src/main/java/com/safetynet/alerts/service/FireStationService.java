@@ -14,18 +14,44 @@ import com.safetynet.alerts.exceptions.FireStationNotFoundException;
 import com.safetynet.alerts.model.FireStation;
 import com.safetynet.alerts.repository.IFireStationRepository;
 import com.safetynet.alerts.util.FireStationConverter;
-
+/**
+ * FireStationService class for business processing of fire station CRUD
+ * operations
+ * 
+ * @see IFireStationService
+ * @author fatima
+ *
+ */
 @Service
 public class FireStationService implements IFireStationService {
+	/**
+	 * Create a SLF4J/LOG4J LOGGER instance.
+	 */
 	private static final Logger LOGGER = LoggerFactory
 			.getLogger(FireStationService.class);
+
+	/**
+	 * IFireStationRepository's implement class reference.
+	 */
 	@Autowired
 	private IFireStationRepository fireStationRepository;
+
+	/**
+	 * FireStationConverter fire station mapper
+	 */
 	@Autowired
 	FireStationConverter fireStationConverter;
 
+	/**
+	 * to get all fire stations in data
+	 * 
+	 * @return list of fireStation
+	 * @throws DataNotFoundException
+	 */
 	@Override
 	public List<FireStationDTO> findAll() throws DataNotFoundException {
+		LOGGER.debug(" find All fire stations start");
+		LOGGER.info(" getting all fire stations ");
 		List<FireStation> firestations = fireStationRepository.findAll();
 		if (firestations != null) {
 			return fireStationConverter.toFireStationDTOList(firestations);
@@ -34,10 +60,19 @@ public class FireStationService implements IFireStationService {
 			throw new DataNotFoundException("Firestation Data note found");
 		}
 	}
-
+	/**
+	 * addFireStation save a given fire station
+	 * 
+	 * @param fireStation
+	 *            to save
+	 * @return fire station saved
+	 * @throws AlreadyExistsException
+	 */
 	@Override
 	public FireStationDTO addFireStation(FireStation fireStation)
 			throws AlreadyExistsException {
+		LOGGER.debug("add fire station stard");
+		LOGGER.info("saving of fireStation {}", fireStation);
 		FireStation fstation = fireStationRepository
 				.findByAddress(fireStation.getAddress());
 		if (fstation != null) {
@@ -53,9 +88,19 @@ public class FireStationService implements IFireStationService {
 		}
 
 	}
+
+	/**
+	 * findByAddress get a fireStation that covers a given address
+	 * 
+	 * @param address
+	 * @return fireStation covered
+	 * @throws FireStationNotFoundException
+	 */
 	@Override
 	public FireStation findByAddress(String address)
 			throws FireStationNotFoundException {
+		LOGGER.debug("find by address start");
+		LOGGER.info("find by address {}", address);
 		FireStation fstation = fireStationRepository.findByAddress(address);
 		if (fstation != null) {
 			return fstation;
@@ -63,13 +108,23 @@ public class FireStationService implements IFireStationService {
 			LOGGER.error("firestation at address  :{} not found", address);
 			throw new FireStationNotFoundException(
 					"firestation at address :" + address + " not found");
-
 		}
 
 	}
+
+	/**
+	 * updateFireStation update a given fire station
+	 * 
+	 * @param fireStation
+	 *            to update
+	 * @return fireStation updated
+	 * @throws FireStationNotFoundException
+	 */
 	@Override
 	public FireStationDTO updateFireStation(FireStation fireStation)
 			throws FireStationNotFoundException {
+		LOGGER.debug("updating fire station start");
+		LOGGER.info("updating fire station {}", fireStation);
 		FireStation fstation = fireStationRepository
 				.findByAddress(fireStation.getAddress());
 		if (fstation != null) {
@@ -83,9 +138,20 @@ public class FireStationService implements IFireStationService {
 		}
 
 	}
+
+	/**
+	 * deleteFireStation delete a fire station at given address
+	 * 
+	 * @param address
+	 *            covered by fire station
+	 * @return fire station deleted
+	 * @throws FireStationNotFoundException
+	 */
 	@Override
 	public FireStationDTO deleteFireStation(String address)
 			throws FireStationNotFoundException {
+		LOGGER.debug("deleting fire station start");
+		LOGGER.info("deleting fire station at address {}", address);
 		FireStation fstation = fireStationRepository.findByAddress(address);
 		if (fstation != null) {
 			fireStationRepository.deleteFireStation(fstation);
@@ -97,10 +163,19 @@ public class FireStationService implements IFireStationService {
 		}
 
 	}
-
+	/**
+	 * findByStation get all addresses covered by given firStation number
+	 * 
+	 * @param station
+	 *            fire station number
+	 * @return list of address
+	 * @throws FireStationNotFoundException
+	 */
 	@Override
 	public List<String> findByStation(int station)
 			throws FireStationNotFoundException {
+		LOGGER.debug("find by station start");
+		LOGGER.info("find by station {}", station);
 		List<String> addresses = fireStationRepository.findByStation(station);
 		if (!addresses.isEmpty()) {
 			return addresses;
